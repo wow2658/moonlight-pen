@@ -5,7 +5,7 @@
 
 ## 다운로드와 설치
 
-> **배포 파일 범위:** 아래 Releases ZIP은 기존 펜·화면 제어 배포판입니다. 최신 텍스트 클립보드·손터치·통합 복원 도구는 현재 저장소 소스와 별도 개인용 복원 묶음에 포함돼 있으며, 이 소스 반영만으로 Releases 실행 파일이 바뀌지는 않습니다.
+> **배포 파일 범위:** 아래 Releases ZIP은 기존 펜·화면 제어 배포판입니다. 텍스트 클립보드·통합 복원 도구는 현재 저장소 소스와 별도 개인용 복원 묶음에 포함됩니다. 손터치 F10 도구는 아래의 별도 선택 다운로드로 제공합니다. 기존 01/02 ZIP의 실행 파일은 그대로입니다.
 
 ### [⬇ 노트북용 문라이트 ZIP 바로 다운로드 · 약 44MB](https://github.com/wow2658/moonlight-pen/releases/latest/download/01-Laptop-Moonlight-Pen.zip)
 
@@ -15,6 +15,12 @@
 
 **Sunshine과 그리기 앱이 설치된 데스크톱 PC에서 받으세요.** 전체 압축 해제 후 `호스트 설치.cmd`를 한 번 실행합니다. 복제·확장 버튼을 쓸 때 필요합니다.
 
+### [⬇ 선택: 손터치 F10 도구 ZIP 바로 다운로드 · 약 176KB](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.15-touch1/03-Laptop-Finger-Touch.zip)
+
+**Samsung 940X3M 노트북 전용입니다.** 손가락 터치스크린만 **Ctrl+Alt+F10**으로 켜고 끄며 S펜은 유지합니다. Moonlight 연결 없이도 작동합니다. 전체 압축 해제 후 **`CHECK.cmd` → `INSTALL.cmd`** 순서로 실행하세요. 이미 잘 쓰고 있다면 재설치할 필요는 없습니다.
+
+개인 장치 ID는 포함하지 않고 현재 PC에서 모델·손터치·별도 S펜을 확인합니다. 다른 모델이나 모호한 장치 구성이면 중단합니다. 관리자 권한이 필요하며 자체 빌드라 코드 서명이 없습니다. [설치·검증 범위](touch-toggle/README.md) · [보안 검토](docs/TOUCH_SECURITY.md) · [ZIP SHA256](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.15-touch1/03-Laptop-Finger-Touch-SHA256.txt)
+
 위 링크를 누르면 ZIP을 바로 다운로드합니다. Releases 페이지에서 파일을 따로 찾을 필요는 없습니다.
 
 이 저장소에 접근할 수 있는 GitHub 계정으로 로그인하세요. 비공개 저장소라 로그아웃 상태에서는 404가 보일 수 있습니다.
@@ -23,8 +29,9 @@
 | --- | --- | --- |
 | `01-Laptop-Moonlight-Pen.zip` | **펜을 사용하는 노트북** | `문라이트 실행.cmd` 더블클릭 |
 | `02-Host-Display-Shortcuts.zip` | **그리기 프로그램이 있는 데스크톱 PC** | `호스트 설치.cmd` 한 번 실행 |
+| `03-Laptop-Finger-Touch.zip` — 선택 | **Samsung 940X3M 노트북** | `CHECK.cmd` 확인 후 `INSTALL.cmd` |
 
-**GitHub의 초록색 `Code → Download ZIP`과 Releases의 `Source code`는 개발용 소스입니다. 실행하려면 위의 01/02 ZIP을 받으세요.**
+**GitHub의 초록색 `Code → Download ZIP`과 Releases의 `Source code`는 개발용 소스입니다. 실행하려면 위의 기능별 ZIP을 받으세요.**
 
 이미 지금 구성으로 잘 쓰고 있다면 재설치할 필요는 없습니다. 아래 안내는 새 PC에 설치하거나 나중에 복구할 때 사용하세요.
 
@@ -93,15 +100,18 @@
 
 ## 평소에 기억할 단축키
 
-모두 **노트북에서 스트리밍 연결 중** 누릅니다.
+모두 **노트북에서** 누릅니다. 손터치 전환은 별도 프로그램이 처리하며, 나머지는 Moonlight 스트리밍 연결 중 사용합니다.
 
-| 단축키 | 기능 |
-| --- | --- |
-| `Ctrl+Alt+Shift+B` | 화면 제어 패널 열기 / 접기 |
-| `Ctrl+Alt+Shift+P` | 필압 IN/OUT 표시 켜기 / 끄기 |
-| `Ctrl+Alt+Shift+O` | 성능 통계 표시 켜기 / 끄기 — 이 수정판은 S 대신 **O** |
-| `Ctrl+Alt+Shift+K` | Windows 키 등 시스템 키를 호스트로 전달할지 전환 |
-| `Ctrl+Alt+Shift+1` / `2` | 호스트 모니터 1 / 2 전환 요청 |
+| 단축키 | 기능 | 사용 범위 |
+| --- | --- | --- |
+| **`Ctrl+Alt+F10`** | **손가락 터치스크린 켜기 / 끄기 · S펜 유지** | 손터치 도구 설치 후 노트북 전체에서 사용. Moonlight 연결 불필요 |
+| `Ctrl+Alt+Shift+B` | 화면 제어 패널 열기 / 접기 | Moonlight 스트리밍 중 |
+| `Ctrl+Alt+Shift+P` | 필압 IN/OUT 표시 켜기 / 끄기 | Moonlight 스트리밍 중 |
+| `Ctrl+Alt+Shift+O` | 성능 통계 표시 켜기 / 끄기 — 이 수정판은 S 대신 **O** | Moonlight 스트리밍 중 |
+| `Ctrl+Alt+Shift+K` | Windows 키 등 시스템 키를 호스트로 전달할지 전환 | Moonlight 스트리밍 중 |
+| `Ctrl+Alt+Shift+1` / `2` | 호스트 모니터 1 / 2 전환 요청 | Moonlight 스트리밍 중 |
+
+**F10은 선택 다운로드인 `03-Laptop-Finger-Touch.zip`을 설치하면 사용할 수 있습니다.** 기존 01 문라이트 ZIP에는 포함되지 않습니다. 다운로드판은 개인 프로필 없이 현재 장치를 확인하며 940X3M만 지원합니다. [설치 설명과 제한](touch-toggle/README.md)을 확인하세요.
 
 패널의 **모니터 1 / 2**는 스트리밍할 화면 선택입니다. Sunshine이 나열하는 순서라 Windows 설정의 화면 번호와 다를 수 있습니다.
 
