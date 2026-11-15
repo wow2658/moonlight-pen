@@ -497,10 +497,16 @@ typedef struct _CONNECTION_LISTENER_CALLBACKS {
     ConnListenerSetMotionEventState setMotionEventState;
     ConnListenerSetControllerLED setControllerLED;
     ConnListenerSetAdaptiveTriggers setAdaptiveTriggers;
+    // Private MPCT v1 extension. Called on the control receive thread: copy/queue only.
+    void (*penClipboardFrame)(const unsigned char* data, int length);
 } CONNECTION_LISTENER_CALLBACKS, *PCONNECTION_LISTENER_CALLBACKS;
 
 // Use this function to zero the connection callbacks when allocated on the stack or heap
 void LiInitializeConnectionCallbacks(PCONNECTION_LISTENER_CALLBACKS clCallbacks);
+
+// Private MPCT v1 extension; valid only between successful LiStartConnection and LiStopConnection.
+// Returns an error unless Sunshine uses authenticated Control V2 and supports channel 6.
+int LiSendPenClipboardFrame(const unsigned char* data, int length);
 
 // ServerCodecModeSupport values
 #define SCM_H264            0x00000001

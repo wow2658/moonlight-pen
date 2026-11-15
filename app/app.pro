@@ -37,6 +37,7 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs depr
 
 win32 {
     LIBS += gdiplus.lib
+    HEADERS += ../shared/clipboard/protocol.h ../shared/clipboard/windows.h
     SOURCES += streaming/input/hostdisplaycontrols.cpp
     HEADERS += streaming/input/hostdisplaycontrols.h streaming/input/hostdisplayshortcuts.h
     !exists($$PWD/../libs/windows) {

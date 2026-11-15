@@ -28,6 +28,8 @@ QVariant ComputerModel::data(const QModelIndex& index, int role) const
     QReadLocker lock(&computer->lock);
 
     switch (role) {
+    case ClipboardTextRole:
+        return computer->shareClipboardText;
     case NameRole:
         return computer->name;
     case OnlineRole:
@@ -110,6 +112,7 @@ QHash<int, QByteArray> ComputerModel::roleNames() const
     names[StatusUnknownRole] = "statusUnknown";
     names[ServerSupportedRole] = "serverSupported";
     names[DetailsRole] = "details";
+    names[ClipboardTextRole] = "shareClipboardText";
 
     return names;
 }
@@ -170,6 +173,17 @@ void ComputerModel::wakeComputer(int computerIndex)
 
     DeferredWakeHostTask* wakeTask = new DeferredWakeHostTask(m_Computers[computerIndex]);
     QThreadPool::globalInstance()->start(wakeTask);
+}
+
+void ComputerModel::setClipboardTextSharing(int computerIndex, bool enabled)
+{
+    if (computerIndex < 0 || computerIndex >= m_Computers.count()) return;
+    NvComputer* computer = m_Computers[computerIndex];
+    {
+        QWriteLocker lock(&computer->lock);
+        computer->shareClipboardText = enabled;
+    }
+    m_ComputerManager->clientSideAttributeUpdated(computer);
 }
 
 void ComputerModel::renameComputer(int computerIndex, QString name)

@@ -16,7 +16,8 @@ class ComputerModel : public QAbstractListModel
         WakeableRole,
         StatusUnknownRole,
         ServerSupportedRole,
-        DetailsRole
+        DetailsRole,
+        ClipboardTextRole
     };
 
 public:
@@ -42,6 +43,7 @@ public:
     Q_INVOKABLE void wakeComputer(int computerIndex);
 
     Q_INVOKABLE void renameComputer(int computerIndex, QString name);
+    Q_INVOKABLE void setClipboardTextSharing(int computerIndex, bool enabled);
 
     Q_INVOKABLE Session* createSessionForCurrentGame(int computerIndex);
 

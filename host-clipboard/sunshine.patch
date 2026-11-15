@@ -1,0 +1,1155 @@
+diff --git a/src/stream.cpp b/src/stream.cpp
+index 1291c9c..9968cb1 100644
+--- a/src/stream.cpp
++++ b/src/stream.cpp
+@@ -32,6 +32,9 @@ extern "C" {
+ #include "platform/common.h"
+ #include "process.h"
+ #include "stream.h"
++#ifdef _WIN32
++  #include "pen_clipboard/windows.h"
++#endif
+ #include "sync.h"
+ #include "system_tray.h"
+ #include "thread_safe.h"
+@@ -431,11 +434,12 @@ namespace stream {
+      *
+      * @param payload Optional payload body to include in the response.
+      * @param peer Remote endpoint associated with the socket.
++     * @param channel Reliable ENet channel; clipboard uses its own negotiated channel.
+      * @return Network operation status.
+      */
+-    int send(const std::string_view &payload, net::peer_t peer) {
++    int send(const std::string_view &payload, net::peer_t peer, uint8_t channel = 0) {
+       auto packet = enet_packet_create(payload.data(), payload.size(), ENET_PACKET_FLAG_RELIABLE);
+-      if (enet_peer_send(peer, 0, packet)) {
++      if (!packet || enet_peer_send(peer, channel, packet)) {
+         enet_packet_destroy(packet);
+ 
+         return -1;
+@@ -550,6 +554,9 @@ namespace stream {
+       safe::mail_raw_t::event_t<video::hdr_info_t> hdr_queue;  ///< Queue of HDR metadata awaiting control-channel delivery.
+     } control;  ///< Runtime state for the encrypted GameStream control channel.
+ 
++#ifdef _WIN32
++    std::unique_ptr<pen_clipboard::WindowsBridge> pen_clipboard;  ///< Opt-in worker scoped to this stream; never persists text.
++#endif
+     std::uint32_t launch_session_id;  ///< RTSP launch-session ID associated with this stream.
+     std::string client_cert;  ///< PEM certificate for the paired client owning the stream.
+     std::string input_session_id;  ///< Stable client identity used to retain input devices across resume.
+@@ -1156,12 +1163,72 @@ namespace stream {
+     return 0;
+   }
+ 
++#ifdef _WIN32
++  /**
++   * @brief Drain a bounded clipboard response batch on the existing ENet/cipher owner thread.
++   * @param session Active encrypted stream; its clipboard worker only produces plain frames.
++   */
++  static void send_clipboard_messages(session_t *session) {
++    // Keep cipher/sequence and ENet access on this existing control thread.
++    // Stop-and-wait plus this per-iteration cap prevents clipboard traffic
++    // from building an unbounded queue or starving input/feedback.
++    if (session->pen_clipboard) {
++      for (unsigned i = 0; i < 4; ++i) {
++        auto frame = session->pen_clipboard->take_outgoing();
++        if (!frame) {
++          break;
++        }
++        control_header_v2 plaintext_header;
++        plaintext_header.type = util::endian::little(pen_clipboard::control_type);
++        plaintext_header.payloadLength = util::endian::little(static_cast<uint16_t>(frame->size()));
++        std::string plaintext(reinterpret_cast<const char *>(&plaintext_header), sizeof(plaintext_header));
++        plaintext += *frame;
++        std::array<std::uint8_t, pen_clipboard::header_size + pen_clipboard::chunk_size + 128> encrypted;
++        auto payload = encode_control(session, plaintext, encrypted);
++        if (payload.empty() || session->broadcast_ref->control_server.send(payload, session->control.peer, pen_clipboard::channel)) {
++          session->pen_clipboard->cancel();
++          break;
++        }
++      }
++    }
++  }
++#endif
++
+   /**
+    * @brief Run the broadcast control-channel worker thread.
+    *
+    * @param server RTSP server instance handling the request.
+    */
+   void controlBroadcastThread(control_server_t *server) {
++#ifdef _WIN32
++    // Only one paired stream may own clipboard sharing at a time. Other viewers
++    // must never receive copies from a different client's streaming session.
++    session_t *clipboard_owner = nullptr;
++    server->map(pen_clipboard::control_type, [&](session_t *session, const std::string_view &payload) {
++      if (session->config.controlProtocolType != 13 || !(session->config.encryptionFlagsEnabled & SS_ENC_CONTROL_V2) || !session->control.peer || session->control.peer->channelCount <= pen_clipboard::channel || session->state.load(std::memory_order_acquire) == session::state_e::STOPPING) {
++        return;
++      }
++      auto packet = pen_clipboard::decode(payload);
++      if (!packet) {
++        if (session->pen_clipboard) {
++          session->pen_clipboard->cancel();
++        }
++        return;
++      }
++      if (!session->pen_clipboard) {
++        if (packet->kind != pen_clipboard::Kind::hello || packet->revision.origin != 1 || (clipboard_owner && clipboard_owner != session)) {
++          return;
++        }
++        clipboard_owner = session;
++        session->pen_clipboard = std::make_unique<pen_clipboard::WindowsBridge>(pen_clipboard::Role::host, pen_clipboard::WindowsBridge::Sender {}, [](pen_clipboard::State state) {
++          BOOST_LOG(info) << "Text clipboard: " << (state == pen_clipboard::State::connected ? "connected" : state == pen_clipboard::State::failed ? "unavailable" :
++                                                                                                                                                     "stopped");
++        });
++        session->pen_clipboard->start();
++      }
++      session->pen_clipboard->receive(payload);
++    });
++#endif
+     server->map(packetTypes[IDX_PERIODIC_PING], [](session_t *session, const std::string_view &payload) {
+       BOOST_LOG(verbose) << "type [IDX_PERIODIC_PING]"sv;
+     });
+@@ -1333,6 +1400,12 @@ namespace stream {
+           }
+ 
+           if (session->state.load(std::memory_order_acquire) == session::state_e::STOPPING) {
++#ifdef _WIN32
++            if (session->pen_clipboard)
++              session->pen_clipboard->stop();
++            if (clipboard_owner == session)
++              clipboard_owner = nullptr;
++#endif
+             pos = server->_sessions->erase(pos);
+ 
+             if (session->control.peer) {
+@@ -1361,6 +1434,9 @@ namespace stream {
+               send_feedback_msg(session, *feedback_msg);
+             }
+ 
++#ifdef _WIN32
++            send_clipboard_messages(session);
++#endif
+             auto &hdr_queue = session->control.hdr_queue;
+             while (session->control.peer && hdr_queue->peek()) {
+               auto hdr_info = hdr_queue->pop();
+@@ -1379,7 +1455,11 @@ namespace stream {
+         break;
+       }
+ 
++#ifdef _WIN32
++      server->iterate(clipboard_owner ? 10ms : 150ms);
++#else
+       server->iterate(150ms);
++#endif
+     }
+ 
+     // Let all remaining connections know the server is shutting down
+@@ -1398,6 +1478,11 @@ namespace stream {
+     for (auto pos = std::begin(*server->_sessions); pos != std::end(*server->_sessions); ++pos) {
+       auto session = *pos;
+ 
++#ifdef _WIN32
++      if (session->pen_clipboard) {
++        session->pen_clipboard->stop();
++      }
++#endif
+       // We may not have gotten far enough to have an ENet connection yet
+       if (session->control.peer) {
+         auto payload = encode_control(session, util::view(plaintext), encrypted_payload);
+--- /dev/null
++++ b/src/pen_clipboard/protocol.h
+@@ -0,0 +1,424 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++#pragma once
++
++#include <algorithm>
++#include <cstdint>
++#include <functional>
++#include <limits>
++#include <optional>
++#include <string>
++#include <string_view>
++#include <utility>
++
++/** @brief Private, versioned Moonlight Pen clipboard protocol (not an upstream protocol). */
++namespace pen_clipboard {
++  /** @brief Compare Windows text content independently of LF/CRLF and clipboard format bookkeeping. */
++  inline std::string text_identity(std::string_view text) {
++    std::string result;
++    result.reserve(text.size());
++    for (size_t i = 0; i < text.size(); ++i) {
++      if (text[i] == '\r') {
++        result.push_back('\n');
++        if (i + 1 < text.size() && text[i + 1] == '\n') {
++          ++i;
++        }
++      } else {
++        result.push_back(text[i]);
++      }
++    }
++    return result;
++  }
++
++  /** @brief Remember only the current text; sequence/format changes alone must not create network echoes. */
++  class TextObservation {
++  public:
++    /** @brief Establish a baseline after negotiation or a remote write without transmitting it. */
++    void remember(const std::optional<std::string> &text) {
++      value_ = text ? std::optional<std::string>(text_identity(*text)) : std::nullopt;
++    }
++
++    /** @brief Return true only for a new text value, or a nontext event invalidating pending remote text. */
++    bool changed(const std::optional<std::string> &text) {
++      if (!text) {
++        value_.reset();
++        return true;
++      }
++      auto current = text_identity(*text);
++      if (value_ && *value_ == current) {
++        return false;
++      }
++      value_ = std::move(current);
++      return true;
++    }
++
++  private:
++    std::optional<std::string> value_;  ///< Current connection only; never written to logs or settings.
++  };
++
++  constexpr uint16_t control_type = 0x5c10;  ///< Only carried inside authenticated encrypted control packets.
++  constexpr uint8_t channel = 6;  ///< Separate reliable ENet channel from keyboard and pen input.
++  constexpr size_t header_size = 24;  ///< Little endian MPCT v1 header size.
++  constexpr size_t chunk_size = 8192;  ///< Stop-and-wait keeps at most one text chunk in flight.
++  constexpr size_t max_text = 1024 * 1024;  ///< Maximum UTF-8 text size before allocating receive storage.
++  enum class Role : uint8_t {
++    client = 1,
++    host = 2
++  };  ///< Origin of a clipboard revision.
++  enum class Kind : uint8_t {
++    hello = 1,
++    welcome,
++    text,
++    ack,
++    invalidate,
++    goodbye
++  };  ///< Wire operation.
++  enum class State {
++    waiting,
++    connected,
++    stopped,
++    failed
++  };  ///< Sharing status, without clipboard contents.
++
++  /** @brief Logical revision; simultaneous edits resolve consistently in favour of the host. */
++  struct Revision {
++    uint64_t counter = 0;  ///< Lamport counter, scoped to one streaming connection.
++    uint8_t origin = 0;  ///< Client or host role.
++
++    bool operator==(const Revision &b) const {
++      return counter == b.counter && origin == b.origin;
++    }
++
++    bool operator<(const Revision &b) const {
++      return counter < b.counter || (counter == b.counter && origin < b.origin);
++    }
++  };
++
++  /** @brief Parsed packet, holding an owning copy only of this bounded chunk. */
++  struct Packet {
++    Kind kind;  ///< Message operation.
++    Revision revision;  ///< Originating clipboard revision (ACK preserves the original origin).
++    uint32_t total = 0;  ///< Complete UTF-8 length.
++    uint32_t offset = 0;  ///< Chunk start, or next expected offset in an ACK.
++    std::string data;  ///< At most chunk_size bytes.
++  };
++
++  /** @brief Append a little endian integer without unaligned loads. */
++  inline void put(std::string &out, uint64_t n, unsigned bytes) {
++    for (unsigned i = 0; i < bytes; ++i) {
++      out.push_back(static_cast<char>(n >> (8 * i)));
++    }
++  }
++
++  /** @brief Read a previously bounds-checked little endian integer. */
++  inline uint64_t get(std::string_view in, size_t at, unsigned bytes) {
++    uint64_t n = 0;
++    for (unsigned i = 0; i < bytes; ++i) {
++      n |= uint64_t(static_cast<uint8_t>(in[at + i])) << (8 * i);
++    }
++    return n;
++  }
++
++  /** @brief Serialize one protocol packet; transport encryption is mandatory outside this codec. */
++  inline std::string encode(const Packet &p) {
++    std::string out("MPCT", 4);
++    out.push_back(1);
++    out.push_back(static_cast<char>(p.kind));
++    out.push_back(static_cast<char>(p.revision.origin));
++    out.push_back(0);
++    put(out, p.revision.counter, 8);
++    put(out, p.total, 4);
++    put(out, p.offset, 4);
++    out += p.data;
++    return out;
++  }
++
++  /** @brief Validate size, version and structural fields before accepting any allocation request. */
++  inline std::optional<Packet> decode(std::string_view bytes) {
++    if (bytes.size() < header_size || bytes.size() > header_size + chunk_size || bytes.substr(0, 4) != "MPCT" || bytes[4] != 1 || bytes[7] != 0) {
++      return {};
++    }
++    auto kind = static_cast<Kind>(bytes[5]);
++    const auto origin = static_cast<uint8_t>(bytes[6]);
++    if (kind < Kind::hello || kind > Kind::goodbye || origin < 1 || origin > 2) {
++      return {};
++    }
++    Packet p {kind, {get(bytes, 8, 8), origin}, static_cast<uint32_t>(get(bytes, 16, 4)), static_cast<uint32_t>(get(bytes, 20, 4)), {}};
++    if (p.total > max_text || p.offset > p.total) {
++      return {};
++    }
++    if (kind == Kind::text) {
++      if (!p.revision.counter || bytes.size() - header_size > p.total - p.offset || (p.total && bytes.size() == header_size)) {
++        return {};
++      }
++    } else if (bytes.size() != header_size) {
++      return {};
++    }
++    if (kind != Kind::text && kind != Kind::ack && (p.total || p.offset)) {
++      return {};
++    }
++    if ((kind == Kind::hello || kind == Kind::welcome || kind == Kind::goodbye) && p.revision.counter) {
++      return {};
++    }
++    if ((kind == Kind::invalidate || kind == Kind::ack) && !p.revision.counter) {
++      return {};
++    }
++    p.data.assign(bytes.substr(header_size));
++    return p;
++  }
++
++  /** @brief Strict UTF-8 validation: reject embedded NUL, overlong encodings and surrogate code points. */
++  inline bool valid_text(std::string_view s) {
++    for (size_t i = 0; i < s.size();) {
++      uint32_t cp = static_cast<uint8_t>(s[i++]);
++      if (cp == 0) {
++        return false;
++      }
++      if (cp < 0x80) {
++        continue;
++      }
++      unsigned more;
++      uint32_t minimum;
++      if (cp >= 0xc2 && cp <= 0xdf) {
++        more = 1;
++        minimum = 0x80;
++        cp &= 0x1f;
++      } else if (cp >= 0xe0 && cp <= 0xef) {
++        more = 2;
++        minimum = 0x800;
++        cp &= 0x0f;
++      } else if (cp >= 0xf0 && cp <= 0xf4) {
++        more = 3;
++        minimum = 0x10000;
++        cp &= 0x07;
++      } else {
++        return false;
++      }
++      if (s.size() - i < more) {
++        return false;
++      }
++      for (unsigned j = 0; j < more; ++j) {
++        const auto c = static_cast<uint8_t>(s[i++]);
++        if ((c & 0xc0) != 0x80) {
++          return false;
++        }
++        cp = (cp << 6) | (c & 0x3f);
++      }
++      if (cp < minimum || cp > 0x10ffff || (cp >= 0xd800 && cp <= 0xdfff)) {
++        return false;
++      }
++    }
++    return true;
++  }
++
++  /** @brief Single-threaded state machine; adapter owns the worker thread and OS clipboard. */
++  class Endpoint {
++  public:
++    using Send = std::function<bool(const std::string &)>;  ///< Bounded transport enqueue operation.
++    using Apply = std::function<void(Revision, std::optional<std::string>)>;  ///< Replace/cancel pending remote text.
++    using Notify = std::function<void(State)>;  ///< Content-free state notification.
++
++    /** @brief Construct a disconnected endpoint without reading or transmitting the clipboard. */
++    Endpoint(Role role, Send send, Apply apply, Notify notify):
++        role_(role),
++        send_(std::move(send)),
++        apply_(std::move(apply)),
++        notify_(std::move(notify)) {}
++
++    /** @brief Start client negotiation; the host waits for an explicit HELLO. */
++    void begin(uint64_t now) {
++      started_ = now_ = now;
++      if (role_ == Role::client) {
++        send_packet({Kind::hello, {0, static_cast<uint8_t>(role_)}});
++      }
++    }
++
++    State state() const {
++      return state_;
++    }  ///< Query current sharing state.
++
++    Revision revision() const {
++      return current_;
++    }  ///< Query latest accepted revision.
++
++    /** @brief Fail closed, releasing buffered clipboard data and cancelling pending writes. */
++    void fail() {
++      if (state_ == State::failed || state_ == State::stopped) {
++        return;
++      }
++      clear();
++      state_ = State::failed;
++      notify_(state_);
++    }
++
++    /** @brief Stop this connection; no buffered text survives the endpoint's lifetime. */
++    void stop() {
++      clear();
++      state_ = State::stopped;
++      notify_(state_);
++    }
++
++    /** @brief Time out an unsupported host or stalled transfer without affecting streaming. */
++    void tick(uint64_t now) {
++      now_ = now;
++      if ((state_ == State::waiting && now - started_ >= 5000) || (waiting_ack_ && now - sent_at_ >= 10000)) {
++        fail();
++      }
++    }
++
++    /** @brief Publish a new OS clipboard revision; nullopt invalidates earlier text transfers. */
++    void local(std::optional<std::string> text) {
++      if (state_ != State::connected) {
++        return;
++      }
++      if (current_.counter == std::numeric_limits<uint64_t>::max()) {
++        fail();
++        return;
++      }
++      current_ = {current_.counter + 1, static_cast<uint8_t>(role_)};
++      clear();
++      if (!text || text->size() > max_text || !valid_text(*text)) {
++        send_packet({Kind::invalidate, current_});
++        return;
++      }
++      outgoing_ = std::move(*text);
++      sending_ = true;
++      send_chunk();
++    }
++
++    /** @brief Receive one decrypted frame, rejecting stale and malformed revisions. */
++    void receive(std::string_view bytes) {
++      if (state_ == State::failed || state_ == State::stopped) {
++        return;
++      }
++      auto decoded = decode(bytes);
++      if (!decoded) {
++        fail();
++        return;
++      }
++      const auto &p = *decoded;
++      const auto remote = static_cast<uint8_t>(role_ == Role::client ? Role::host : Role::client);
++      if (p.kind == Kind::hello && role_ == Role::host && p.revision.origin == remote) {
++        if (state_ == State::waiting) {
++          connected();
++        }
++        send_packet({Kind::welcome, {0, static_cast<uint8_t>(role_)}});
++        return;
++      }
++      if (p.kind == Kind::welcome && role_ == Role::client && p.revision.origin == remote) {
++        if (state_ == State::waiting) {
++          connected();
++        }
++        return;
++      }
++      if (state_ != State::connected) {
++        return;
++      }
++      if (p.kind == Kind::ack) {
++        if (!waiting_ack_ || !(p.revision == current_) || p.total != outgoing_.size() || p.offset != next_offset_) {
++          return;
++        }
++        waiting_ack_ = false;
++        offset_ = next_offset_;
++        if (offset_ == outgoing_.size()) {
++          outgoing_.clear();
++          sending_ = false;
++        } else {
++          send_chunk();
++        }
++        return;
++      }
++      if (p.revision.origin != remote) {
++        fail();
++        return;
++      }
++      if (p.kind == Kind::goodbye) {
++        stop();
++        return;
++      }
++      if (p.kind != Kind::text && p.kind != Kind::invalidate) {
++        fail();
++        return;
++      }
++      if (p.revision < current_) {
++        return;
++      }
++      if (current_ < p.revision) {
++        current_ = p.revision;
++        clear();
++        incoming_total_ = p.total;
++      }
++      if (p.kind == Kind::invalidate) {
++        clear();
++        return;
++      }
++      if (received_complete_ && p.revision == current_) {
++        // Reliable ENet is ordered, but duplicate application frames must not
++        // cause another OS clipboard write or resurrect an old transfer.
++        if (p.total == incoming_total_) {
++          send_packet({Kind::ack, p.revision, p.total, p.total});
++        }
++        return;
++      }
++      if (p.total != incoming_total_ || p.offset != incoming_.size()) {
++        fail();
++        return;
++      }
++      incoming_ += p.data;
++      send_packet({Kind::ack, p.revision, p.total, static_cast<uint32_t>(incoming_.size())});
++      if (incoming_.size() == incoming_total_) {
++        if (!valid_text(incoming_)) {
++          fail();
++          return;
++        }
++        received_complete_ = true;
++        apply_(current_, std::move(incoming_));
++        incoming_.clear();
++      }
++    }
++
++  private:
++    /** @brief Mark negotiation complete; the OS adapter takes its initial baseline here. */
++    void connected() {
++      state_ = State::connected;
++      notify_(state_);
++    }
++
++    /** @brief Clear transfer state and invalidate any delayed clipboard write. */
++    void clear() {
++      incoming_.clear();
++      outgoing_.clear();
++      incoming_total_ = 0;
++      offset_ = next_offset_ = 0;
++      waiting_ack_ = sending_ = received_complete_ = false;
++      apply_(current_, std::nullopt);
++    }
++
++    /** @brief Queue a bounded packet, disabling sharing on transport failure. */
++    void send_packet(const Packet &p) {
++      if (!send_(encode(p))) {
++        fail();
++      }
++    }
++
++    /** @brief Send exactly one chunk and wait for the receiver's application-level ACK. */
++    void send_chunk() {
++      const auto count = (std::min) (chunk_size, outgoing_.size() - offset_);
++      next_offset_ = offset_ + static_cast<uint32_t>(count);
++      waiting_ack_ = true;
++      sent_at_ = now_;
++      send_packet({Kind::text, current_, static_cast<uint32_t>(outgoing_.size()), offset_, outgoing_.substr(offset_, count)});
++    }
++
++    Role role_;  ///< Local origin.
++    Send send_;  ///< Transport callback.
++    Apply apply_;  ///< OS write callback.
++    Notify notify_;  ///< Status callback.
++    State state_ = State::waiting;  ///< Current connection status.
++    Revision current_;  ///< Latest logical revision.
++    std::string outgoing_, incoming_;  ///< Bounded transfer buffers.
++    uint32_t incoming_total_ = 0, offset_ = 0, next_offset_ = 0;  ///< Transfer cursors.
++    bool waiting_ack_ = false, sending_ = false;  ///< Stop-and-wait state.
++    bool received_complete_ = false;  ///< Prevent reapplying a duplicate completed revision.
++    uint64_t started_ = 0, now_ = 0, sent_at_ = 0;  ///< Monotonic timeout timestamps.
++  };
++}  // namespace pen_clipboard
+--- /dev/null
++++ b/src/pen_clipboard/windows.h
+@@ -0,0 +1,377 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++#pragma once
++
++#ifndef NOMINMAX
++  #define NOMINMAX
++#endif
++#ifndef WIN32_LEAN_AND_MEAN
++  #define WIN32_LEAN_AND_MEAN
++#endif
++#include "protocol.h"
++
++#include <atomic>
++#include <deque>
++#include <mutex>
++#include <thread>
++#include <windows.h>
++
++namespace pen_clipboard {
++  /** @brief A clipboard snapshot; null text means an unsupported/empty clipboard revision. */
++  struct Snapshot {
++    DWORD sequence = 0;  ///< Sequence after delayed rendering completes.
++    std::optional<std::string> text;  ///< Valid, bounded UTF-8 plain text only.
++  };
++
++  /** @brief Read Unicode content while the calling thread already holds the Windows clipboard lock. */
++  inline Snapshot read_open_clipboard() {
++    Snapshot result;
++    if (IsClipboardFormatAvailable(CF_UNICODETEXT) && !IsClipboardFormatAvailable(CF_HDROP)) {
++      HANDLE data = GetClipboardData(CF_UNICODETEXT);
++      const auto bytes = data ? GlobalSize(data) : 0;
++      if (bytes >= sizeof(wchar_t) && bytes <= (max_text + 1) * sizeof(wchar_t)) {
++        const auto *p = static_cast<const wchar_t *>(GlobalLock(data));
++        if (p) {
++          const size_t capacity = bytes / sizeof(wchar_t);
++          const auto end = std::find(p, p + capacity, L'\0');
++          if (end != p + capacity) {
++            const int length = static_cast<int>(end - p);
++            const int required = length ? WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, p, length, nullptr, 0, nullptr, nullptr) : 0;
++            if ((!length || required > 0) && required <= static_cast<int>(max_text)) {
++              std::string text(static_cast<size_t>(required), '\0');
++              if (!length || WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, p, length, text.data(), required, nullptr, nullptr) == required) {
++                result.text = std::move(text);
++              }
++            }
++          }
++          GlobalUnlock(data);
++        }
++      }
++    }
++    result.sequence = GetClipboardSequenceNumber();
++    return result;
++  }
++
++  /** @brief Read one stable Unicode snapshot, returning nullopt if another app holds the clipboard. */
++  inline std::optional<Snapshot> read_clipboard(HWND owner) {
++    if (!OpenClipboard(owner)) {
++      return {};
++    }
++    auto result = read_open_clipboard();
++    CloseClipboard();
++    return result;
++  }
++
++  enum class WriteResult {
++    written,
++    unchanged,
++    busy,
++    changed,
++    invalid
++  };  ///< Clipboard write outcome.
++
++  /** @brief Replace clipboard text only if no local copy occurred since the adapter's last snapshot. */
++  inline WriteResult write_clipboard(HWND owner, std::string_view text, DWORD expected, DWORD &written_sequence) {
++    if (text.size() > max_text || !valid_text(text)) {
++      return WriteResult::invalid;
++    }
++    const int count = text.empty() ? 0 : MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, text.data(), static_cast<int>(text.size()), nullptr, 0);
++    if (!text.empty() && count <= 0) {
++      return WriteResult::invalid;
++    }
++    HGLOBAL data = GlobalAlloc(GMEM_MOVEABLE, (static_cast<size_t>(count) + 1) * sizeof(wchar_t));
++    if (!data) {
++      return WriteResult::busy;
++    }
++    auto *destination = static_cast<wchar_t *>(GlobalLock(data));
++    if (!destination) {
++      GlobalFree(data);
++      return WriteResult::busy;
++    }
++    if (count) {
++      MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, text.data(), static_cast<int>(text.size()), destination, count);
++    }
++    destination[count] = L'\0';
++    GlobalUnlock(data);
++    if (!OpenClipboard(owner)) {
++      GlobalFree(data);
++      return WriteResult::busy;
++    }
++    if (GetClipboardSequenceNumber() != expected) {
++      CloseClipboard();
++      GlobalFree(data);
++      return WriteResult::changed;
++    }
++    // Do not empty/repopulate an identical clipboard. Windows history and other
++    // format providers can alter its sequence without changing the copied text.
++    const auto current = read_open_clipboard();
++    if (current.text && text_identity(*current.text) == text_identity(text)) {
++      written_sequence = current.sequence;
++      CloseClipboard();
++      GlobalFree(data);
++      return WriteResult::unchanged;
++    }
++    const bool ok = EmptyClipboard() && SetClipboardData(CF_UNICODETEXT, data);
++    written_sequence = GetClipboardSequenceNumber();
++    CloseClipboard();
++    if (!ok) {
++      GlobalFree(data);
++      return WriteResult::busy;
++    }
++    return WriteResult::written;
++  }
++
++  /** @brief Check that this worker is on the user's input desktop, excluding lock/UAC desktops. */
++  inline bool on_input_desktop() {
++    HDESK input = OpenInputDesktop(0, FALSE, DESKTOP_READOBJECTS);
++    if (!input) {
++      return false;
++    }
++    wchar_t current_name[256] = {}, input_name[256] = {};
++    DWORD needed = 0;
++    const bool match = GetUserObjectInformationW(GetThreadDesktop(GetCurrentThreadId()), UOI_NAME, current_name, sizeof(current_name), &needed) &&
++                       GetUserObjectInformationW(input, UOI_NAME, input_name, sizeof(input_name), &needed) &&
++                       wcscmp(current_name, input_name) == 0;
++    CloseDesktop(input);
++    return match;
++  }
++
++  /** @brief Bounded worker owning all Windows clipboard calls; transport callbacks never touch the GUI thread. */
++  class WindowsBridge {
++  public:
++    using Sender = Endpoint::Send;  ///< Client sends directly; host drains its queue on the ENet thread.
++    using Notifier = Endpoint::Notify;  ///< Optional content-free status callback.
++    using DesktopCheck = std::function<bool()>;  ///< Injectable desktop check for isolated window-station tests.
++
++    /** @brief Construct an idle bridge. No clipboard access occurs before explicit start and negotiation. */
++    explicit WindowsBridge(Role role, Sender sender = {}, Notifier notifier = {}, DesktopCheck desktop_check = on_input_desktop):
++        role_(role),
++        sender_(std::move(sender)),
++        notifier_(std::move(notifier)),
++        desktop_check_(std::move(desktop_check)) {}
++
++    ~WindowsBridge() {
++      stop();
++    }  ///< Join before transport destruction.
++
++    WindowsBridge(const WindowsBridge &) = delete;
++    WindowsBridge &operator=(const WindowsBridge &) = delete;
++
++    /** @brief Start the clipboard worker once, before accepting transport frames. */
++    void start() {
++      if (thread_.joinable()) {
++        return;
++      }
++      cancelled_ = false;
++      accepting_ = true;
++      thread_ = std::thread([this] {
++        run();
++      });
++    }
++
++    /** @brief Stop accepting work immediately; safe from a control-stream termination callback. */
++    void cancel() {
++      accepting_ = false;
++      cancelled_ = true;
++    }
++
++    /** @brief Stop and join before freeing session/cipher/network objects. */
++    void stop() {
++      cancel();
++      if (thread_.joinable()) {
++        thread_.join();
++      }
++      std::lock_guard<std::mutex> lock(mutex_);
++      incoming_.clear();
++      outgoing_.clear();
++    }
++
++    State state() const {
++      return state_;
++    }  ///< Get current status without clipboard contents.
++
++    /** @brief Queue only a bounded, structurally valid frame from the authenticated control channel. */
++    bool receive(std::string_view bytes) {
++      if (!accepting_) {
++        return false;
++      }
++      if (!decode(bytes)) {
++        overflow_ = true;
++        return false;
++      }
++      std::lock_guard<std::mutex> lock(mutex_);
++      if (!accepting_) {
++        return false;
++      }
++      if (incoming_.size() >= 32) {
++        overflow_ = true;
++        return false;
++      }
++      incoming_.emplace_back(bytes);
++      return true;
++    }
++
++    /** @brief Pop one host response; only the host's existing control thread performs encryption/send. */
++    std::optional<std::string> take_outgoing() {
++      std::lock_guard<std::mutex> lock(mutex_);
++      if (outgoing_.empty() || cancelled_) {
++        return {};
++      }
++      auto bytes = std::move(outgoing_.front());
++      outgoing_.pop_front();
++      return bytes;
++    }
++
++  private:
++    /** @brief Register a message-only owner for clipboard ownership and format notifications. */
++    static LRESULT CALLBACK window_proc(HWND window, UINT msg, WPARAM wp, LPARAM lp) {
++      return DefWindowProcW(window, msg, wp, lp);
++    }
++
++    /** @brief Deliver one small response, with fixed memory bounds on the host queue. */
++    bool send(const std::string &bytes) {
++      if (cancelled_) {
++        return false;
++      }
++      if (sender_) {
++        return sender_(bytes);
++      }
++      std::lock_guard<std::mutex> lock(mutex_);
++      if (outgoing_.size() >= 32) {
++        return false;
++      }
++      outgoing_.push_back(bytes);
++      return true;
++    }
++
++    /** @brief Pump clipboard/transport changes on the dedicated worker thread. */
++    void run() {
++      const wchar_t *class_name = L"MoonlightPenClipboardV1";
++      WNDCLASSW wc {};
++      wc.lpfnWndProc = window_proc;
++      wc.hInstance = GetModuleHandleW(nullptr);
++      wc.lpszClassName = class_name;
++      RegisterClassW(&wc);
++      HWND window = CreateWindowExW(0, class_name, L"", 0, 0, 0, 0, 0, HWND_MESSAGE, nullptr, wc.hInstance, nullptr);
++      if (!window || !AddClipboardFormatListener(window)) {
++        if (window) {
++          DestroyWindow(window);
++        }
++        state_ = State::failed;
++        accepting_ = false;
++        if (notifier_) {
++          notifier_(State::failed);
++        }
++        return;
++      }
++      DWORD sequence = GetClipboardSequenceNumber();
++      TextObservation observation;
++      std::optional<std::string> pending;
++      Revision pending_revision;
++      uint64_t pending_since = 0;
++      bool desktop_available = false;
++      Endpoint endpoint(role_, [this](const std::string &b) {
++        return send(b);
++      },
++                        [&](Revision r, std::optional<std::string> text) {
++                          pending_revision = r;
++                          pending = std::move(text);
++                          pending_since = GetTickCount64();
++                        },
++                        [&](State status) {
++                          state_ = status;
++                          if (status == State::connected) {
++                            // Never transmit the clipboard that existed before negotiation completed.
++                            sequence = GetClipboardSequenceNumber();
++                            if (auto initial = read_clipboard(window)) {
++                              sequence = initial->sequence;
++                              observation.remember(initial->text);
++                            }
++                            desktop_available = desktop_check_();
++                          }
++                          if (notifier_) {
++                            notifier_(status);
++                          }
++                        });
++      endpoint.begin(GetTickCount64());
++      while (!cancelled_ && endpoint.state() != State::failed && endpoint.state() != State::stopped) {
++        MSG msg;
++        while (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE)) {
++          DispatchMessageW(&msg);
++        }
++        const auto now = GetTickCount64();
++        endpoint.tick(now);
++        if (overflow_) {
++          endpoint.fail();
++          break;
++        }
++        const bool available = desktop_check_();
++        if (available != desktop_available) {
++          desktop_available = available;
++          sequence = GetClipboardSequenceNumber();
++          pending.reset();
++          observation.remember(std::nullopt);
++          // Cancel data that was copied before switching desktop; resume from new copies.
++          if (endpoint.state() == State::connected) {
++            endpoint.local(std::nullopt);
++          }
++        }
++        // Observe local changes BEFORE remote packets, so a late network write cannot erase a newer local copy.
++        bool local_busy = false;
++        if (endpoint.state() == State::connected && available && GetClipboardSequenceNumber() != sequence) {
++          auto snapshot = read_clipboard(window);
++          if (snapshot) {
++            sequence = snapshot->sequence;
++            if (observation.changed(snapshot->text)) {
++              endpoint.local(std::move(snapshot->text));
++            }
++          } else {
++            local_busy = true;
++          }
++        }
++        std::deque<std::string> frames;
++        {
++          std::lock_guard<std::mutex> lock(mutex_);
++          // Defer network changes while a newer local copy is still being rendered/locked.
++          if (!local_busy) {
++            frames.swap(incoming_);
++          }
++        }
++        for (const auto &frame : frames) {
++          if (cancelled_) {
++            break;
++          }
++          endpoint.receive(frame);
++        }
++        if (!available) {
++          pending.reset();
++        }
++        if (pending && !local_busy && available && !cancelled_ && endpoint.state() == State::connected && pending_revision == endpoint.revision()) {
++          const auto result = write_clipboard(window, *pending, sequence, sequence);
++          if (result == WriteResult::written || result == WriteResult::unchanged) {
++            observation.remember(pending);
++          }
++          if (result == WriteResult::written || result == WriteResult::unchanged || result == WriteResult::invalid || result == WriteResult::changed || (now >= pending_since && now - pending_since > 2000)) {
++            pending.reset();
++          }
++        }
++        MsgWaitForMultipleObjects(0, nullptr, FALSE, 10, QS_ALLINPUT);
++      }
++      if (endpoint.state() != State::failed) {
++        endpoint.stop();
++      }
++      accepting_ = false;
++      RemoveClipboardFormatListener(window);
++      DestroyWindow(window);
++    }
++
++    Role role_;  ///< Endpoint role.
++    Sender sender_;  ///< Optional direct client transport.
++    Notifier notifier_;  ///< Status callback.
++    DesktopCheck desktop_check_;  ///< Production uses the real Windows input desktop check.
++    std::thread thread_;  ///< Clipboard owner thread.
++    std::atomic<bool> cancelled_ {true}, accepting_ {false}, overflow_ {false};  ///< Cross-thread lifecycle flags.
++    std::atomic<State> state_ {State::waiting};  ///< Last content-free state.
++    std::mutex mutex_;  ///< Protects frame queues only, never OS clipboard or transport operations.
++    std::deque<std::string> incoming_, outgoing_;  ///< At most 32 bounded frames per direction.
++  };
++}  // namespace pen_clipboard
+--- /dev/null
++++ b/tests/unit/test_pen_clipboard.cpp
+@@ -0,0 +1,186 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++#include "src/pen_clipboard/protocol.h"
++
++#include <deque>
++#include <gtest/gtest.h>
++#include <iostream>
++#include <random>
++
++using namespace pen_clipboard;
++#define CHECK(x) ASSERT_TRUE(x)
++
++struct Pair {
++  std::deque<std::string> to_host, to_client;
++  std::string client_clip = "untouched client", host_clip = "untouched host";
++  unsigned client_writes = 0, host_writes = 0;
++  Endpoint client {Role::client, [&](const auto &b) {
++                     to_host.push_back(b);
++                     return true;
++                   },
++                   [&](auto, auto text) {
++                     if (text) {
++                       client_clip = *text;
++                       ++client_writes;
++                     }
++                   },
++                   [](auto) {
++                   }};
++  Endpoint host {Role::host, [&](const auto &b) {
++                   to_client.push_back(b);
++                   return true;
++                 },
++                 [&](auto, auto text) {
++                   if (text) {
++                     host_clip = *text;
++                     ++host_writes;
++                   }
++                 },
++                 [](auto) {
++                 }};
++
++  void pump() {
++    size_t loops = 0;
++    while (!to_host.empty() || !to_client.empty()) {
++      CHECK(++loops < 1000);
++      if (!to_host.empty()) {
++        auto b = std::move(to_host.front());
++        to_host.pop_front();
++        host.receive(b);
++      }
++      if (!to_client.empty()) {
++        auto b = std::move(to_client.front());
++        to_client.pop_front();
++        client.receive(b);
++      }
++    }
++  }
++
++  void connect() {
++    host.begin(100);
++    client.begin(100);
++    pump();
++    CHECK(client.state() == State::connected && host.state() == State::connected);
++    CHECK(client_clip == "untouched client" && host_clip == "untouched host");
++    CHECK(client_writes == 0 && host_writes == 0);
++  }
++};
++
++TEST(PenClipboard, RoundTripsAndMalformedFrames) {
++  TextObservation observation;
++  observation.remember(std::string("existing\r\ntext"));
++  CHECK(!observation.changed(std::string("existing\ntext")));
++  for (int i = 0; i < 1000; ++i) {
++    CHECK(!observation.changed(std::string("existing\r\ntext")));
++  }
++  CHECK(observation.changed(std::string("new copy")));
++  observation.remember(std::string("remote text"));
++  CHECK(!observation.changed(std::string("remote text")));
++  CHECK(observation.changed(std::nullopt));  // New image/file cancels pending text, even after deduplication.
++  CHECK(observation.changed(std::string("remote text")));  // Copying it again after an image is a new text copy.
++  CHECK(observation.changed(std::string("")));
++  CHECK(!observation.changed(std::string("")));
++  Pair p;
++  p.client.local("must not send before opt-in");
++  CHECK(p.to_host.empty());
++  p.connect();
++  const std::string text = "한글 가나다\r\nEnglish 123\n😀🖊️\t끝";
++  p.client.local(text);
++  p.pump();
++  CHECK(p.host_clip == text && p.host_writes == 1 && p.client_writes == 0);
++  auto duplicate = encode({Kind::text, p.client.revision(), static_cast<uint32_t>(text.size()), 0, text});
++  p.host.receive(duplicate);
++  p.pump();
++  CHECK(p.host_writes == 1);
++  p.host.local("호스트 → 노트북\r\n둘째 줄");
++  p.pump();
++  CHECK(p.client_clip == "호스트 → 노트북\r\n둘째 줄" && p.client_writes == 1);
++  p.client.local("");
++  p.pump();
++  CHECK(p.host_clip.empty());
++  for (size_t size : {size_t(8191), size_t(8192), size_t(8193), max_text}) {
++    std::string large(size, 'x');
++    large.replace(size - 4, 4, "LAST");
++    p.host.local(large);
++    CHECK(p.to_client.size() == 1);  // Hard backpressure, not 128 queued chunks.
++    p.pump();
++    CHECK(p.client_clip == large);
++  }
++  auto saved = p.host_clip;
++  p.client.local(std::string(max_text + 1, 'x'));
++  p.pump();
++  CHECK(p.host_clip == saved);
++  p.client.local(std::string("bad\0text", 8));
++  p.pump();
++  CHECK(p.host_clip == saved);
++  p.client.local(std::string("\xc0\xaf", 2));
++  p.pump();
++  CHECK(p.host_clip == saved);
++  CHECK(!valid_text("\xed\xa0\x80") && !valid_text("\xf4\x90\x80\x80"));
++  CHECK(!valid_text("\xe3\x81") && !valid_text("\x80"));
++  CHECK(valid_text("字😀") && valid_text(""));
++  // A local image/file/clear invalidates in-flight text without clearing the remote clipboard.
++  p.client.local(std::string(20000, 'a'));
++  p.client.local(std::nullopt);
++  p.pump();
++  CHECK(p.host_clip == saved);
++  // A newer local copy cancels an unfinished old transfer.
++  p.client.local(std::string(25000, 'b'));
++  p.client.local("newest");
++  p.pump();
++  CHECK(p.host_clip == "newest");
++  // Simultaneous opposite-direction edits converge deterministically and never echo forever.
++  p.client.local("client simultaneous");
++  p.host.local("host simultaneous");
++  p.pump();
++  CHECK(p.client_clip == "host simultaneous");
++  CHECK(p.client.state() == State::connected && p.host.state() == State::connected);
++  for (int i = 0; i < 200; ++i) {
++    auto s = "alternate " + std::to_string(i);
++    if (i % 2) {
++      p.host.local(s);
++      p.pump();
++      CHECK(p.client_clip == s);
++    } else {
++      p.client.local(s);
++      p.pump();
++      CHECK(p.host_clip == s);
++    }
++  }
++  // A stopped/disconnected session must not apply late packets or carry them into a new session.
++  auto late = encode({Kind::text, {999, 2}, 4, 0, "late"});
++  auto before = p.client_clip;
++  p.client.stop();
++  p.client.receive(late);
++  CHECK(p.client_clip == before);
++  Pair reconnect;
++  reconnect.connect();
++  CHECK(reconnect.client_writes == 0);
++  Pair unsupported;
++  unsupported.client.begin(10);
++  unsupported.client.tick(5010);
++  CHECK(unsupported.client.state() == State::failed);
++  Pair timeout;
++  timeout.connect();
++  timeout.client.local("no acknowledgement");
++  timeout.client.tick(10100);
++  CHECK(timeout.client.state() == State::failed);
++  // Malformed/oversize headers are rejected before allocation or clipboard mutation.
++  Pair malformed;
++  malformed.connect();
++  malformed.client.receive(encode({Kind::text, {1, 2}, static_cast<uint32_t>(max_text + 1), 0, "x"}));
++  CHECK(malformed.client.state() == State::failed && malformed.client_writes == 0);
++  CHECK(!decode(""));
++  CHECK(!decode(std::string(header_size + chunk_size + 1, 'x')));
++  std::mt19937 rng(0x434c4950);
++  for (int i = 0; i < 10000; ++i) {
++    std::string bytes(rng() % 100, '\0');
++    for (auto &c : bytes) {
++      c = static_cast<char>(rng());
++    }
++    auto decoded = decode(bytes);
++    if (decoded) {
++      CHECK(decoded->data.size() <= chunk_size && decoded->total <= max_text);
++    }
++  }
++  std::cout << "PASS: negotiation, Unicode, both directions, 1 MiB, flow control, invalidation, races, reconnect, limits and malformed frames\n";
++}

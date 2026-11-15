@@ -1,0 +1,23 @@
+{
+  "baseVersion": "2026.914.233613",
+  "protocol": "MPCT v1 (text only)",
+  "originalSha256": "a8ddf74e93297529ca5aa9c59234a7043b94587e8d11ea24c521fa69d6f59fd3",
+  "patchedSha256": "09c1ffe2c523232841a15857d4022bf6ef4cc0a624ed586ab93d0fe222b689ac",
+  "clientSha256": "e412a0b4a91b405e5afa236ff067e8d6c339d3ed0edb1d529d7ebec8f818848a",
+  "sunshineBaseCommit": "63d35f702ee9e362e43263742981836ec0710384",
+  "installerRevision": 3,
+  "originalVariants": [
+    {
+      "distribution": "official lite ZIP AMD64",
+      "sha256": "a8ddf74e93297529ca5aa9c59234a7043b94587e8d11ea24c521fa69d6f59fd3"
+    },
+    {
+      "distribution": "official MSI AMD64",
+      "sha256": "8e2c4627318432b67520a9de7cfd8ac089068a2873ccf8443756733a1af7d571"
+    }
+  ],
+  "previousPatchedSha256": [
+    "b30d1ef79d7bbd94a788d473384898e4c436a5d6f6f3dc6a6f44d72392f27662"
+  ],
+  "clipboardRevision": "text-history-dedup-r3"
+}

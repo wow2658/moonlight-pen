@@ -200,6 +200,14 @@ CenteredGridView {
                 }
 
                 NavigableMenuItem {
+                    objectName: "clipboardTextSharingMenu"
+                    text: "텍스트 클립보드 공유"
+                    checkable: true
+                    checked: model.shareClipboardText
+                    visible: Qt.platform.os === "windows" && model.paired
+                    onTriggered: computerModel.setClipboardTextSharing(index, checked)
+                }
+                NavigableMenuItem {
                     text: qsTr("Rename PC")
                     onTriggered: {
                         renamePcDialog.pcIndex = index

@@ -1,10 +1,10 @@
 {
   "format": 1,
-  "description": "SHA256 of exported tracked source, updated for performance shortcut, host command protocol v2 and panel paint fix; original README renamed.",
+  "description": "Tracked client and vendored source including pen/display controls and bidirectional text clipboard r3.",
   "files": [
     {
       "path": ".gitignore",
-      "sha256": "d5e8fe90c78ca8e325d5dab479770e13ce8c42c6f3e607a92eb9344d6aeda200"
+      "sha256": "61aedf799acff139ce8b23e955c371fc9d615f0ca7448261a74c72acaa70c861"
     },
     {
       "path": "AntiHooking/AntiHooking.pro",
@@ -64,7 +64,7 @@
     },
     {
       "path": "app/app.pro",
-      "sha256": "ebee09e5417ab36a81e7508d695ce4eaa4e0151f72f40c024b1144cf12d82671"
+      "sha256": "5ae0fd17bee9b1dd067f60d3ab2be45a6f750fcf49142ef8721aedc0e7e3701e"
     },
     {
       "path": "app/backend/autoupdatechecker.cpp",
@@ -124,11 +124,11 @@
     },
     {
       "path": "app/backend/nvcomputer.cpp",
-      "sha256": "526adcddd5eb5a4dd34e3929c31ed21143c4669c9f950dbcaec2c5037281c56b"
+      "sha256": "9edac8c566ad62beb7fcaec58326062f2c9473a314c0272ca10f95da69893212"
     },
     {
       "path": "app/backend/nvcomputer.h",
-      "sha256": "566790f20086f01d5f6e8f5cba8a1a00c3f5e5d1a1c3d774f2448d43b2bc2419"
+      "sha256": "33b7e8b05b37cfc56112d17c4af293aa959955a3127affb542144a21728d5441"
     },
     {
       "path": "app/backend/nvhttp.cpp",
@@ -284,7 +284,7 @@
     },
     {
       "path": "app/gui/PcView.qml",
-      "sha256": "e92762cf1582dfac87b08bc3a3ba0cd31f91e8aea34a103602420317302280ce"
+      "sha256": "7ab699fbbbb2387df02f2c5262984baa4bd36e60c1ca9d0f415e289607538c1d"
     },
     {
       "path": "app/gui/QuitSegue.qml",
@@ -308,11 +308,11 @@
     },
     {
       "path": "app/gui/computermodel.cpp",
-      "sha256": "3ca2f5ec610667dd3ea4d2a4c4ad15e29bdb8b2d0a66bdf1d8c9b07742eec68e"
+      "sha256": "0a6a07693c64375068dcbb27089bdf13be5fedfe123b584a604f50c656c20ccd"
     },
     {
       "path": "app/gui/computermodel.h",
-      "sha256": "dc2ef950b76e27e4a88602995b80839a9146cb296e485d97b3bbc2f32c50ad46"
+      "sha256": "8c3c736cc247de4fe87847305a054e781d2be47bdba80b81595780a24bb17698"
     },
     {
       "path": "app/gui/main.qml",
@@ -872,11 +872,11 @@
     },
     {
       "path": "app/streaming/session.cpp",
-      "sha256": "519d258487fce3b8584aa1cf2ffd161c3bbe7f8a85a4a8a973a11cd9ec84739d"
+      "sha256": "fd6e83ea10904f4dce5085ca64ec8c3946b8e566c84967e2719ced2f5b63d28f"
     },
     {
       "path": "app/streaming/session.h",
-      "sha256": "f7533f9ada6cf1a2b38f199e582f7d53f6370e844edff8d082fa95d02c67ccbf"
+      "sha256": "3cbbaf64a7b4eae0b4b209d312ac4cf777734cf496591ec490bd185af96b2fc7"
     },
     {
       "path": "app/streaming/streamutils.cpp",
@@ -1480,7 +1480,7 @@
     },
     {
       "path": "moonlight-common-c/moonlight-common-c/src/ControlStream.c",
-      "sha256": "64ca2bc97f8945cd826d7c484aca92976a1a4b965fd92e10bf78e9386b32e63c"
+      "sha256": "e6a42e7b9ac5f4322e07f400173f6e4ea9ae7d3222a7c7832d9052ebef8e1791"
     },
     {
       "path": "moonlight-common-c/moonlight-common-c/src/FakeCallbacks.c",
@@ -1500,7 +1500,7 @@
     },
     {
       "path": "moonlight-common-c/moonlight-common-c/src/Limelight.h",
-      "sha256": "24e55dc22227abc0bb65c615946bef925aee2344f87a2d8e435e0bbc7dff47a0"
+      "sha256": "5ea63504daaf6ed2d515d2a04cac351931fb921bd65880868b624e6174e529e6"
     },
     {
       "path": "moonlight-common-c/moonlight-common-c/src/LinkedBlockingQueue.c",
@@ -1969,6 +1969,22 @@
     {
       "path": "setup-deps.py",
       "sha256": "7a2bedb7b921b5b0b0a15b427c2c1d6fa1153e22dfd46f91aeb6e10cd895e0df"
+    },
+    {
+      "path": "shared/clipboard/protocol.h",
+      "sha256": "074e5a8510e22d18b124bd4199160bd2f4acd9e526d0e74d787313006ebee7ed"
+    },
+    {
+      "path": "shared/clipboard/windows.h",
+      "sha256": "0fc76f5874076d9323804b6e98dffe2e700f34e998ff7063555051ec0a1a41d7"
+    },
+    {
+      "path": "tests/clipboard-protocol-test.cpp",
+      "sha256": "31b890fe82c2feb5264523d79c3f6ad6eb8edbf1972cb9c1005681e68a4ef903"
+    },
+    {
+      "path": "tests/clipboard-windows-test.cpp",
+      "sha256": "0b859897fea1252628f60362efe4d293f7b5eed813507b02711228e4d25edb92"
     },
     {
       "path": "tests/hostdisplay-paint-test.cpp",

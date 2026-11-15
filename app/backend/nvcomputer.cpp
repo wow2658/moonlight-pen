@@ -28,6 +28,7 @@ NvComputer::NvComputer(QSettings& settings)
     this->name = settings.value(SER_NAME).toString();
     this->uuid = settings.value(SER_UUID).toString();
     this->hasCustomName = settings.value(SER_CUSTOMNAME).toBool();
+    this->shareClipboardText = settings.value("shareClipboardText", false).toBool();
     this->macAddress = settings.value(SER_MAC).toByteArray();
     this->localAddress = NvAddress(settings.value(SER_LOCALADDR).toString(),
                                    settings.value(SER_LOCALPORT, QVariant(DEFAULT_HTTP_PORT)).toUInt());
@@ -80,6 +81,7 @@ void NvComputer::serialize(QSettings& settings, bool serializeApps) const
 
     settings.setValue(SER_NAME, name);
     settings.setValue(SER_CUSTOMNAME, hasCustomName);
+    settings.setValue("shareClipboardText", shareClipboardText);
     settings.setValue(SER_UUID, uuid);
     settings.setValue(SER_MAC, macAddress);
     settings.setValue(SER_LOCALADDR, localAddress.address());
@@ -109,6 +111,7 @@ bool NvComputer::isEqualSerialized(const NvComputer &that) const
 {
     return this->name == that.name &&
            this->hasCustomName == that.hasCustomName &&
+           this->shareClipboardText == that.shareClipboardText &&
            this->uuid == that.uuid &&
            this->macAddress == that.macAddress &&
            this->localAddress == that.localAddress &&

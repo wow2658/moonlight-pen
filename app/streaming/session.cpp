@@ -2,6 +2,9 @@
 #include "settings/streamingpreferences.h"
 #include "streaming/streamutils.h"
 #include "backend/richpresencemanager.h"
+#ifdef Q_OS_WIN32
+#include "../../shared/clipboard/windows.h"
+#endif
 
 #include <Limelight.h>
 #include "SDL_compat.h"
@@ -60,7 +63,8 @@ CONNECTION_LISTENER_CALLBACKS Session::k_ConnCallbacks = {
     Session::clRumbleTriggers,
     Session::clSetMotionEventState,
     Session::clSetControllerLED,
-    Session::clSetAdaptiveTriggers
+    Session::clSetAdaptiveTriggers,
+    Session::clPenClipboardFrame
 };
 
 Session* Session::s_ActiveSession;
@@ -85,8 +89,22 @@ void Session::clStageFailed(int stage, int errorCode)
     emit s_ActiveSession->stageFailed(QString::fromLocal8Bit(LiGetStageName(stage)), errorCode, QString(failingPorts));
 }
 
+void Session::clPenClipboardFrame(const unsigned char* data, int length)
+{
+#ifdef Q_OS_WIN32
+    if (s_ActiveSession->m_Clipboard) {
+        s_ActiveSession->m_Clipboard->receive(std::string_view(reinterpret_cast<const char*>(data), length));
+    }
+#else
+    Q_UNUSED(data); Q_UNUSED(length);
+#endif
+}
+
 void Session::clConnectionTerminated(int errorCode)
 {
+#ifdef Q_OS_WIN32
+    if (s_ActiveSession->m_Clipboard) s_ActiveSession->m_Clipboard->cancel();
+#endif
     unsigned int portFlags = LiGetPortFlagsFromTerminationErrorCode(errorCode);
     s_ActiveSession->m_PortTestResults = LiTestClientConnectivity(CONN_TEST_SERVER, 443, portFlags);
 
@@ -586,6 +604,19 @@ Session::Session(NvComputer* computer, NvApp& app, StreamingPreferences *prefere
       m_AudioSampleCount(0),
       m_DropAudioEndTime(0)
 {
+#ifdef Q_OS_WIN32
+    // Stable object for all control callbacks, including connection failure/teardown.
+    if (computer->shareClipboardText && !computer->isNvidiaServerSoftware) {
+        m_Clipboard = std::make_unique<pen_clipboard::WindowsBridge>(pen_clipboard::Role::client,
+            [](const std::string& frame) {
+                return LiSendPenClipboardFrame(reinterpret_cast<const unsigned char*>(frame.data()), static_cast<int>(frame.size())) == 0;
+            }, [](pen_clipboard::State state) {
+                const char* status = state == pen_clipboard::State::connected ? "connected" :
+                    state == pen_clipboard::State::failed ? "unavailable (host patch or clipboard access required)" : "stopped";
+                SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Text clipboard: %s", status);
+            });
+    }
+#endif
 }
 
 Session::~Session()
@@ -1287,6 +1318,10 @@ private:
         // LiStartConnection() and LiStopConnection().
         SDL_assert(m_Session->m_VideoDecoder == nullptr);
 
+        // Join clipboard transport before common-c destroys the ENet peer/cipher.
+#ifdef Q_OS_WIN32
+        if (m_Session->m_Clipboard) m_Session->m_Clipboard->stop();
+#endif
         // Finish cleanup of the connection state
         LiStopConnection();
 
@@ -1725,6 +1760,9 @@ bool Session::startConnectionAsync()
         return false;
     }
 
+#ifdef Q_OS_WIN32
+    if (m_Clipboard) m_Clipboard->start();
+#endif
     emit connectionStarted();
     return true;
 }
@@ -2328,6 +2366,9 @@ void Session::exec()
     }
 
 DispatchDeferredCleanup:
+#ifdef Q_OS_WIN32
+    if (m_Clipboard) m_Clipboard->cancel();
+#endif
     // Switch back to synchronous logging mode
     StreamUtils::exitAsyncLoggingMode();
 

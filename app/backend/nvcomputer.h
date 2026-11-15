@@ -109,6 +109,7 @@ public:
     QByteArray macAddress;
     QString name;
     bool hasCustomName;
+    bool shareClipboardText = false; // Explicit opt-in, persisted per paired host.
     QString uuid;
     QSslCertificate serverCert;
     QVector<NvApp> appList;

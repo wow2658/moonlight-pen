@@ -1290,6 +1290,17 @@ static void controlReceiveThreadFunc(void* context) {
                 hdrEnabled = (enableByte != 0);
             }
 
+            // Private clipboard frames must never be accepted on legacy/unencrypted transport.
+            if (ctlHdr->type == 0x5c10 && IS_SUNSHINE() && encryptedControlStream &&
+                (EncryptionFeaturesEnabled & SS_ENC_CONTROL_V2)) {
+                int length = packetLength - sizeof(*ctlHdr);
+                if (length >= 24 && length <= 24 + 8192 && ListenerCallbacks.penClipboardFrame != NULL) {
+                    ListenerCallbacks.penClipboardFrame((const unsigned char*)(ctlHdr + 1), length);
+                }
+                free(ctlHdr);
+                continue;
+            }
+
             // Process client callbacks in a separate thread
             if (needsAsyncCallback(ctlHdr->type)) {
                 queueAsyncCallback(ctlHdr, packetLength);
@@ -1688,6 +1699,16 @@ int stopControlStream(void) {
 }
 
 // Called by the input stream to send a packet for Gen 5+ servers
+int LiSendPenClipboardFrame(const unsigned char* data, int length) {
+    // Caller must stop/join its clipboard worker BEFORE LiStopConnection().
+    if (!data || length < 24 || length > 24 + 8192 || stopping || !IS_SUNSHINE() ||
+        !encryptedControlStream || !(EncryptionFeaturesEnabled & SS_ENC_CONTROL_V2) ||
+        !peer || peer->channelCount <= 6) {
+        return -1;
+    }
+    return sendMessageEnet(0x5c10, (short)length, data, 6, ENET_PACKET_FLAG_RELIABLE, false) ? 0 : -1;
+}
+
 int sendInputPacketOnControlStream(unsigned char* data, int length, uint8_t channelId, uint32_t flags, bool moreData) {
     LC_ASSERT(AppVersionQuad[0] >= 5);
 

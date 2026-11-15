@@ -1,0 +1,12 @@
+Local text clipboard test build; not an official upstream release.
+
+Base source: https://github.com/SunshineStream/Sunshine/tree/63d35f702ee9e362e43263742981836ec0710384
+Changes: source-changes/sunshine.patch
+Apply the unified patch to the base source before building.
+The client source link is in the existing private repository. No changes have been pushed.
+
+Client: Qt 6.12.0 MSVC x64, qmake release, jom; use the base BUILDING.md.
+Host: Sunshine 2026.914.233613, recursive submodules, MSYS2 UCRT64, GCC 16.2, CMake/Ninja.
+Host configure: -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TESTS=OFF -DDOTNET_EXECUTABLE=OFF -DSUNSHINE_ASSETS_DIR=assets. Build target sunshine.
+Host runtime retains the matching official installed assets and service.
+Debug information was stripped from the host executable; existing configuration and keys are not distributed.

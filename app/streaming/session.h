@@ -1,5 +1,10 @@
 #pragma once
 
+#include <QtGlobal>
+#include <memory>
+#ifdef Q_OS_WIN32
+namespace pen_clipboard { class WindowsBridge; }
+#endif
 #include <QSemaphore>
 #include <QQuickWindow>
 
@@ -243,6 +248,10 @@ private:
     static
     int drSubmitDecodeUnit(PDECODE_UNIT du);
 
+    static void clPenClipboardFrame(const unsigned char* data, int length);
+#ifdef Q_OS_WIN32
+    std::unique_ptr<pen_clipboard::WindowsBridge> m_Clipboard;
+#endif
     StreamingPreferences* m_Preferences;
     bool m_IsFullScreen;
     SupportedVideoFormatList m_SupportedVideoFormats; // Sorted in order of descending priority
