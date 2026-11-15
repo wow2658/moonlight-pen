@@ -76,7 +76,7 @@ source_note = (
     'Community pen fork: https://github.com/AaaUpo/moonlight-qt-surface\n'
     'License: GNU GPL v3. Third-party notices: licenses/.\n'
     'Dependency source/build references: licenses/SOURCE-REFERENCES.json.\n'
-    'GitHub sign-in and repository access are required for this private repository.\n'
+    'Source and downloads are public; GitHub sign-in is not required.\n'
 )
 (client / 'SOURCE.txt').write_text(source_note, encoding='utf-8')
 (host / 'SOURCE.txt').write_text(source_note.replace('Third-party notices: licenses/.', 'See LICENSE; this package contains only text scripts.').replace('Dependency source/build references: licenses/SOURCE-REFERENCES.json.\n', ''), encoding='utf-8')

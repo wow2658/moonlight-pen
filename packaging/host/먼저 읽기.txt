@@ -34,7 +34,7 @@ Sunshine 패치나 별도 도우미 EXE는 필요하지 않습니다.
 https://github.com/wow2658/moonlight-pen#readme
 https://github.com/wow2658/moonlight-pen/blob/main/docs/TROUBLESHOOTING.md
 
-비공개 저장소이므로 접근 권한이 있는 GitHub 계정으로 로그인해야 합니다.
+공개 저장소이며 GitHub 로그인 없이 다운로드할 수 있습니다.
 
 그만 사용할 때
 이 폴더의 삭제.cmd를 실행하세요.
