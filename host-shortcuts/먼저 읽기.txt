@@ -1,0 +1,38 @@
+Moonlight 호스트 화면 전환 - Windows 기본 바로가기 방식
+
+이 묶음에는 추가 EXE나 DLL이 없습니다.
+Windows의 기본 디스플레이 전환 프로그램 DisplaySwitch.exe에 단축키를 붙입니다.
+현재 문라이트의 복제/확장 버튼을 그대로 사용할 수 있습니다.
+
+v2 패키지: 노트북 문라이트도 Moonlight-Pen-Panel-v2.exe로 실행해야 합니다.
+기존 바로가기 설치에 다시 실행하면 D/E/H 키로 갱신됩니다.
+
+설치
+1. 이 폴더를 Sunshine이 설치된 호스트 PC로 옮기세요.
+2. 압축을 완전히 풀고 INSTALL-HOST-SHORTCUTS.cmd를 실행하세요.
+3. PASS 후 자동으로 Clone / Extend / Check가 있는 폴더가 열립니다. 열리지 않으면 OPEN-SHORTCUTS.cmd를 실행하세요.
+4. 노트북의 기존 문라이트를 종료하고 문라이트 실행 바로가기로 새 v2 버전을 열어 다시 연결하세요.
+5. 화면 패널의 ?를 누르면 호스트의 Windows 디스플레이 설정이 열려야 합니다.
+6. 복제 또는 확장 버튼으로 실제 화면이 바뀌는지 확인하세요.
+
+이 방식에서 ?는 Windows 디스플레이 설정을 엽니다. 기존 EXE 도우미의 연결 알림과 로그 기능은 사용하지 않습니다.
+설치 자체는 화면 구성을 바꾸지 않습니다. 버튼을 누르거나 생성한 바로가기를 실행할 때 전환됩니다.
+
+설치되는 위치
+시작 메뉴 > Moonlight Display Shortcuts
+Clone: Ctrl+Alt+Shift+D -> Windows DisplaySwitch.exe /clone
+Extend: Ctrl+Alt+Shift+E -> Windows DisplaySwitch.exe /extend
+Check: Ctrl+Alt+Shift+H -> Windows 디스플레이 설정
+
+진단 순서: 시작 메뉴 Check 직접 실행 -> 호스트 키보드 Ctrl+Alt+Shift+H -> 문라이트 ? 순으로 확인하세요.
+직접 실행만 되면 Windows의 바로가기 단축키 등록 문제이고, 호스트 키보드까지 되면 원격 입력 전달 문제입니다.
+
+단축키가 반응하지 않으면 작업을 저장하고 호스트에서 한 번 로그아웃/로그인하세요.
+그래도 반응하지 않으면 시작 메뉴의 Clone/Extend 바로가기를 직접 실행해서 화면 전환 자체가 되는지 확인하세요.
+Windows 버전이나 드라이버에 따라 화면 선택창만 열리거나 전환이 거부될 수 있습니다. 실제 호스트에서의 검증은 아직 필요합니다.
+전환 중 스트리밍이 복구되지 않으면 다시 연결하세요.
+
+기존 도우미 EXE는 설치할 필요가 없습니다. 이미 실행 중이면 중복 단축키를 막기 위해 설치를 멈춥니다.
+보안 프로그램이 이 묶음도 차단하면 허용/예외 등록 대신 오류를 확인하세요.
+스크립트 실행 기능이 없는 Windows에서는 실패할 수 있습니다. 해당 경우 기능을 임의로 켜지 말고 나온 오류를 알려주세요.
+삭제: UNINSTALL-HOST-SHORTCUTS.cmd

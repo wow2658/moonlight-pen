@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "layout": "Source-only snapshot; dependency gitlinks flattened to tracked source files.",
+  "repositories": [
+    {
+      "path": ".",
+      "source_url": "https://github.com/AaaUpo/moonlight-qt-surface.git",
+      "revision": "d75068ee6acd848fad09d02b57871fd598e5e158",
+      "git_metadata_included": false
+    },
+    {
+      "path": "app/SDL_GameControllerDB",
+      "source_url": "https://github.com/gabomdq/SDL_GameControllerDB.git",
+      "revision": "8d9fefd7b810f2541f78cc7a8ccbd185bc84c7a5",
+      "git_metadata_included": false
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c",
+      "source_url": "https://github.com/moonlight-stream/moonlight-common-c.git",
+      "revision": "04053843c90c4268583f2496b997d54d59f03957",
+      "git_metadata_included": false
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet",
+      "source_url": "https://github.com/cgutman/enet.git",
+      "revision": "aca87840b57f045a1f7f9299e4b1b9b8e2a5e2f1",
+      "git_metadata_included": false
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors",
+      "source_url": "https://github.com/sleepybishop/nanors.git",
+      "revision": "b1e3c22ca0cdc0bb83e3cd6ed1a2fc77869ed99a",
+      "git_metadata_included": false
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine",
+      "source_url": "https://github.com/cgutman/qmdnsengine.git",
+      "revision": "920c097ffa742e2968290f15d4dde6693aec02e5",
+      "git_metadata_included": false
+    }
+  ],
+  "excluded_upstream_metadata": [
+    ".github/ISSUE_TEMPLATE/bug_report.md",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/ISSUE_TEMPLATE/feature_request.md",
+    ".github/auto-comment.yml",
+    ".github/dependabot.yml",
+    ".github/no-response.yml",
+    ".github/stale.yml",
+    ".github/workflows/build-appimage.yml",
+    ".github/workflows/build-steamlink.yml",
+    ".github/workflows/build-win-mac.yml",
+    ".github/workflows/build.yml",
+    ".gitmodules",
+    "app/SDL_GameControllerDB/.github/workflows/check.yml",
+    "moonlight-common-c/moonlight-common-c/.github/dependabot.yml",
+    "moonlight-common-c/moonlight-common-c/.github/workflows/ci.yml",
+    "moonlight-common-c/moonlight-common-c/.github/workflows/codeql.yml",
+    "moonlight-common-c/moonlight-common-c/.gitmodules",
+    "moonlight-common-c/moonlight-common-c/enet/.github/workflows/cmake.yml",
+    "moonlight-common-c/moonlight-common-c/nanors/.github/workflows/ci.yml"
+  ]
+}

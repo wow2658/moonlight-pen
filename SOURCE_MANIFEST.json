@@ -1,0 +1,2022 @@
+{
+  "format": 1,
+  "description": "SHA256 of exported tracked source, updated for performance shortcut, host command protocol v2 and panel paint fix; original README renamed.",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "d5e8fe90c78ca8e325d5dab479770e13ce8c42c6f3e607a92eb9344d6aeda200"
+    },
+    {
+      "path": "AntiHooking/AntiHooking.pro",
+      "sha256": "8a296200b8608b14d091530de30e8b4c740a1632e658b5e230a028665cbaf0fd"
+    },
+    {
+      "path": "AntiHooking/antihookingprotection.cpp",
+      "sha256": "580e9efcbb836cec6893a49e92b2a1eb26e0edb13fb7c6fa7ea1b3a4cedb1fd4"
+    },
+    {
+      "path": "AntiHooking/antihookingprotection.h",
+      "sha256": "5a9f6856f95e201ea9494d108d30e20c26f1a5b966e803e6ee8e7b58a8e2d4b6"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "53927bd0b739d38c87a0a82236fd9b070c2dfff11c0c119be50372005d5047ad"
+    },
+    {
+      "path": "README.upstream.md",
+      "sha256": "a933283ef39bd3bb4fa9ef1b281c7c054e1a294536a70de1615375dec4b0441b"
+    },
+    {
+      "path": "app/Info.plist",
+      "sha256": "71ff8ea862f71161df948085aade61da637e34fba8d301612d7ad1d7efe02c82"
+    },
+    {
+      "path": "app/ModeSeven.ttf",
+      "sha256": "afb1601d2b8d368900f3181d972d44584da964b1f99f6580ec81f9ce1b0906f8"
+    },
+    {
+      "path": "app/Moonlight.exe.manifest",
+      "sha256": "6dc8dfb1aac164ad8f21c84f4934ecbb22b734e49e1ba7b2fa7e5e7b5610207e"
+    },
+    {
+      "path": "app/SDL_GameControllerDB/LICENSE",
+      "sha256": "6b8da877f518bae3e261b2613754cc97e916f20001c5499b4cea6680ac6d1e1b"
+    },
+    {
+      "path": "app/SDL_GameControllerDB/README.md",
+      "sha256": "df178ba8557893f1d0edee41bc4ec0eca771d93c33e2c63b4874e034c8eecbd5"
+    },
+    {
+      "path": "app/SDL_GameControllerDB/duplicates.py",
+      "sha256": "d432a0d4031abb3b90962b1db5507378d2af108d91b8211f5cabb337266dabea"
+    },
+    {
+      "path": "app/SDL_GameControllerDB/gamecontrollerdb.txt",
+      "sha256": "5b5bb6808b3cf14b6fb7d6884dc88f5ea1eebdcbe5c7c03e7f59f2735aa4f617"
+    },
+    {
+      "path": "app/SDL_GameControllerDB/mapping_guide.png",
+      "sha256": "b9b01f2e527e68c272ad90d76a974c29f9b1da2c2dcb0cad0b6b8c7a62ce9cf8"
+    },
+    {
+      "path": "app/SDL_compat.h",
+      "sha256": "968d56c96e9ad6d0f0fc9439fe8843aeef0e12340b981dbf9ad742154b2ef8dd"
+    },
+    {
+      "path": "app/app.pro",
+      "sha256": "ebee09e5417ab36a81e7508d695ce4eaa4e0151f72f40c024b1144cf12d82671"
+    },
+    {
+      "path": "app/backend/autoupdatechecker.cpp",
+      "sha256": "31d0460a6db8955c62f195e88f0eac2c7a1d24ff3776e12f37611b39395b003e"
+    },
+    {
+      "path": "app/backend/autoupdatechecker.h",
+      "sha256": "9077e6bbea5b44ca625755cdaede46aa0fc5cabbe58858c0a252e72470714f1e"
+    },
+    {
+      "path": "app/backend/boxartmanager.cpp",
+      "sha256": "17dfc7f83a206586912f3ca080d4c6961f69f7176af8b6e5231fcc4628ddd930"
+    },
+    {
+      "path": "app/backend/boxartmanager.h",
+      "sha256": "c0d268943a6536e644b414b846575cf031526d625a137007d141f8ad3732e728"
+    },
+    {
+      "path": "app/backend/computermanager.cpp",
+      "sha256": "71468544838d3e4bc57e6c069c80b38787e2bae12fdf6611dd4bd8d8bdb7eff9"
+    },
+    {
+      "path": "app/backend/computermanager.h",
+      "sha256": "8245518db68b63172c42cf06e787646dd835fd8b2be7a3d89960de487b38318e"
+    },
+    {
+      "path": "app/backend/computerseeker.cpp",
+      "sha256": "4bd58a945a959f5465c9817292d30d37c94afd0b5462d91381a8179703803aa1"
+    },
+    {
+      "path": "app/backend/computerseeker.h",
+      "sha256": "4b25351d7e5a422bd82f70b46cb59715d8d7a09901d84577c1f08f10f376611b"
+    },
+    {
+      "path": "app/backend/identitymanager.cpp",
+      "sha256": "c70f48b0ee4ad9f1f12cd2640e4a2689ed410e3a59e255c1e291ee9ca1def41b"
+    },
+    {
+      "path": "app/backend/identitymanager.h",
+      "sha256": "87e7c6241899fa0b9bb1e7c955736c3b5a84fd2a1c1b6ac853c456ed90a216df"
+    },
+    {
+      "path": "app/backend/nvaddress.cpp",
+      "sha256": "59838ff17f8150db3de080097891b40693a7a975d75558bc74d1c1cfed960838"
+    },
+    {
+      "path": "app/backend/nvaddress.h",
+      "sha256": "1525fa52a3a4bbb696e89f8dbdc5c586230bed0732a3b51f666c78a45f684f64"
+    },
+    {
+      "path": "app/backend/nvapp.cpp",
+      "sha256": "0878299d235e823290147aba0a7009aa8c3bb489832a4cebced9e2ac84b2233a"
+    },
+    {
+      "path": "app/backend/nvapp.h",
+      "sha256": "1255879b85685be5ae640a5429a17af0b82ecb88c2a8d6498872c28bc6b34cd5"
+    },
+    {
+      "path": "app/backend/nvcomputer.cpp",
+      "sha256": "526adcddd5eb5a4dd34e3929c31ed21143c4669c9f950dbcaec2c5037281c56b"
+    },
+    {
+      "path": "app/backend/nvcomputer.h",
+      "sha256": "566790f20086f01d5f6e8f5cba8a1a00c3f5e5d1a1c3d774f2448d43b2bc2419"
+    },
+    {
+      "path": "app/backend/nvhttp.cpp",
+      "sha256": "d52a8cba3f797f86805e2aee069c4e75dd802fe23b99c9280c28cc294c028ac7"
+    },
+    {
+      "path": "app/backend/nvhttp.h",
+      "sha256": "c947bbb97173a0507a6e5ac0b322f3c52e890eac8b526f05235828516c01141d"
+    },
+    {
+      "path": "app/backend/nvpairingmanager.cpp",
+      "sha256": "5e628a2cee43cefac5dc62cdfb38d817b2a11033a437f8c0df7db59278ea35d0"
+    },
+    {
+      "path": "app/backend/nvpairingmanager.h",
+      "sha256": "db8bf2b5943227658917142a9b33f3b9d118aa2b3f3d2adb8a0d880d787bb46c"
+    },
+    {
+      "path": "app/backend/richpresencemanager.cpp",
+      "sha256": "2c17ff439b79fbf68f9a72cb8b3c95e270fa516a6767e76c801e7cd31f147a67"
+    },
+    {
+      "path": "app/backend/richpresencemanager.h",
+      "sha256": "d5ed5d3c9943f89d3e374dd01bb934f24c0dcc14d39178ee8dafa03564d53de3"
+    },
+    {
+      "path": "app/backend/systemproperties.cpp",
+      "sha256": "2dd3b78b25be38ef42d770adca6d417f2564fbb3d2b6e04ae0e337fec9f27257"
+    },
+    {
+      "path": "app/backend/systemproperties.h",
+      "sha256": "b469ea9a4be0a06f10ce154872a474d9bd77eeb87e3b56635617560c16c54b43"
+    },
+    {
+      "path": "app/cli/commandlineparser.cpp",
+      "sha256": "a02f71d0631e4841f7ece97d340deec7158add5d9c2a6cf1056329faadea0166"
+    },
+    {
+      "path": "app/cli/commandlineparser.h",
+      "sha256": "4a511c72c452dbc0b79cafbf462fafa44676a19c57d8ecac4e5840344d1c7db2"
+    },
+    {
+      "path": "app/cli/listapps.cpp",
+      "sha256": "09afc650b370f2bc63939b5861957c6d12c8beddcbdb44f1b05a71ab0b4921e9"
+    },
+    {
+      "path": "app/cli/listapps.h",
+      "sha256": "2eda00d9e5b3871f80062ef01ba5143e075b44ff47629f8c475cbdb1121e3925"
+    },
+    {
+      "path": "app/cli/pair.cpp",
+      "sha256": "1200fc539b04f7b8f231d8bc240902eed1c1a5187533690a5b8839f4cbd2c762"
+    },
+    {
+      "path": "app/cli/pair.h",
+      "sha256": "39965ff5252912cdb5c8d8d7496fe49029df31da445b940e531970a2e31b5dcb"
+    },
+    {
+      "path": "app/cli/quitstream.cpp",
+      "sha256": "9d44a2bde73f48f541f35bdc1651762b8f43d63c033cf83e68fec1d73779fd96"
+    },
+    {
+      "path": "app/cli/quitstream.h",
+      "sha256": "aa8633f0148a547f98b8e3da208f2d1f6520e6af6150f2e87107c8a5eddcb0f4"
+    },
+    {
+      "path": "app/cli/startstream.cpp",
+      "sha256": "77b662599aed40798be22e0ed653fc2162012aeae86917cde5324ff2e4aa6f57"
+    },
+    {
+      "path": "app/cli/startstream.h",
+      "sha256": "029c195f65b69be3d7c7c987f841e693a4d15320088e174c4654680349ab1e1a"
+    },
+    {
+      "path": "app/deploy/linux/com.moonlight_stream.Moonlight.appdata.xml",
+      "sha256": "e58fb82383fff3fe2195f9b1aa07fc1e72e425bc04d7c969eb2846bab9df64d4"
+    },
+    {
+      "path": "app/deploy/linux/com.moonlight_stream.Moonlight.desktop",
+      "sha256": "701b7c822be8c10367b65b44cf4b2493dd3bdc5ce2a18609d7c18866616056af"
+    },
+    {
+      "path": "app/deploy/linux/libva-probe.c",
+      "sha256": "81a7cd58ff3981080dc9b8c4022bea98b811c10a7754f30981fe1dcc71ae4076"
+    },
+    {
+      "path": "app/deploy/steamlink/moonlight.png",
+      "sha256": "6f73546965b091f2e0b1be247f66299ca9a8bf38e6ef19d10ddfa5655fb10de1"
+    },
+    {
+      "path": "app/deploy/steamlink/moonlight.sh",
+      "sha256": "ff903f51384be4df1cefa0fbdfe51c0bc256b57305bc9fa563b24aae44ea2b54"
+    },
+    {
+      "path": "app/deploy/steamlink/toc.txt",
+      "sha256": "377ca086eab2adb640c17b4e8acf30f5a7cd7184e4d5252297c28e01f077f279"
+    },
+    {
+      "path": "app/gui/AppView.qml",
+      "sha256": "4d0a0aad9713c9e969681918902b870022bb2c121bc6cfbfa8820f288fd1ee59"
+    },
+    {
+      "path": "app/gui/AutoResizingComboBox.qml",
+      "sha256": "f81d3cf53a8e1135f58988d5762a99e3843aefa46add118b632b8aa7bb9b1713"
+    },
+    {
+      "path": "app/gui/CenteredGridView.qml",
+      "sha256": "4fdebfedbdd04d1d3868c7f07d5cdc6d9c124c57af4c8f97060c19aa11c33b15"
+    },
+    {
+      "path": "app/gui/CliPair.qml",
+      "sha256": "c184f64f6d6b0176b6f3492a2216e7b6c7e75b9337fe35b61fea64426094fd06"
+    },
+    {
+      "path": "app/gui/CliQuitStreamSegue.qml",
+      "sha256": "474a8c6755baa6df252c5dce84b091b57eb7f5b693345bdb4e927f011ac3a761"
+    },
+    {
+      "path": "app/gui/CliStartStreamSegue.qml",
+      "sha256": "ea418904e020fd9a97f6d6ac3faa9e335d092bfbaa1190e047684e9003836464"
+    },
+    {
+      "path": "app/gui/ErrorMessageDialog.qml",
+      "sha256": "b13d4eeb6f7eb60385ab0756af3d29d0065655450123aa14de27edce6d1a4b86"
+    },
+    {
+      "path": "app/gui/GamepadMapper.qml",
+      "sha256": "213008ed74bff7167f85b5627a77a0f6fa8b17f53ea1b88bd1c8b44b9562827b"
+    },
+    {
+      "path": "app/gui/NavigableDialog.qml",
+      "sha256": "f0c44c429a02ac533ad209a1b97195a7594e56067c35884f500ec3cb3f15ff06"
+    },
+    {
+      "path": "app/gui/NavigableItemDelegate.qml",
+      "sha256": "3185f62740d2a1da889aeb87989ee808c50ab7957f160ba34f150465770d4e3a"
+    },
+    {
+      "path": "app/gui/NavigableMenu.qml",
+      "sha256": "4c652289b3b7cbeec8ef17a7f9d5f6006cd9eb9a52656bc28da981167548f694"
+    },
+    {
+      "path": "app/gui/NavigableMenuItem.qml",
+      "sha256": "c2baa19f69320f55f5e72017b6dbdb403eab586dd1a340723b51918050dea6a0"
+    },
+    {
+      "path": "app/gui/NavigableMessageDialog.qml",
+      "sha256": "9b074277961163d931dda7a9abece7d2df93c1707d12bde68b05714f307c9d9e"
+    },
+    {
+      "path": "app/gui/NavigableToolButton.qml",
+      "sha256": "08d20df84eac92a0f0058b38bd4729c9598aa0e09e8e5c258f2b7f5afa376676"
+    },
+    {
+      "path": "app/gui/PcView.qml",
+      "sha256": "e92762cf1582dfac87b08bc3a3ba0cd31f91e8aea34a103602420317302280ce"
+    },
+    {
+      "path": "app/gui/QuitSegue.qml",
+      "sha256": "acdb774e6f1a20bd4a14e20f7b5e62e5b6a4c2f4496a129bfcf67b426ae61075"
+    },
+    {
+      "path": "app/gui/SettingsView.qml",
+      "sha256": "7a5baf12289ea4b7aa5993cabc3aa9727a6de99b19a4e57dd35feea8cddb577e"
+    },
+    {
+      "path": "app/gui/StreamSegue.qml",
+      "sha256": "1ba3c97c4e59b8a74c0efa797c980d24357885629648fd1e6b328e5f4078c2c5"
+    },
+    {
+      "path": "app/gui/appmodel.cpp",
+      "sha256": "a4d858297b8ebb44be4a957f63ce0e9068335a1007244367abe6dd08eda03727"
+    },
+    {
+      "path": "app/gui/appmodel.h",
+      "sha256": "aaf8e52a93b402f3826b0026b853c9c43f9c99cbd3d9a8afecff1e6b490bed56"
+    },
+    {
+      "path": "app/gui/computermodel.cpp",
+      "sha256": "3ca2f5ec610667dd3ea4d2a4c4ad15e29bdb8b2d0a66bdf1d8c9b07742eec68e"
+    },
+    {
+      "path": "app/gui/computermodel.h",
+      "sha256": "dc2ef950b76e27e4a88602995b80839a9146cb296e485d97b3bbc2f32c50ad46"
+    },
+    {
+      "path": "app/gui/main.qml",
+      "sha256": "e7787104c37643384700f775ec147fa2a80c23ac9f6d06de1604cf72673e3600"
+    },
+    {
+      "path": "app/gui/sdlgamepadkeynavigation.cpp",
+      "sha256": "4d77f0daa2b93a14c9a708366439023d5c914a273708ec5b53e48dc5c8cc9596"
+    },
+    {
+      "path": "app/gui/sdlgamepadkeynavigation.h",
+      "sha256": "030718ea18c8544ee1ab8492f6c5c9263ad0bfd2a89967ec8d9eb12db68afba4"
+    },
+    {
+      "path": "app/languages/qml_bg.qm",
+      "sha256": "4a0a03ae64032d0e5d3cc4ecbee70f349527640854ec576c21cc16cf05adb910"
+    },
+    {
+      "path": "app/languages/qml_bg.ts",
+      "sha256": "c670aa34e26abf3ece5b5c98511998a0b4d8390949c6ac6621df88467f1afb42"
+    },
+    {
+      "path": "app/languages/qml_ckb.qm",
+      "sha256": "0c48165d78c33259d6927897effed86fc4f73137271b7048b9aa0443fee40331"
+    },
+    {
+      "path": "app/languages/qml_ckb.ts",
+      "sha256": "a99b3bdacb93f6a5be936e87880d6c38dc514775381ae2bed9a51202b3bb70c1"
+    },
+    {
+      "path": "app/languages/qml_cs.qm",
+      "sha256": "133f46d40c4fcd8060c2a58e69cca20531da7b1cfeee3fd32d03f5a4d9199ee6"
+    },
+    {
+      "path": "app/languages/qml_cs.ts",
+      "sha256": "5f9d3cf036d656681c47f1570d82555af6978ac69c7fef274ede602f61ce5145"
+    },
+    {
+      "path": "app/languages/qml_de.qm",
+      "sha256": "720c5c2362364ee806bfbece767b1cf2f76e6084a7b69cac6770f3c8e4fafb66"
+    },
+    {
+      "path": "app/languages/qml_de.ts",
+      "sha256": "472a176837f585e35c2437a279956df3cc64652ba0008c4ef79c3ddc646db163"
+    },
+    {
+      "path": "app/languages/qml_el.qm",
+      "sha256": "749edf4f46726256c5ef88a46020036ab4fc59cbd65b8afab33750e23e70e823"
+    },
+    {
+      "path": "app/languages/qml_el.ts",
+      "sha256": "debce3c476a0aff08ecc9f74bfd178539d3ba7dda742aefa512fba81a885dc66"
+    },
+    {
+      "path": "app/languages/qml_eo.qm",
+      "sha256": "c6750ecf6358c5bfbd9ee5ff5c2e1ceb4f2c593c392f50436f896b320b45901b"
+    },
+    {
+      "path": "app/languages/qml_eo.ts",
+      "sha256": "0bac2b1ce2b009a750736c55a007284730b0497c933cd0a9fdf92a27488096fb"
+    },
+    {
+      "path": "app/languages/qml_es.qm",
+      "sha256": "5542c67dfbb2e8bcaa47542a8a1a1a795ad73d59b7f66f8b7abeeeb044a94e0c"
+    },
+    {
+      "path": "app/languages/qml_es.ts",
+      "sha256": "b658111a4697fbd9301a58c0f813bc3a35e58aaf5c92958629eb9475302c8931"
+    },
+    {
+      "path": "app/languages/qml_et.qm",
+      "sha256": "b970c5468df7af682709ebed2a63a7c73e21a18b55afebe8a139826d775a6ecf"
+    },
+    {
+      "path": "app/languages/qml_et.ts",
+      "sha256": "5d97c2c603bca216649034321b9967c700945f3ea4034279eef6ebe628954715"
+    },
+    {
+      "path": "app/languages/qml_fr.qm",
+      "sha256": "bd222a2837638ffd5b7a0d030c14f4115dd34824909b532af3ca7091f6d49f2f"
+    },
+    {
+      "path": "app/languages/qml_fr.ts",
+      "sha256": "6d52575cfd6ba709d597b9dc90a5287d7164ee889625ad52c144932c3c2cbf38"
+    },
+    {
+      "path": "app/languages/qml_he.qm",
+      "sha256": "31ddfa0f52376d4bec7817c5cb9310268e5b334d47e8f3a40883c13598916477"
+    },
+    {
+      "path": "app/languages/qml_he.ts",
+      "sha256": "a58464a907af5f87ea18c3f53f7b6bce0993e26451adcc1eaefcc296622d70ec"
+    },
+    {
+      "path": "app/languages/qml_hi.qm",
+      "sha256": "efb753e1b33b0df61f0c1f9cbb15213ad18d99a594d569d3cb3a2c17ce20b9fd"
+    },
+    {
+      "path": "app/languages/qml_hi.ts",
+      "sha256": "485e35e79749d7c51bfc9189ad56134bc3f5b1840bba883ec86db019c947ff03"
+    },
+    {
+      "path": "app/languages/qml_hu.qm",
+      "sha256": "462a8fc99871889f4f10f506bdb256c9a0e1819a7349aa57758883454c091b9c"
+    },
+    {
+      "path": "app/languages/qml_hu.ts",
+      "sha256": "f7539bab036a6d651aaab835cc43ad9f9511995ae065ea7cb981e6443ebc450a"
+    },
+    {
+      "path": "app/languages/qml_it.qm",
+      "sha256": "94f96b3459213937125609ba6510182cb96e58374a88a18d1cf06eb676548204"
+    },
+    {
+      "path": "app/languages/qml_it.ts",
+      "sha256": "17862156b40968cce1234d586bad6f0f52d5503f51eddd9879ce3200f3f08542"
+    },
+    {
+      "path": "app/languages/qml_ja.qm",
+      "sha256": "a4eb07e1b1dbc375095d478ee43a13d404bee3baacd1accc6dc3531e9d7e6fcf"
+    },
+    {
+      "path": "app/languages/qml_ja.ts",
+      "sha256": "6fb0b5832d8262bd704df0908eb2292aa259c28655d766eb2933c393f8bd403a"
+    },
+    {
+      "path": "app/languages/qml_ko.qm",
+      "sha256": "ae61a362a3de1cd960a5d845362a99e5b5161a30899eed64c08722007d7de467"
+    },
+    {
+      "path": "app/languages/qml_ko.ts",
+      "sha256": "33953a431710a2badfa6ca47a44bc21915260dbcc5a34a00457cc6957362a570"
+    },
+    {
+      "path": "app/languages/qml_lt.qm",
+      "sha256": "4877377bf631716b0ced9177de2eb1655802804b9baf897756232a00f74a3877"
+    },
+    {
+      "path": "app/languages/qml_lt.ts",
+      "sha256": "018da54dabaa5a6a2bf0e40d9156d2d0eb389641877421b5e8ec215da3546de5"
+    },
+    {
+      "path": "app/languages/qml_nb_NO.qm",
+      "sha256": "62ce65ef08b3378f4d4c81ecf8d804fe733847f025f1a633cada917bc2643781"
+    },
+    {
+      "path": "app/languages/qml_nb_NO.ts",
+      "sha256": "86f9e6bf80e9a9c95738f06325a6dba690aed4f0687078ee332bfed351ca5dfb"
+    },
+    {
+      "path": "app/languages/qml_nl.qm",
+      "sha256": "437110d3f2886aea8149a8d593096dd47a872022d204c5df2852d87d671b557c"
+    },
+    {
+      "path": "app/languages/qml_nl.ts",
+      "sha256": "65124e205399d8ac62a1b599adcef808dd18cbc80a9d94467c9bf7749bae6888"
+    },
+    {
+      "path": "app/languages/qml_pl.qm",
+      "sha256": "fa28bacf4c587eab4e835021d95dafd595d6df5a268c1303f4f918735ada5dd7"
+    },
+    {
+      "path": "app/languages/qml_pl.ts",
+      "sha256": "6b375db2e889f4d8f38068360fe0d7481dc64aaac05fa3fcbb6ee133236cfe3b"
+    },
+    {
+      "path": "app/languages/qml_pt.qm",
+      "sha256": "9d78d8f00de04451268f842f8208baebdae0d1644c68cc5d8cd1227f21e18609"
+    },
+    {
+      "path": "app/languages/qml_pt.ts",
+      "sha256": "643f2f88286b87a5cf2db69f5e0a87fcaadd69d42bea4df5f362459ab8efd855"
+    },
+    {
+      "path": "app/languages/qml_pt_BR.qm",
+      "sha256": "678f16ecd1c88357a0ef00b128e16a4e07b055c2207c8a105e9bd1574e24fe55"
+    },
+    {
+      "path": "app/languages/qml_pt_BR.ts",
+      "sha256": "b6d6bf4ab59c31e81a9d317ab1afb3c163e4df6f16c65f224aebf357c8221a58"
+    },
+    {
+      "path": "app/languages/qml_ru.qm",
+      "sha256": "e19e12750adcc9de3c6489326fff4c637bff35ddf86dae458d91dedfbd329ecb"
+    },
+    {
+      "path": "app/languages/qml_ru.ts",
+      "sha256": "ca686e2dbdf611c65ed3632562964deb4fb767168365c95f5f1e93b538b538a3"
+    },
+    {
+      "path": "app/languages/qml_sv.qm",
+      "sha256": "f4d2975a14b5d13d419134929f4c5a5a503d530e2265ae9988ba382501388946"
+    },
+    {
+      "path": "app/languages/qml_sv.ts",
+      "sha256": "8e669244a969ca20cc0e17a37088ed06b54ebd733cef40c2822b6cdaa2983504"
+    },
+    {
+      "path": "app/languages/qml_ta.qm",
+      "sha256": "0ff2c6c89fa34ff57ad337cb9f20fdadf4d993adf6b4126b1de0cdcd846460a9"
+    },
+    {
+      "path": "app/languages/qml_ta.ts",
+      "sha256": "cb340396968ac10a0583101330773967ce9b31a67629cda6f612be3969681829"
+    },
+    {
+      "path": "app/languages/qml_th.qm",
+      "sha256": "e6fcd353d338689008a5760c3f27454e326bf749abb78ee02d31424b793554b6"
+    },
+    {
+      "path": "app/languages/qml_th.ts",
+      "sha256": "ea68fa90e57bb7804299aef44472e9f701d471507cea45a12145b609804ec92c"
+    },
+    {
+      "path": "app/languages/qml_tr.qm",
+      "sha256": "d4cbc3c3f29153a72c7dc5ef3d4819b1aa281e0c59d3fe9a7732505e2acc3cba"
+    },
+    {
+      "path": "app/languages/qml_tr.ts",
+      "sha256": "dc5559c08674549041cbf6779b5542f6f0010fcfc1ebd0e886f3c139c31ddc0f"
+    },
+    {
+      "path": "app/languages/qml_uk.qm",
+      "sha256": "f864180f3274373f0c36d92dfccfbd843e86b01fcf2fb091463d930e4ab53371"
+    },
+    {
+      "path": "app/languages/qml_uk.ts",
+      "sha256": "05b17eb4708fc0685ea51e1eba8d14924210d82c5ad61215dec1fa5d8f728ad3"
+    },
+    {
+      "path": "app/languages/qml_vi.qm",
+      "sha256": "2e14a9fd61f414bc931827cb3412205abf14ff68994e33badd07ff77d2ccc627"
+    },
+    {
+      "path": "app/languages/qml_vi.ts",
+      "sha256": "547b7083836d378217e621b4e71e2be6ebe5be6cd63422bc53f441c27425901e"
+    },
+    {
+      "path": "app/languages/qml_zh_CN.qm",
+      "sha256": "fdba4199b97e362e514e46f0ea1785190ce66974148810bef86c79dcdbfeb44a"
+    },
+    {
+      "path": "app/languages/qml_zh_CN.ts",
+      "sha256": "c2e0799d155b83f8cd14c8b20e3e4102b8259bffe74d01429190325001e67791"
+    },
+    {
+      "path": "app/languages/qml_zh_TW.qm",
+      "sha256": "62ef56c1f02e014a14203e46ab10c75719dd696763ba7b2f97cc4d10a6850d34"
+    },
+    {
+      "path": "app/languages/qml_zh_TW.ts",
+      "sha256": "7fff621ea5c91c5915bd1136c8201f40887eca7833a3b8116d4ccc41b8095dfc"
+    },
+    {
+      "path": "app/main.cpp",
+      "sha256": "42587b001155e679d4f420de35bf4bf2c926ca98b7a6b7e93eee1ddbe745f112"
+    },
+    {
+      "path": "app/masterhook.c",
+      "sha256": "f9dc389c30e42a507dcd40873604de095c3ecc4e5f5d96dc8f7a31c0e4eec8df"
+    },
+    {
+      "path": "app/masterhook_internal.c",
+      "sha256": "436c137f6e817731b63afcfbd883f17e9994434255b6a5ac219710c2fb906bee"
+    },
+    {
+      "path": "app/moonlight.icns",
+      "sha256": "89d1c951c284b8ccfa060dc60dafd742e0d8fa40a9a6ffc9f934681d721629dd"
+    },
+    {
+      "path": "app/moonlight.ico",
+      "sha256": "217eaa17949f190a582c39898ef524ae80bb944fcc75e54daea714c22831c4d5"
+    },
+    {
+      "path": "app/moonlight_wix.png",
+      "sha256": "fe91d3d5afb5436439f17a491f9e5cc9e35c22980eb54e289c2715a0204710e8"
+    },
+    {
+      "path": "app/path.cpp",
+      "sha256": "d9ee89cccbec1b30920390b6cbecf4b4bf6a23f2916c5bec8376304e4cb10ab0"
+    },
+    {
+      "path": "app/path.h",
+      "sha256": "6b5e8bd1dcdf0d713d4b42d81598ae13a4fcf4321e18aa6b77c763855eea233a"
+    },
+    {
+      "path": "app/qml.qrc",
+      "sha256": "47f63c83cbe05240f4880f5b7fca3b55966b962cbb7bef86f8022d4e638a8386"
+    },
+    {
+      "path": "app/qt_qt5.conf",
+      "sha256": "4c74a0dfd59915c7a1504783fa36833c71739096fe9b8b2f3ff53b844c40d241"
+    },
+    {
+      "path": "app/res/arrow_left.svg",
+      "sha256": "b8f085c32ab5640e9734b306367e225a6872ca49e52a7c2b718ce987a748a1a6"
+    },
+    {
+      "path": "app/res/baseline-check_circle_outline-24px.svg",
+      "sha256": "aea34e0a7b0ac935a29bc9ed9cd1799e0278e1fe96793a8a3dead3c7fa3166fd"
+    },
+    {
+      "path": "app/res/baseline-error_outline-24px.svg",
+      "sha256": "08bf10dc20b1fee7a7089439fe7c5760d1a48d0946afddd01a0ddeae57390f14"
+    },
+    {
+      "path": "app/res/baseline-help_outline-24px.svg",
+      "sha256": "d0a692948c9d788ae321cb9847725469e52b3747d0d5b64e5c5d0b0310d2ee82"
+    },
+    {
+      "path": "app/res/baseline-lock-24px.svg",
+      "sha256": "f0b6f1d8efb2f1289a63dff398e0d7c8917eeae6c56ed7c52fd4c84eb40fd0d8"
+    },
+    {
+      "path": "app/res/baseline-warning-24px.svg",
+      "sha256": "93cdb70e4d50de59ba6c655941869199875f1a769fa7e44bc37f5b2c43163e09"
+    },
+    {
+      "path": "app/res/desktop_windows-48px.svg",
+      "sha256": "55c013cdfe17949e1e4d87896d6aa36392cef3fae9f2b2505238ac27096f8f95"
+    },
+    {
+      "path": "app/res/discord.svg",
+      "sha256": "a517fb7b751dafeebdc5a1f86233483f20c67c211bcbbe5dd339da3c55df4e90"
+    },
+    {
+      "path": "app/res/ic_add_to_queue_white_48px.svg",
+      "sha256": "93b2c30d097ebbe761aebbc5cee861709ba289c8c9461b231e31b9fa709525fd"
+    },
+    {
+      "path": "app/res/ic_videogame_asset_white_48px.svg",
+      "sha256": "18bc80a544f388fa5d3f540f8dde763178739e47cadb681973cd094d81b640bb"
+    },
+    {
+      "path": "app/res/moonlight.svg",
+      "sha256": "6fd0ee4fe5b4aad5abaa5d5c9acb9f7d1bda0abadfe9d1582115de9b4ba16aa2"
+    },
+    {
+      "path": "app/res/no_app_image.png",
+      "sha256": "96ceaed30d385cf81c0ba0efd4aa619638dc7af516dad4a9ed306be6966b856b"
+    },
+    {
+      "path": "app/res/play_arrow_FILL1_wght700_GRAD200_opsz48.svg",
+      "sha256": "9333b85cc1265a7dcf524298b4a9c19c2a63714d0b9fb19a34bf99a7a81e4f5e"
+    },
+    {
+      "path": "app/res/question_mark.svg",
+      "sha256": "4604f8f42b823207218dc0a7e0130e90bf86cbcb0f5696b0e1fbace8d5b00ee2"
+    },
+    {
+      "path": "app/res/settings.svg",
+      "sha256": "9d33c3e383aaabeb6140a12100654dc1d6d2f28662fe7451a2ff0efa63beab7d"
+    },
+    {
+      "path": "app/res/stop_FILL1_wght700_GRAD200_opsz48.svg",
+      "sha256": "c2e1b876f114f4c1cf997c4a1987c88feb19855e0dfa4cf0a7ed753d2e78152b"
+    },
+    {
+      "path": "app/res/update.svg",
+      "sha256": "91c816fb91710feb0158f94bd10b5646e5281e8b4e01dcd1b45bab3e9af42645"
+    },
+    {
+      "path": "app/res/warning_FILL1_wght300_GRAD200_opsz24.svg",
+      "sha256": "cd39e6a52d744513daf53ee6fc22d06bbbada2e398bdc1bb327d7a77715281f1"
+    },
+    {
+      "path": "app/resources.qrc",
+      "sha256": "f75b0504e9ee7fbf1b0507bad06e0687898911b1c9d6e624e0c39fc456d853d6"
+    },
+    {
+      "path": "app/settings/compatfetcher.cpp",
+      "sha256": "e00274d3971819d7c326ca9debb084907411dfa57cb5d83bee2f934cb1977532"
+    },
+    {
+      "path": "app/settings/compatfetcher.h",
+      "sha256": "458b54965e705ce0ffcaaae737b4c788af11af39719f411cffc092c4abca16ad"
+    },
+    {
+      "path": "app/settings/mappingfetcher.cpp",
+      "sha256": "d2c4058a6dfce952f4ba90d2fc2e7a602700995b00ec8ff99849aca69e951f21"
+    },
+    {
+      "path": "app/settings/mappingfetcher.h",
+      "sha256": "35089adeaa930049ec0aae0415fe603ef0b0a94488489c85dd3ce6175cf3f6ed"
+    },
+    {
+      "path": "app/settings/mappingmanager.cpp",
+      "sha256": "196dff2000f656e13c55fbd6ed6e63f4d3e7992b9c89891fff988322f226abdd"
+    },
+    {
+      "path": "app/settings/mappingmanager.h",
+      "sha256": "bebf8a30d824b6f4999b90b9a8f163fbe9e4b6ca5facec4d838b7cb2f59fec94"
+    },
+    {
+      "path": "app/settings/streamingpreferences.cpp",
+      "sha256": "be684491108b4757ab2ba3fb96c656165c95e2d71ee7e75cc9d3dcdced3478c2"
+    },
+    {
+      "path": "app/settings/streamingpreferences.h",
+      "sha256": "cb114f3ce99e8f682359fe7f3aaf02138358bc13185ffc9fd268ff3e22718593"
+    },
+    {
+      "path": "app/shaders/build_hlsl.bat",
+      "sha256": "ad11ef9f4a637a5111e8843e9b1cd7ca5f90e011e40760487290dda6d99a37c8"
+    },
+    {
+      "path": "app/shaders/d3d11_ayuv_pixel.fxc",
+      "sha256": "663f156c47fd7ae5bfd51aec69d8934f7f5f38c2b2c6cc109cf95c6355368225"
+    },
+    {
+      "path": "app/shaders/d3d11_ayuv_pixel.hlsl",
+      "sha256": "f0115f9a4062e23b817e3112c95116dadf9a57b50a5385b2912e66c6f2899bd1"
+    },
+    {
+      "path": "app/shaders/d3d11_overlay_pixel.fxc",
+      "sha256": "6294161841dcd32c56691ef15546591da5f9c400dd1cbdd23935f441013bff5c"
+    },
+    {
+      "path": "app/shaders/d3d11_overlay_pixel.hlsl",
+      "sha256": "c6248e9e2d860b5078a0c3f95e859a8ecddeb81ee9a8e125b5883c7aba278d9b"
+    },
+    {
+      "path": "app/shaders/d3d11_vertex.fxc",
+      "sha256": "a94cad493f0555decb7718d69b3e86c4f13916fff0ac91be97c9aef60f4561cb"
+    },
+    {
+      "path": "app/shaders/d3d11_vertex.hlsl",
+      "sha256": "e06ea41f69fa264ade140586a4eded08cf1a1046c872f10727a40df2f67baf8f"
+    },
+    {
+      "path": "app/shaders/d3d11_y410_pixel.fxc",
+      "sha256": "2ce178b39403add7f9850c3d6c7cf9fe9c1da682b5fd936204f3f3015133b41f"
+    },
+    {
+      "path": "app/shaders/d3d11_y410_pixel.hlsl",
+      "sha256": "3d4ca2f7f23b87611897c8004490c0f53eea06cf8d14efd7a36f639d1bef2fc6"
+    },
+    {
+      "path": "app/shaders/d3d11_yuv420_pixel.fxc",
+      "sha256": "17dc15f5216f7dc1a5e0e93e13c8a74e6eeab61f67c0b5e6b11d315bd05fb8c5"
+    },
+    {
+      "path": "app/shaders/d3d11_yuv420_pixel.hlsl",
+      "sha256": "5312c30027791d6683ac0e4288438fa4c949896b2eec9ed5c6299cb1e1799ce0"
+    },
+    {
+      "path": "app/shaders/d3d11_yuv444_pixel_end.hlsli",
+      "sha256": "e6145e16ccbd39a39470d25b161581dfbd4032c2f2392ce620e2125e065cdd89"
+    },
+    {
+      "path": "app/shaders/d3d11_yuv444_pixel_start.hlsli",
+      "sha256": "05faa43dc4afc6426f0a7f9e6730ff48b4c524b45969feea0321385b4a45835d"
+    },
+    {
+      "path": "app/shaders/egl.vert",
+      "sha256": "57b7d54613043438b56069d2567e7fb71de912b2fa95a89afbf78fce3004abd3"
+    },
+    {
+      "path": "app/shaders/egl_nv12.frag",
+      "sha256": "f17db92127bb23024674ebba017911645fc653b3b0b0fe88eed194f6c8f80df3"
+    },
+    {
+      "path": "app/shaders/egl_opaque.frag",
+      "sha256": "9e7e2b221541ec8a1a7e74dfe6bc5ccc3d39246b0d1620c3ad7125e8ad5a9797"
+    },
+    {
+      "path": "app/shaders/egl_overlay.frag",
+      "sha256": "8e315faeef29f03ede23ef69f4923f6a0b9b6a94000efb5388a56ec6b91f07ca"
+    },
+    {
+      "path": "app/shaders/vt_renderer.metal",
+      "sha256": "d7c426465c89b5db39a84a1a43a74691e5f39a659d570ab15f3e295820f611e4"
+    },
+    {
+      "path": "app/streaming/audio/audio.cpp",
+      "sha256": "291d6420fb82d0e76e714e2d322707e7889542a27c47938ff185ef40a7a07188"
+    },
+    {
+      "path": "app/streaming/audio/renderers/renderer.h",
+      "sha256": "3f78aaf13e696430c8ab007df8eb245c63c4c7a45406ad40c666badd333ba40a"
+    },
+    {
+      "path": "app/streaming/audio/renderers/sdl.h",
+      "sha256": "4824e13b4ead8e2abbce95848c70c17a08b2bc49bedc43284bd2e6518539fb99"
+    },
+    {
+      "path": "app/streaming/audio/renderers/sdlaud.cpp",
+      "sha256": "1b0dff3adea784bfedf43e2ea3e92cb262f35b7b3e62bf6391fe1c655c969580"
+    },
+    {
+      "path": "app/streaming/audio/renderers/slaud.cpp",
+      "sha256": "45b95ae84e178326ad258117914e7751b1a486480c37247cf9e5dfc456335620"
+    },
+    {
+      "path": "app/streaming/audio/renderers/slaud.h",
+      "sha256": "85f34bfd0d33e935827d5c4167dfc7395a7759b7ac607ab38b2a280f567b8d98"
+    },
+    {
+      "path": "app/streaming/bandwidth.cpp",
+      "sha256": "10b4b547112d9e1b0e911474ccb8591f428c69797001203ff9794ce918e7d4b5"
+    },
+    {
+      "path": "app/streaming/bandwidth.h",
+      "sha256": "6ee6def3bb2df8945b10f6c74ad6690d4f6d208b17e1b476c08953ae4de788e1"
+    },
+    {
+      "path": "app/streaming/input/abstouch.cpp",
+      "sha256": "3f463688d8e4ee7ed7fe52483c89adf9f78c54db8b86523e1255dbf176195795"
+    },
+    {
+      "path": "app/streaming/input/gamepad.cpp",
+      "sha256": "9a7c7af5076861a72f8f5fe3fcd2532f228dfc790e4af06e3d410e762f8dd6e4"
+    },
+    {
+      "path": "app/streaming/input/hostdisplaycontrols.cpp",
+      "sha256": "4a97e0d55e0d2b513c3313c1e874c3843a15fa82d5089af2d2a14cd24e7737b9"
+    },
+    {
+      "path": "app/streaming/input/hostdisplaycontrols.h",
+      "sha256": "80f65d09695d0d1c1f28c2cfea8454e9e2884e44937250aeffd6c26bbf904a83"
+    },
+    {
+      "path": "app/streaming/input/hostdisplayprotocol.h",
+      "sha256": "4095ba76515a698b47306d7e0b191e9381e27188df12eb46685748194765946a"
+    },
+    {
+      "path": "app/streaming/input/hostdisplayshortcuts.h",
+      "sha256": "7489d88016deed8a20fffc1b6e674321847e87327fe0e1cb9ebf2d715e747143"
+    },
+    {
+      "path": "app/streaming/input/input.cpp",
+      "sha256": "667b4256be1b25d6b46a27eda006ef2c4a24cab13db6e23ee0f736640e8114e9"
+    },
+    {
+      "path": "app/streaming/input/input.h",
+      "sha256": "d72f0949c6c645ca3665b4ad19afa8fa4403b205ef0f80ed530173b61956c663"
+    },
+    {
+      "path": "app/streaming/input/keyboard.cpp",
+      "sha256": "78da33a876e8e12b0e81f2c6686696a49d975d110264b14066ba40c8a3a1e92d"
+    },
+    {
+      "path": "app/streaming/input/mouse.cpp",
+      "sha256": "498890450921bf495010e9d739f1a4df3299c8ddfcc1ec89c35a7459052da3c3"
+    },
+    {
+      "path": "app/streaming/input/penpressure.h",
+      "sha256": "1bbf9dafacfdb5a8e87f4856940989d19b9d4019616737ac287763d6acd807e7"
+    },
+    {
+      "path": "app/streaming/input/reltouch.cpp",
+      "sha256": "4808ae1dc05f4a15eedbd3deb4df01e02000dd017f28c8b061b782e0ebf931a9"
+    },
+    {
+      "path": "app/streaming/input/winpen.cpp",
+      "sha256": "92e645233feb9e56a89a8b1359d2a4073c04347e892f03eead7d157c4d9fa966"
+    },
+    {
+      "path": "app/streaming/session.cpp",
+      "sha256": "519d258487fce3b8584aa1cf2ffd161c3bbe7f8a85a4a8a973a11cd9ec84739d"
+    },
+    {
+      "path": "app/streaming/session.h",
+      "sha256": "f7533f9ada6cf1a2b38f199e582f7d53f6370e844edff8d082fa95d02c67ccbf"
+    },
+    {
+      "path": "app/streaming/streamutils.cpp",
+      "sha256": "eae846fd43fd41cc488e3e3a6a4f041a6d703d84a15fd3c49036ef495cb6f75c"
+    },
+    {
+      "path": "app/streaming/streamutils.h",
+      "sha256": "97f5d4f494c852807aca45f2bff68403d5373fa15ce3a653c9aa813320ab3d5f"
+    },
+    {
+      "path": "app/streaming/video/decoder.h",
+      "sha256": "8b458a9413d5a02390e341321a1508ce1973b6bd049cd39745ae586895337c39"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/cuda.cpp",
+      "sha256": "9524ca300e7d40aa5c8cecd6d8c3e7659258a582ddbb29adafd08ff5ec043bbc"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/cuda.h",
+      "sha256": "c2fe50f8562a71da3fc43385de0fad09fc42b0d4a4d0b35dd7533e6fad96f7c8"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/d3d11va.cpp",
+      "sha256": "68d89458327c1364524a3b0e5e6cfd43b371c4c72efcb25edc399d1a7c218827"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/d3d11va.h",
+      "sha256": "e4cd8f0dcbe3cac5fc5fa741c35cfecb3a40f35df2cc1c50207f32d73a1d7f49"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/drm.cpp",
+      "sha256": "5cab256a3aa02161c6c585ac81f55eaa40ac36bcb003c63da067f9efd4391248"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/drm.h",
+      "sha256": "bf7e1cfb8f017623bee94bbe1ff8f20589730c065de3661e72129a957ddebae2"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/dxutil.h",
+      "sha256": "cd86eec9955a1c2b8305c066844a14973311e4a2babc2fdec0a9455125f60b66"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/dxva2.cpp",
+      "sha256": "4b0f0b3f9a1f0dce2dabd1a10dc8c0da215c97d9df0d92005fd46feb56f6246e"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/dxva2.h",
+      "sha256": "d09003392612e015569184a0256e29eaf92462f3de83d6f29f441cd52ac83d91"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/egl_extensions.cpp",
+      "sha256": "a57a86dbd0d4159a25ea544a56bac955df53510c82a3306ad78cd4b4d9c667c8"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/eglimagefactory.cpp",
+      "sha256": "fa8260fce7945f96b3006b9cf141c3091361431de524b4527cadabf9ee851b50"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/eglimagefactory.h",
+      "sha256": "62253bd5f3f6f4c42b4a104bbcac86c600fcf687e47556c52f435eada60d23a1"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/eglvid.cpp",
+      "sha256": "19c69d7f2bf0a7779ec5f2b20886b6b71b92b53c8ae1090cf1c44da1ffea92dd"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/eglvid.h",
+      "sha256": "8eb40173f493c843170d1ee81b9572afef10bdc5233d486047e0207017f8da67"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/genhwaccel.cpp",
+      "sha256": "8f90c681b2e7b1c00da4240f3c7e6205ce7852421d6f28dad72ff211ed5bee8c"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/genhwaccel.h",
+      "sha256": "07571efe64eb07336f11b5c5b2d080409858fb61515e5fbf2266b72fb196c47a"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/mmal.cpp",
+      "sha256": "5ccd4d44f291fc8646fd39fff957e7a41e40a9ae6d2df4361d39353d9b7d6d32"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/mmal.h",
+      "sha256": "37f535a2713c0d61fea009110bc819298d19064005aacd8b1a0534235ea5a0d6"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/pacer/dxvsyncsource.cpp",
+      "sha256": "0a5a7e3e851367645dc2293feb831f5953be7bce31f081f9f36e5d042a149341"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/pacer/dxvsyncsource.h",
+      "sha256": "063c1a17d209e358b9f44aab107e4827785dff7f4415ef725afc9011f9ef7d8d"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/pacer/pacer.cpp",
+      "sha256": "3460bb649dff16d7b3ee323eed79034ee1a4c0af30219aa899d93ba78f02376e"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/pacer/pacer.h",
+      "sha256": "91869c3d2ff182b01d4f1ac776298ef29d1b4e6251c488496f5405239ad5a1bc"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/pacer/waylandvsyncsource.cpp",
+      "sha256": "3f44931c24fba09afd7ec409173462830aca6669f87aeb467c745c1f0247fa76"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/pacer/waylandvsyncsource.h",
+      "sha256": "e920896d353c607e2c89d605b076cde5e2fae89eb1928cc0132f299a0437979c"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/plvk.cpp",
+      "sha256": "25e6822da9a1c7461712fee437d7e8870dbfdac6467d5dbd00fdee87b7087d69"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/plvk.h",
+      "sha256": "0dbf02a9414d2ced8503377ef5b513e6b26b00b96f16093d19a36d627853af7d"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/plvk_c.c",
+      "sha256": "85bab98abc3dbe29a39b17b1e9848214a7b9f1c92df8010736cadb70e15804f5"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/plvk_objc.mm",
+      "sha256": "1ab16c0e52e8b6ae8c7219a2197381f7d8a4736c18246aed835898329215906a"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/renderer.h",
+      "sha256": "2b15287f6a8aeb1f8376dfd00573db5f6c55027ece94bad23132f456f95d4d13"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/sdlvid.cpp",
+      "sha256": "f27ad67eb98dd134000bc52ea74c4fe879f948def0abc3a95c0bdd1b1337fb7b"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/sdlvid.h",
+      "sha256": "006c21cfc97726901b2c4c8758630fd19c5b81c94b1ca8e3393fe63e2b105684"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/swframemapper.cpp",
+      "sha256": "54d5e497efa82f94df2577ce4daf39fea6b099e7b3a1fd0b06f1f795839f9691"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/swframemapper.h",
+      "sha256": "712179392da30e29b1c57fe13e9d834ff3c962d2dc957871def0f629cd32abe5"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vaapi.cpp",
+      "sha256": "45b721e8a97519fea2397e458b50118b08780aedd27ecaf73e30da45d1759549"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vaapi.h",
+      "sha256": "5849fb86a54633f73ef9212cbd592160f805a6f14f4108b797f350f88b418d7d"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vdpau.cpp",
+      "sha256": "122e0dfa6b127cf44ca70310f4dc1be108498abef88b5a464a348cbde670e009"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vdpau.h",
+      "sha256": "51e95b3bbeb104108997c3260a2621375c0e35c5d1ab8bb41f14fc7a1b8501ce"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vt.h",
+      "sha256": "fc9dd2d715d72e6b33f24044356a4e1dac5fdbf3e7730559a8769d326f1a58a8"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vt_avsamplelayer.mm",
+      "sha256": "191fb86dfb8b289248d41ca61e6764b898d08ca8094b5abdbd08eb448f87a767"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vt_base.mm",
+      "sha256": "6b86d9cb465e7c43c8572f9ddb3f9ce0b45c04c8e1fa682b31b21a7ebe3bd3d2"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg-renderers/vt_metal.mm",
+      "sha256": "27dedfca33bd5b0301e4cef4cc16ae470efac476b30c882d0d3991439aaf4c06"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg.cpp",
+      "sha256": "c42c895f3736be07ab076a8a4154ec6fa33c40db90c4555819d5b51beaf1b1ca"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg.h",
+      "sha256": "196db18ddce59343299cee18cf4aca321cda762700a1b49d581fd97b3384186b"
+    },
+    {
+      "path": "app/streaming/video/ffmpeg_videosamples.cpp",
+      "sha256": "6acb0f182adbba9bd7443f410c815eff821ee8b97bd2592a745da3e1d3a1f8b6"
+    },
+    {
+      "path": "app/streaming/video/overlaymanager.cpp",
+      "sha256": "81f62192989a0f960e99857ecf45ee5460964853147f6d9c75189257df951ffe"
+    },
+    {
+      "path": "app/streaming/video/overlaymanager.h",
+      "sha256": "35b6be5127b8790a41778090ef4b0059f0b8cf66a64a417a948d996033d3dfc7"
+    },
+    {
+      "path": "app/streaming/video/slvid.cpp",
+      "sha256": "86df9307f18c5f718a94bfc2840a881fcfb58d5cbdda1d16e0f5d4007c10bdfe"
+    },
+    {
+      "path": "app/streaming/video/slvid.h",
+      "sha256": "85b28ef45a0bf988aba41bdc95593dd7998e2fd6437d6b3f9d570ab8a2c4ca37"
+    },
+    {
+      "path": "app/utils.h",
+      "sha256": "5dc9d484918fd44fa6f0a86197796c3026f2beca71fabb70bf204b903349cb59"
+    },
+    {
+      "path": "app/version.txt",
+      "sha256": "2394b7a64dc20f32cd958a4724884d35c43d02e77c732604bc06047598769c59"
+    },
+    {
+      "path": "app/wm.cpp",
+      "sha256": "2519ece3da2c3f722ec1319ee2b5d4956f8a3937103d7e909026883ff29508e3"
+    },
+    {
+      "path": "config.tests/EGL/EGL.pro",
+      "sha256": "2156ec447b10b4ff2c9e7a92a80356e9cb90addb78cbb2ec1503b18e1c284c0e"
+    },
+    {
+      "path": "config.tests/EGL/main.cpp",
+      "sha256": "f6a84453caebf078053724ff420b4a045c2d12f2a47e9ef6b6e098a1b627fa03"
+    },
+    {
+      "path": "config.tests/SL/SL.pro",
+      "sha256": "9c61971a6031fcda6c5016bc9be152d9dbbb13667f5f622d6899cbe2882b7c1f"
+    },
+    {
+      "path": "config.tests/SL/main.cpp",
+      "sha256": "e448c0bc993370e3f9f5d07f0d4a05190f2305cdf2d1e38815a6692fd0566eb6"
+    },
+    {
+      "path": "globaldefs.pri",
+      "sha256": "f12aecd2047ec1f6642667d9fe113f35cfe6bb1e4b3e0437283c1c02c8baf74f"
+    },
+    {
+      "path": "h264bitstream/LICENSE",
+      "sha256": "c3abd79a304b8e35ffafd462274b59009d893328fc221f00075116aaabc19804"
+    },
+    {
+      "path": "h264bitstream/bs.h",
+      "sha256": "15232a689c7dfb56a21f53171ec556eba2677d13537613842e2263c037a7f006"
+    },
+    {
+      "path": "h264bitstream/h264_nal.c",
+      "sha256": "42d8eea383069265a93a2323a8a2d11e2057f77b6c3dcdc9c81201b4178f78c7"
+    },
+    {
+      "path": "h264bitstream/h264_stream.c",
+      "sha256": "c54e33563a20b29d0553deb28d6d4e77b55478327df5fda43bc08859d4da5ce9"
+    },
+    {
+      "path": "h264bitstream/h264_stream.h",
+      "sha256": "f9f8948344f3baf35c1cb7fd64a3ba45867f48e4417501db588d3660f3c0f63e"
+    },
+    {
+      "path": "h264bitstream/h264bitstream.pro",
+      "sha256": "cfa83f3b6c392f2b4157f76e45f34d98ec7efaf6cbf7282b7ca396daf3872b0d"
+    },
+    {
+      "path": "host-helper/displayrequest.h",
+      "sha256": "760593038bb8d316aa45274bf3ec3608f85dfcb6b6233e6e22f350a43d1e2a13"
+    },
+    {
+      "path": "host-helper/main.cpp",
+      "sha256": "4f0857c463c393ac06f036c4dd0e8286c3b19fbee38ed28fa95f0f9f06ee7d6e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c.pro",
+      "sha256": "9dee19fbe60c219af364e39b5019583bf8c3a18250ed4512e635ed4a1be0d941"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/.gitignore",
+      "sha256": "d28b266293aed9cdeb07a0220b774b17eff96bec274c5f8cd5ea733443b0a69f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/CMakeLists.txt",
+      "sha256": "4bc545f8af404b46cd090661deeb868121b841838214205572516a0b4db0d0ce"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/LICENSE.txt",
+      "sha256": "eb6b46aefb0e6dcf2f0ce1003476a323d9866ca1bf124dc6cfe795c13714113e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/README.md",
+      "sha256": "9d0482ffc3fdc3eb816ece1084d064595c6955af1b228790af7dc5a50af0d86e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/cmake/FindMbedTLS.cmake",
+      "sha256": "ed404c54281f33c9b961f96236e0c7bb7f3ecdd71f82e42dd43ca688cbf30706"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/CMakeLists.txt",
+      "sha256": "cb09750b55d42c9f8c49ce20875383edb740923853c473fdd553f9ff74e28e6e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/ChangeLog",
+      "sha256": "800111af296ef603065d04ef3c3cab89245b3c59a78a7307687596dd45f67ef0"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/Doxyfile",
+      "sha256": "0768794db684b91844fee981f2e806108fa0c6856946720484da35171292c772"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/DoxygenLayout.xml",
+      "sha256": "fb7447783f1da07446be8a2e19e733edecd806c7f701b09d41fe51c91affed2c"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/LICENSE",
+      "sha256": "3c326d1182a09bdd48101b7eab2bf2312c76286e756b46cd24844359d7dfecf3"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/Makefile.am",
+      "sha256": "bc86c8076f7adaafd4070d0b2f8032c2c454bc3ee518974da330f34b8e4f3594"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/README",
+      "sha256": "d7ce9d73f240c611ba778ede713ccb3a0998b15fb3c21089dcf2258ba98f43a4"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/callbacks.c",
+      "sha256": "005540118eff46ffef5aff373ef773a497902d867759bf364e79e39875919415"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/compress.c",
+      "sha256": "f14e3479d059c99189bc941bfb31339b1d754b18647c0efa261fab1dbeb63835"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/configure.ac",
+      "sha256": "a3b2dd0fdd8133dc41d3cd4e4dd7eb6554707a7ade46e82bfd45ad037f5d8ba0"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/docs/FAQ.dox",
+      "sha256": "ce2f94728cf59740b4e1a863bd8db0cc307470b72ea020292934af2dbebc626f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/docs/design.dox",
+      "sha256": "6af8d4d1e8c323ac490fe06a574405cda41d87cd5add9eacd2ff1f524ee71e9b"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/docs/install.dox",
+      "sha256": "a3f014e79bcf77283986888d8229279d0342d588ae798cfa8ba7b54eba6b41d0"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/docs/license.dox",
+      "sha256": "3da556a64711853179f381783da8931f3d8888e78f17ecd6dbabe8d6012cc286"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/docs/mainpage.dox",
+      "sha256": "edf3646d050166da40375d9059dc84b90a15263fa5fb558b2d19229278a74bea"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/docs/tutorial.dox",
+      "sha256": "dff8a7c6049301f91dfcb8c6b531761cb915fcb58b354224f54d693efbad9d05"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/enet.dsp",
+      "sha256": "e616f4088ce8fcb38efd2372b6264d01f37241bdec4ccf461a297e3a0782a0e4"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/enet_dll.cbp",
+      "sha256": "36a09b36197b85cb0683f15ccd32a1dda6ee48197884f1c2facf2a2e86f242b9"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/host.c",
+      "sha256": "fed85d9eb4802c334d7582d091cadfd83b9b094b825af0025952804e01f98e94"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/callbacks.h",
+      "sha256": "07503c89a70c602d0713299efb9a548e743e260b0ede204931a06ffae6ad2e1b"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/enet.h",
+      "sha256": "9dfa7d80ddb088ddb7e7307f860360448620aae5c11335aa46f797de7344f254"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/list.h",
+      "sha256": "a8b8f60c838e12b2505fe1bda66a1c31046bc0c5225d2a9731d0508a19387c2f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/protocol.h",
+      "sha256": "7ccfe356d899bd69e024acf1200dfcb306fcb70f428ca1e8aab94bdf924e104f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/time.h",
+      "sha256": "b025aee33536c608e15e7c2e3354d64c5a0e7cf81c3ed5e79fecf413133299bc"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/types.h",
+      "sha256": "5a3dd1641333f8cfcf5565e7539cd0d00da497777fe8e3c9cc9c538a2ddfba59"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/unix.h",
+      "sha256": "4fcce7170e2a0ba9df986dd14670959f673c6a8c72c78d5f5117e0fab0b845f4"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/utility.h",
+      "sha256": "7ac6c7d50c8e74caa5181add463d35e75f721324b7be1470265ec6016318d210"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/include/enet/win32.h",
+      "sha256": "0bb57f58edfeeb67ca89b89f1dae01d67ca2f8a2717aff370f0a1d0703ac1088"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/libenet.pc.in",
+      "sha256": "2d35f6045a9cd66dc14de39b7b3703ed185dda210de7cf77273960d99f751152"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/list.c",
+      "sha256": "361b6b42e2870c835a0a37b5b4e649c82436b0e2189ef285bfd75373c5a0471f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/m4/.keep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/packet.c",
+      "sha256": "6efa345fca1550f9d83541f7115ca335be231431a388c97119e8890dfde48795"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/peer.c",
+      "sha256": "d7512fb5bc06680aa24c4beaf07219c74b59af4d2b2f61b49a7f6daaf3a166bf"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/premake4.lua",
+      "sha256": "c5045a1d93b5bb286f5dddb1c096fc635fc550900e51f8e9fc24d159716d1b15"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/protocol.c",
+      "sha256": "d026d3c7b913d50e0cf74eff49d6ff342547ce3a0c6a19a8cd1dc6e43bac85c6"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/unix.c",
+      "sha256": "417e643f587e661f39407dfb0c38d380534d02f26a7645aebf23baae829457c5"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/enet/win32.c",
+      "sha256": "f83376318d08c175aa964552c63b9bfab1885e340a2a3fc5960e3a771cb08766"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/.clang-format",
+      "sha256": "8ddd0b9fce4c7abc5611e6db1a0a1699c9e9b72592a8417aa4fddf7fd97b4427"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/.gitignore",
+      "sha256": "20181d12dbcac92b1c3810ae7742d9bc265c677820e1e79103bd3af3f0bf0758"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/LICENSE",
+      "sha256": "22372a6da1d4fbf640798a70c1014ff47b9669e2cd97a98bca5fc6d38fc67a82"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/Makefile",
+      "sha256": "f1514f8040c809a98755820a145b8547f0b7c3214ae914b824b4bbf59328083d"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/README.md",
+      "sha256": "b6d5cc7500aed37a3fb680773393d30d4dd4095cb4fb0bccac29a3e18afbbcff"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/gf2_8_affine_mat.h",
+      "sha256": "ba3c169ca53ae6f17523e4d0ca7bd96cb51f994b12d5839592bd49a7b725aa89"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/gf2_8_tables.h",
+      "sha256": "5068e10330230581fddbb6cb3864359327555964e7e73233ca3c06d9eabe2126"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas16.c",
+      "sha256": "064e56bd48bec7f810e39ff3ec76231d9bfba477dc3f85fed0f8f1464cc5b5dc"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas16.h",
+      "sha256": "663772be165f998ae6566f82ce85191142f6b1b4fd69f0bba9f8e97f2f305344"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas16_afft.c",
+      "sha256": "55a68902601d2546911d9140c3d07183d72838764f2ccfc2d840c32b6c1d8bbe"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas16_afft.h",
+      "sha256": "486a7c66f8e5f7da7c7bee7e90420c9840fe2048906d2a587bf3bbeb1d58cc8c"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas_common.c",
+      "sha256": "10533c2b9f3d30fb98b815cba13b3a01fcf1a3b1d63dee0c64b5ce751f21c7b6"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas_common.h",
+      "sha256": "ead563c1710c52381bcda8f3a448b8f5589103addb7d95a00b37851f790f095f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas_lite.c",
+      "sha256": "6af1839d11603c1a5114844ec593d40911a4c5d3c0f273f4370aca15a9d56750"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/deps/obl/oblas_lite.h",
+      "sha256": "d2a285071c51b3c6b90c96b33d3f32ad1e98e2b3705620462321492ed0fef760"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/graph.png",
+      "sha256": "b69b4f5219202b795ec05862f7f7f868a378fed7ac640e6c314ed79e7e67b869"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/rs.c",
+      "sha256": "35d5e10a4b3c401cf3c21bc7012ac87f2e02278558cc79673267f604aa227323"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/rs.h",
+      "sha256": "8befcc19e942900906332eaf9ceead15208e9a0f384a28f40e7c9d139927bb71"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/rs16.c",
+      "sha256": "99591d26db64fe55790d3bd643bfbe3f29b95a24670893b9592f9e084efd4858"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/rs16.h",
+      "sha256": "495d6def512f1df903865f00c35eb9c19d17a7b503c9b4fc7e616e53f094c053"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/rs16_afft.c",
+      "sha256": "28a24b33b2ff89c9cf209a0c37c30515f1b5439c16bc5c83abd115b053eaa48f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/rs16_afft.h",
+      "sha256": "f0a6b064415d8376acf9d972fdffdcbc322758079766d1daa6427ffaebc59d30"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/00util/bench.c",
+      "sha256": "e6d57479739154eafb9e37e21693bd186b5a3d88df70297754f0ed6814918b7b"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/00util/bench16.c",
+      "sha256": "37e73869c9fe4f495c8ed39e59002c45365255b7f5d45965efb64969afa6a446"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/00util/bench16_afft.c",
+      "sha256": "0cc0ecfffbb5164657c82a18814753d5874a6ae0fb8a8c9110360c5f62a69957"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/00util/test.c",
+      "sha256": "fe6662f8df027876f498930c09ba72b75dd487fa9e8b45d59f77d6d530c5a6c2"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/00util/test16.c",
+      "sha256": "36340a2d21a0728910c0b61d24b3fe090441d28e9910435551eb56d6fcd9732b"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/00util/test16_afft.c",
+      "sha256": "6eac832502ed65cc69b8c29a4145b7825b01a3a40f7473ac808357cd8f24e105"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/10random_schemes.t",
+      "sha256": "23beeb758026d7d5b98081795f980bc6ab00f9a7b497388eac0e139d87249b84"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/15random_schemes16.t",
+      "sha256": "b4ee476b71c49d8216f7421b39c2a37ba0071a0bb854bbeef5dbf270439c3543"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/16random_schemes16_afft.t",
+      "sha256": "36d90fa1a1129810f9ff9b06a8e65626027f49b11aea2be40bc88ed3329596ec"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/20sample_bench.t",
+      "sha256": "ee99e6d761717b0830f264fe937dc0d9caa9e6b479d9ab64e39c60a509a71daf"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/25sample_bench16.t",
+      "sha256": "72a89adf4161f86c14eab0af167e69514afa4dbf990ba2c4fd37f2dafa73c343"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/26sample_bench16_afft.t",
+      "sha256": "90e934753062e664e30591d2cb547bdbaaf17648d0c53ec11fc16153db2b0e42"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/nanors/t/Util.pm",
+      "sha256": "3117d24c52884a7f859722713ee7502df434242b73fb421de77df20d1871e596"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/AudioStream.c",
+      "sha256": "f4df18972b16d1be35461d72c60dce8ba3075e6afcd2e2fc3821cdb83417b842"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/ByteBuffer.c",
+      "sha256": "affac47bc6cd66cec028cac33262e02585c660b919e4ed11f283e853dc07f632"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/ByteBuffer.h",
+      "sha256": "8d79da7491850b65f6f28e25996741a6cc84adb948273fa17cfe0f948bf9915a"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Connection.c",
+      "sha256": "029b084a74e4944cee8a552b271f08ff02ecf6423552f544c1a8ea67c314b0f6"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/ConnectionTester.c",
+      "sha256": "31be38eb5bdec3ad011dfc5a4beb5806a15c083cb7ec502f3fdb6b696b54fe63"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/ControlStream.c",
+      "sha256": "64ca2bc97f8945cd826d7c484aca92976a1a4b965fd92e10bf78e9386b32e63c"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/FakeCallbacks.c",
+      "sha256": "d45117760313a9172fe6dd9511243fc9fec3404c6f3bb72d8e7ea96d4ed26861"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Input.h",
+      "sha256": "a8bfd9f885add907a242feac1bfcbead3bd1c8427cbc50b5685ba85061660743"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/InputStream.c",
+      "sha256": "d92c1b8829d78dc737886d23ea0c3d434aad11b211528d917b456def7e4721f7"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Limelight-internal.h",
+      "sha256": "2b5a62bbaa6b9d3723f02092586d1b8ec36827bde993203deffc7615f995fb16"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Limelight.h",
+      "sha256": "24e55dc22227abc0bb65c615946bef925aee2344f87a2d8e435e0bbc7dff47a0"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/LinkedBlockingQueue.c",
+      "sha256": "a6507ebdff3ff230f995a8ea69b484926b1f805941ca71f622f749c58538224e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/LinkedBlockingQueue.h",
+      "sha256": "3e3d3f622080ba9835816079e983008b4d5cf175575ea503e044e3a80005a68f"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Misc.c",
+      "sha256": "f7b7dcece3447bbe22c88ac18aad72e58042d52ae976523f7bc0a4cd298dae56"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Platform.c",
+      "sha256": "bfad9961d10d7a134ab4cddace8f6f1b0bb3aa1229cd1b96a0fb9b85be73445e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Platform.h",
+      "sha256": "618776f0330b477bb1c502edb4f3984ea1f6ef92d5ec405869f263abbc93b5c3"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/PlatformCrypto.c",
+      "sha256": "ca902c1279841008f53d444026eb7b2fd173a1952a97575479e3d5500562de96"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/PlatformCrypto.h",
+      "sha256": "9088b9782f43f60851312c91215037f686f7bc0d972efee063d0a9cb4255c79e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/PlatformSockets.c",
+      "sha256": "3a0c8438e73d564395d6c8b223008740490bfafc13811298c4e9b50663a837ee"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/PlatformSockets.h",
+      "sha256": "4164f911495557039bbfdc10d0d16e9d989aa47fac1d090807e956ba42f56840"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/PlatformThreads.h",
+      "sha256": "9d72f802350431ea85470e92445287a91ade84b9874b8c5e50fee6306a5529c0"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/RecorderCallbacks.c",
+      "sha256": "be74f586fe76ed32a0c171d7110008bd1f74b9cd097f5811223831ecab0b2a8e"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/RtpAudioQueue.c",
+      "sha256": "7077645d69f8a666c23406b99f210da74d1b3f5d36eab37ed0ef88d4076c2f19"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/RtpAudioQueue.h",
+      "sha256": "6249c32c4f70f043010caf9546f542d323e96f3525d6c2c9a8444d483da25df2"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/RtpVideoQueue.c",
+      "sha256": "814e57d007b1d0ea1393c5b32220000418530981d3321a0de0982f8212d7fe90"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/RtpVideoQueue.h",
+      "sha256": "f3af92d639701389e8b187d2190df77cee5064cd1b620e29825da055c5cb12b4"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Rtsp.h",
+      "sha256": "65336b941a39b5f1843bb63a706b660355ec70d390de069735dea2d4836754ae"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/RtspConnection.c",
+      "sha256": "23758aa5df1bf55dd61de4af0466fd0f1d0b79f41a9524ee0877ffbc55c3d2a8"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/RtspParser.c",
+      "sha256": "c4e2e6ec8276b36a453f2ae648ed81af9c5f595e2360074925798446b270237b"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/SdpGenerator.c",
+      "sha256": "af1ba1a0c9e5c8c1b1982f15bbac1e73d6434006939d9ce632b28f76c712c14d"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/SimpleStun.c",
+      "sha256": "2e3a33faed3c26b47ea1fcbc32c1b04cd928321c67949834b7bb85b6556440f0"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/Video.h",
+      "sha256": "2b2d59a4446491cb351ef95bfbac6be332ba7590ca9f2c6aeec51c48b098c294"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/VideoDepacketizer.c",
+      "sha256": "93f7442fbb4e3b18d7535c398a8d98b77ce7e098b9db10cc8d306aad36172cb7"
+    },
+    {
+      "path": "moonlight-common-c/moonlight-common-c/src/VideoStream.c",
+      "sha256": "89834ba42af49f25820a6e243e4b5ab5284a0adaf23b27cc8424967c728bfe7e"
+    },
+    {
+      "path": "moonlight-qt.pro",
+      "sha256": "819649bd92b8a3fcdca6b64b8f7f9480f8db6b0b1d7a928611d759cb7d33f389"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine.pro",
+      "sha256": "568c23887279f86677c003699eb3fb5922ac21b994356dbedba7ca4ed8aa22cf"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/.gitignore",
+      "sha256": "47d85b26f9a376d0826ea500eb2898bfa01512b064598f8bda78e23d1fe90d8c"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/CMakeLists.txt",
+      "sha256": "796129ac5e53b7d931a5612f25b9f09698399b7dbef22e135e50df82f58c121e"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/LICENSE.txt",
+      "sha256": "19f7bc4c95863835a04992fbfe076d209c51a1d98314e0379c0809e9d8784314"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/README.md",
+      "sha256": "b01df2ad40a72be86086c4dd12524b234f135388782dd4cf2851674acb3720b9"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/doc/CMakeLists.txt",
+      "sha256": "e3b2007738075c788e5a871aef903f15f74f3549bdf8701d500ec6562b2330c8"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/doc/Doxyfile.in",
+      "sha256": "8225473903c1986416f15e495811300929033ed0e22625d2419eab43bcc8dde6"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/doc/index.md",
+      "sha256": "a1218455b378af9c4e24a44ebc27c1196fa38776c71c34e1feb974d3574b1e88"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/doc/overrides.css",
+      "sha256": "a478884c45b2e59c0e9f70617f944e3fea80cf740fb792bf66a237169a8b2903"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/CMakeLists.txt",
+      "sha256": "3a8392f3f83e801fa6c02cfc73ecd623b812e5fa012705072a064014e30c4b1d"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/browser/CMakeLists.txt",
+      "sha256": "831dd74a29cfa1851493ec7896ae4b90d81e466f3b71d3a7e0755579259e87f1"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/browser/browser.cpp",
+      "sha256": "1fd3822c2303f96de57106e9b9cd3670202f769c12a3bb7fcbd32cfd3aa92f89"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/browser/mainwindow.cpp",
+      "sha256": "abde00b511703f950430b2af9d90e7a2309f92f497f9a8fc43d8b46e10cb927f"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/browser/mainwindow.h",
+      "sha256": "b2fa0a79715daaaf2f3fdaa88fa0886b53eb400e1d5dc0f8608b3ca29bbce7da"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/browser/servicemodel.cpp",
+      "sha256": "6ff051e6f0059601818145840df297fc6e256b5dfcf16b8eca7948c526c0b710"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/browser/servicemodel.h",
+      "sha256": "453e5581c7a45d9d701f73c9261d93a4acff4b967c9397878e09ae92ad5f9f72"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/provider/CMakeLists.txt",
+      "sha256": "89a13f1ac8c4f5213da53f5738a0c10c83b907fdbb4cf564b1181c4cd78647c9"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/provider/mainwindow.cpp",
+      "sha256": "c4c9671288c9dda3b3c669891a1121db05bc0f8b875a6de82bc85f2f6209bbbd"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/provider/mainwindow.h",
+      "sha256": "c83841167be4573dec9587d6d5b6d97f57f7a71fd1f6cdfb6a1720a8830385a4"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/examples/provider/provider.cpp",
+      "sha256": "1fd3822c2303f96de57106e9b9cd3670202f769c12a3bb7fcbd32cfd3aa92f89"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/CMakeLists.txt",
+      "sha256": "f5234730bea3f1c4290a287f310e4f8b96e0b10287a6e6d1f8a8ac998c872b04"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/abstractserver.h",
+      "sha256": "59d13be38ee9211c803083b24654304eacdfecf6943fc2059c3b689296b487cb"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/bitmap.h",
+      "sha256": "e4e702daa2ac9d5b1b0873c40092a23225325b15ccb582e04263942c6737ffd7"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/browser.h",
+      "sha256": "efe9745b9e3fb2871b9dda0dd3a8adf6105b6fe50eb2b6eb2271e82276d0997b"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/cache.h",
+      "sha256": "4a65b2de3e861cb2d0663b1173c2ce987d1fc7bcd46321dad5840187ac7a1469"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/dns.h",
+      "sha256": "bb976e85972099b039fb34613ec7837d90d447d87fbb68815251ac0c41a288e3"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/hostname.h",
+      "sha256": "4944234da04cbb14bb7e2429561edb61be962627e20b6b098fa9f2e4d11d1d0b"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/mdns.h",
+      "sha256": "efc61dd9d680787efb539f1d7847125667745be78a9ea5225a188f1327ea5d7f"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/message.h",
+      "sha256": "19fa4fbcf783bb9459768f173d86a1efd4ad9569f93694fdba8b6d463ae261be"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/prober.h",
+      "sha256": "f36b746b18f04a9651166370b884a6f3da626fd718f1155a293b9e3109ee5710"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/provider.h",
+      "sha256": "6de234081cb75f422184af6ee7a9eabe361144368c532c584099748ec0191cc7"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/query.h",
+      "sha256": "f57ecc287fd91a681cc7a9890c760b3401436c726f1c98ccd995bf59da7912ad"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/record.h",
+      "sha256": "584d180bdaa914f87e8636f927ef9fe4862aee9f83d42016bcbc5e1981d58562"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/resolver.h",
+      "sha256": "51e3fd3d35d3c4c7e83f9f73030ef987d375b1972b681f61472ba679a215844f"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/server.h",
+      "sha256": "5f198be456bb2b6e155839c751dde1ae6338777a6164e9c9c9cc8cfa8040f75d"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/include/qmdnsengine/service.h",
+      "sha256": "8098092c4b24bc0f2bcf6ee4c7beba24a82f1519c6758002e34319b5b21d1588"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/qmdnsengine_export.h.in",
+      "sha256": "4474fbf6be12727e8e73bafd327d56e6773224778a7e48e44fad999714258eb3"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/resource.rc.in",
+      "sha256": "07484539613ee7901fac6339353a0c8dd1c03db213dd3b5e6194945fe4f5e209"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/abstractserver.cpp",
+      "sha256": "f60db0776137a4223df9a25eed31a94b2e1829e46103dd80d48ef78535160027"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/bitmap.cpp",
+      "sha256": "d537e185d4f5cb6940ae9c81eef588b9bfdf9a8dac719a05bdf46290c7edbf1e"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/bitmap_p.h",
+      "sha256": "8564f88eba2cf5301a4bd69bba9a3cd26cb07393bbf6d133aa70dd399ad1dcf3"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/browser.cpp",
+      "sha256": "0394e0168cb14b6ff6f1f91bfbf0c0816ce55a61f07be723f7dd937a773d5325"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/browser_p.h",
+      "sha256": "ceade746e28f999e8e28f8331c60c925bc3d8095d0afe4bfaef1281269d2d488"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/cache.cpp",
+      "sha256": "48eed1edc8c946a2cf0621d683510c727234920f5788a1c0757f4981f908aa93"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/cache_p.h",
+      "sha256": "c5a3a3cb4eb352427a377d1038ed9805e4900264dd631b15f85efa6b2516f9ab"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/dns.cpp",
+      "sha256": "3f735cf2fa9bdf2d70d5b4ee3e72942b7693e45739e7d97bc0cabddafaa11224"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/hostname.cpp",
+      "sha256": "a918d57f2d8056405a8b279ede890e1feb4b289dcd1f6714a6d3acbccf194d11"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/hostname_p.h",
+      "sha256": "d0a6bc846ff41917ea12505d725bc55b91d21d2a49c893bd63289f6f2cfc9159"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/mdns.cpp",
+      "sha256": "125a22000cb06a054752ac37e898033d0ebcf5b250800aa3f5e07e20d3ca5ce8"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/message.cpp",
+      "sha256": "1122305fff92568023b7f3252aa29037f55e75ffb12a5c165574a9f7910d01bf"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/message_p.h",
+      "sha256": "35c6b2545458d0c8608983241aed585d91214e57a6faffdfc64ca9ff206545c6"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/prober.cpp",
+      "sha256": "365ad8eb58c184186f5f7655e653703e84e4612ca5d7405f24aae82c247d01ea"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/prober_p.h",
+      "sha256": "806067515d6cf26824894d9a568131e3d9461553bddbc2c8dbdda0c433b8d29e"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/provider.cpp",
+      "sha256": "beafa5c4783724932ffda015cb90a2055b103e156a883ce8f121af915e14edab"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/provider_p.h",
+      "sha256": "3622a15943f1039bdeec5568a815f3c290abdfbadbbe81d34bab06f557c01ec3"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/query.cpp",
+      "sha256": "76987afbc8a2337a98c5281c29348460ee9638f67ccebbf1027bb0061e935b96"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/query_p.h",
+      "sha256": "136606ec7564e27021fe3c86444436b40a420a9987af68128be9da30ea48042f"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/record.cpp",
+      "sha256": "7c8cbc58ceca12951d30a676596116f710478d062d8d60b114749349edae1b97"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/record_p.h",
+      "sha256": "0a36df71b448c726d797f8408a6a635264376db0e2ebf453efff6d0b89b1d7d9"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/resolver.cpp",
+      "sha256": "630f2dc2adb35c6f142721178c44214f0bb8a4dd47823a5308efe69236c80076"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/resolver_p.h",
+      "sha256": "6ddc6ebaf10c48437335db709526b7f777107f1e50f0426e630d7b097f5b66be"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/server.cpp",
+      "sha256": "07d146610bc5eeeb41ff7b53ca5130772ce0528aa9bcf9afc04670b8722e172a"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/server_p.h",
+      "sha256": "878b76f7837688e062d28b4241a1dbb53e7b29638b2b138f903e2a23700fe272"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/service.cpp",
+      "sha256": "41831f7e8f72032ed8661933b67373cafa0c2c271157b3a74c13c507c8cff2b0"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/src/src/service_p.h",
+      "sha256": "c1db5fead723a5810f5e6386871223e8bd198a28725ca8e6d69e77da011c65e6"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/CMakeLists.txt",
+      "sha256": "bd2c6a3dd4caa02c1e85892c3dc32ac06bebc20c0bd01eee2b22ec9b8b37427b"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/TestBrowser.cpp",
+      "sha256": "62630d20b32b73644923f5ffc49a96c7f9d1fbeb257455000053c499bdbcc65a"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/TestCache.cpp",
+      "sha256": "944a4b254847c661f5742f3f28a7718d4772a37335847db932d10255ed475a38"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/TestDns.cpp",
+      "sha256": "dc12488ad2f099af862b9eb385715001c3adc63610190298b3ca7beed606acd9"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/TestHostname.cpp",
+      "sha256": "6971c4e9c209bc022c6d08b875574b21b7f325efa945f415affd5b31ad42f571"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/TestProber.cpp",
+      "sha256": "2818d3cb90634df9a3d94746c926ffeb93d7ca31e210c0cd5b3d801eb4a55538"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/TestProvider.cpp",
+      "sha256": "0b512f136766f2253aa72473353ae52618213e6a37188ff1118ada2fa61ffaec"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/TestResolver.cpp",
+      "sha256": "d032fb784aaa7f98f093b33797a0adb93d0b938271229b7b755f025ea6a4f9ca"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/common/CMakeLists.txt",
+      "sha256": "df7b52b27cb45563d03f31e84afddcb63859e9fd26a7f0ba037a1d618fa5d191"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/common/testserver.cpp",
+      "sha256": "132f1facfad979786f8f1f34241a7fadf1bebd5ecfc307f7a18d4d5ca3dc97b6"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/common/testserver.h",
+      "sha256": "1fd71153e63fc75b177ea0428fd1342f7f09f00a1ee52e8c684217231145a8a3"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/common/util.cpp",
+      "sha256": "c29f0a029b5962071caba95c41dfe7731fbd32401fa8e85edaa0b0c254226eb4"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine/tests/common/util.h",
+      "sha256": "9843225b98d79ae918f98cf2a2a1c920e5ef5905b9c5f24929d7755cea0f380a"
+    },
+    {
+      "path": "qmdnsengine/qmdnsengine_export.h",
+      "sha256": "1f2a61cc9cd7f8c68481f75d2420a9a866379b829813575fd7d5be092ea05a4a"
+    },
+    {
+      "path": "scripts/build-appimage.sh",
+      "sha256": "57110234cb7fa7cf375ee4ec7f4e7f8b8cccd96d093f0a613858ffb8e5cca252"
+    },
+    {
+      "path": "scripts/build-arch.bat",
+      "sha256": "7e076f2e4817c36635e34b9f8e300136c516b7f2e6c62dbba6f8b4a0a1f33ea3"
+    },
+    {
+      "path": "scripts/build-steamlink-app.sh",
+      "sha256": "1f1cde7aa11693d5955defb7658ace189587744453b0e0ae9356fa1553fd4b99"
+    },
+    {
+      "path": "scripts/create-qt-pdb-zip.bat",
+      "sha256": "5cc564ac0e1ed9d259b6fc889a285f8e2e108c480fcb86b1a700ef3518a4417c"
+    },
+    {
+      "path": "scripts/find-vswhere.bat",
+      "sha256": "942da60cdc0bc25d17c20189544f8742f89bd139a5698610cc16e3295a0862b4"
+    },
+    {
+      "path": "scripts/generate-bundle.bat",
+      "sha256": "4252f33a0ba55a88cf2e526421f46ebd3baf4aeac61108251ff69aa59f29bdb2"
+    },
+    {
+      "path": "scripts/generate-dmg.sh",
+      "sha256": "544f4d42e432f27ac1aa321e8cf1de9af9b3c3c863c72997f74a163e68d66b44"
+    },
+    {
+      "path": "scripts/generate-ico.sh",
+      "sha256": "e359125c2bd4f137c033cc4e170f137ddad2b2bd2dfa2465fa88bee318fce06f"
+    },
+    {
+      "path": "scripts/generate-src.sh",
+      "sha256": "1ce45e314a3cee926da44d9fadd2dea7fe15c5df3da544159a036aacd254e8ae"
+    },
+    {
+      "path": "scripts/git-archive-all.sh",
+      "sha256": "e014d5f5b5428299fb93e8e0a1d6d993f785400849b7a85488fd365eaee9bb18"
+    },
+    {
+      "path": "scripts/svg2icns",
+      "sha256": "d7909e443ca31178b5e97d560834a1328391f30a27a28b9add5604d7085c97d5"
+    },
+    {
+      "path": "scripts/update-msvcredist.ps1",
+      "sha256": "f8d4bc6eb0edfca121643d671954029b98896952225bb6d3bc962d59227cda39"
+    },
+    {
+      "path": "setup-deps.ps1",
+      "sha256": "d3ca80126eee4459a3462dc90f7080c129e6d9644616e902b07dad370293045c"
+    },
+    {
+      "path": "setup-deps.py",
+      "sha256": "7a2bedb7b921b5b0b0a15b427c2c1d6fa1153e22dfd46f91aeb6e10cd895e0df"
+    },
+    {
+      "path": "tests/hostdisplay-paint-test.cpp",
+      "sha256": "cd20fe3378959996fe8c7086c5e79d4931e79d1c93fd8a2a3bd418618b0b62a0"
+    },
+    {
+      "path": "tests/hostdisplay-preview.cpp",
+      "sha256": "add504fdd09f0272d00f421da94b4a92704b6412cdac8196e3d25edf02aba894"
+    },
+    {
+      "path": "tests/hostdisplay-test.cpp",
+      "sha256": "39f85b2706503b6d4ef34ae3d60a44cac5351f098ee1270621db3c37b8ff7a62"
+    },
+    {
+      "path": "tests/pen-device-info.cpp",
+      "sha256": "b312528896a691894847c80ae60a96d027e576ff6390fbc7c09132dbf22ee122"
+    },
+    {
+      "path": "tests/penpressure-test.cpp",
+      "sha256": "16b787ebd10bb03e20e3f820b308b5401f4b8404eb5086334804ed4b56741a54"
+    },
+    {
+      "path": "wix/Moonlight.sln",
+      "sha256": "8f83bc42b49903cfc42be6deab7d4069243bc71deaeaba6c93847cfd1f0360e0"
+    },
+    {
+      "path": "wix/Moonlight/Moonlight.wixproj",
+      "sha256": "fc495d6e7fee3fc50e3fea0bfa3156ba6f5aa0d7ecce2a9b13c8a7ac5e6682e3"
+    },
+    {
+      "path": "wix/Moonlight/Product.wxs",
+      "sha256": "00430825fa665702f322af1de10c6ac409ddd1deafb7299557933659bea9c2b6"
+    },
+    {
+      "path": "wix/MoonlightSetup/Bundle.wxs",
+      "sha256": "0fbde5d6ba95415d4f1c78e7476cdf9ec8132b1c6ba4a21758c0efa15dc687e4"
+    },
+    {
+      "path": "wix/MoonlightSetup/MoonlightSetup.wixproj",
+      "sha256": "6cbcf97f24ba50d1e72274496c94695aefcdc6c4e6bd9507da11424eee29f645"
+    },
+    {
+      "path": "wix/MoonlightSetup/RtfTheme.xml",
+      "sha256": "4c756263841ac9784f88a70660c07232348021e2384efe8a2f4bc3359d82cf3a"
+    },
+    {
+      "path": "wix/MoonlightSetup/license.rtf",
+      "sha256": "656ee2547f55772a4da5a44032dae69dd700f22df9b384eca6a56be6424a4d16"
+    }
+  ]
+}
