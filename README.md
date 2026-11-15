@@ -3,16 +3,24 @@
 **노트북의 S펜 또는 PTH-451로 데스크톱 PC에 그림을 그리기 위한 Windows용 Moonlight 수정판입니다.**
 기기별 필압 보정과 화면 제어 패널을 추가했습니다. Moonlight 공식 배포판은 아닙니다.
 
-## 다시 설치할 때는 여기부터
+## 다운로드와 설치
 
-**[실행용 다운로드 열기 →](https://github.com/wow2658/moonlight-pen/releases/latest)**
+### [⬇ 노트북용 문라이트 ZIP 바로 다운로드 · 약 44MB](https://github.com/wow2658/moonlight-pen/releases/latest/download/01-Laptop-Moonlight-Pen.zip)
+
+**펜을 사용하는 노트북에서 받으세요.** 전체 압축 해제 후 **`문라이트 실행.cmd`**를 실행합니다.
+
+### [⬇ 호스트 PC용 화면 전환 ZIP 바로 다운로드 · 약 21KB](https://github.com/wow2658/moonlight-pen/releases/latest/download/02-Host-Display-Shortcuts.zip)
+
+**Sunshine과 그리기 앱이 설치된 데스크톱 PC에서 받으세요.** 전체 압축 해제 후 **`호스트 설치.cmd`**를 한 번 실행합니다. 복제·확장 버튼을 쓸 때 필요합니다.
+
+위 링크를 누르면 ZIP을 바로 다운로드합니다. Releases 페이지에서 파일을 따로 찾을 필요는 없습니다.
 
 이 저장소에 접근할 수 있는 GitHub 계정으로 로그인하세요. 비공개 저장소라 로그아웃 상태에서는 404가 보일 수 있습니다.
 
 | 받을 파일 | 어느 컴퓨터에서? | 압축을 푼 뒤 할 일 |
 | --- | --- | --- |
-| [01-Laptop-Moonlight-Pen.zip](https://github.com/wow2658/moonlight-pen/releases/latest/download/01-Laptop-Moonlight-Pen.zip) | **펜을 사용하는 노트북** | `문라이트 실행.cmd` 더블클릭 |
-| [02-Host-Display-Shortcuts.zip](https://github.com/wow2658/moonlight-pen/releases/latest/download/02-Host-Display-Shortcuts.zip) | **그리기 프로그램이 있는 데스크톱 PC** | `호스트 설치.cmd` 한 번 실행 |
+| `01-Laptop-Moonlight-Pen.zip` | **펜을 사용하는 노트북** | `문라이트 실행.cmd` 더블클릭 |
+| `02-Host-Display-Shortcuts.zip` | **그리기 프로그램이 있는 데스크톱 PC** | `호스트 설치.cmd` 한 번 실행 |
 
 **GitHub의 초록색 `Code → Download ZIP`과 Releases의 `Source code`는 개발용 소스입니다. 실행하려면 위의 01/02 ZIP을 받으세요.**
 
