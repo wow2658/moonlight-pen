@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "description": "Tracked client and vendored source including pen/display controls and bidirectional text clipboard r3.",
+  "description": "Current client, vendored clipboard sources and hardware-scoped optional touch tool.",
   "files": [
     {
       "path": ".gitignore",
@@ -2005,6 +2005,34 @@
     {
       "path": "tests/penpressure-test.cpp",
       "sha256": "16b787ebd10bb03e20e3f820b308b5401f4b8404eb5086334804ed4b56741a54"
+    },
+    {
+      "path": "tests/touch-device-selection-test.cpp",
+      "sha256": "4c1681a755fe2b90d53f74674164114e53583cc522b028d24f40351f94ff2829"
+    },
+    {
+      "path": "tests/touch-setup-test.ps1",
+      "sha256": "31c99db03b0dc30a60aa0eb30510504466e3ab5bc0eb51fde0f2df516e16a994"
+    },
+    {
+      "path": "touch-toggle/TouchDispatcher.cpp",
+      "sha256": "6c3f12915d80b4f76ff78d3931bdccf30d5ee71b6b228b7d531c084bd21bf2b5"
+    },
+    {
+      "path": "touch-toggle/TouchToggle.cpp",
+      "sha256": "1870c483a1f7d208026e039ed36e0ac67e77594a61c882e5b85717445a35acb8"
+    },
+    {
+      "path": "touch-toggle/TouchToggle.manifest",
+      "sha256": "c066c51bfb8fc1e96b4ebe286fc9b4d505888e981af01023ca222f48693ac560"
+    },
+    {
+      "path": "touch-toggle/device-selection.h",
+      "sha256": "28b3f5e30c928f500d985495a00082103ee23884b731d6e508382278c2153520"
+    },
+    {
+      "path": "touch-toggle/verified-devices.h",
+      "sha256": "e8ae020efca0cf627305993963e15087d8e8bfd8c660ac85dc2895e45fc89e54"
     },
     {
       "path": "wix/Moonlight.sln",

@@ -9,13 +9,25 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+#include "verified-devices.h"
+#else
 #include "device-profile.local.h"
+#endif
 
 namespace {
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+VerifiedTouch::Profile deviceProfile;
+const wchar_t* touchId = nullptr;
+const wchar_t* touchParent = nullptr;
+const wchar_t* penId = nullptr;
+const wchar_t* penParent = nullptr;
+#else
 constexpr wchar_t touchId[] = MOONLIGHT_TOUCH_ID;
 constexpr wchar_t touchParent[] = MOONLIGHT_TOUCH_PARENT;
 constexpr wchar_t penId[] = MOONLIGHT_PEN_ID;
 constexpr wchar_t penParent[] = MOONLIGHT_PEN_PARENT;
+#endif
 
 void require(bool ok, const char* message) { if (!ok) throw std::runtime_error(message); }
 DEVINST locate(const wchar_t* id) {
@@ -116,8 +128,18 @@ void show_state(bool on) {
 }
 }
 int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+    bool quiet = true; // Unsupported-device preflight reports to stdout, never a blocking dialog.
+#else
     bool quiet = false;
+#endif
     try {
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+        require(SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_SYSTEM32) != FALSE, "Cannot restrict DLL loading.");
+        deviceProfile = VerifiedTouch::discover();
+        touchId = deviceProfile.touch.c_str(); touchParent = deviceProfile.touchParent.c_str();
+        penId = deviceProfile.pen.c_str(); penParent = deviceProfile.penParent.c_str();
+#endif
         int argc = 0; auto argv = CommandLineToArgvW(GetCommandLineW(), &argc);
         require(argv != nullptr, "Cannot parse arguments.");
         const std::wstring command = argc >= 2 ? argv[1] : L"--toggle";
@@ -143,6 +165,9 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             verify_pen(); output(enabled() ? "touch=enabled; pen=healthy\n" : "touch=disabled; pen=healthy\n"); return 0;
         }
         if (command == L"--self-test") {
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+            throw std::runtime_error("Automatic OFF/ON tests are disabled in the downloadable release.");
+#else
             verify_pen(); const bool before = enabled();
             try {
                 change_touch(false); require(!enabled(), "Disable verification failed."); verify_pen();
@@ -152,6 +177,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
                 change_touch(before);
             } catch (...) { try { change_touch(true); } catch (...) {} throw; }
             output("PASS: initial touch state restored\n"); return 0;
+#endif
         }
         require(command == L"--toggle" || command == L"--on" || command == L"--off", "Unknown operation.");
         const bool target = command == L"--on" || (command == L"--toggle" && !enabled());

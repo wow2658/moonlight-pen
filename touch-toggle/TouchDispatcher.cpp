@@ -10,15 +10,26 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+#include "verified-devices.h"
+#include "backend-pin.h"
+#else
 #include "device-profile.local.h"
+#endif
 #include <algorithm>
 
 namespace {
 constexpr wchar_t backend[] = L"C:\\Program Files\\Laptop Finger Touch Toggle\\TouchToggle.exe";
 constexpr wchar_t workingDirectory[] = L"C:\\Program Files\\Laptop Finger Touch Toggle";
 constexpr char expectedHash[] = MOONLIGHT_BACKEND_SHA256;
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+VerifiedTouch::Profile deviceProfile;
+const wchar_t* touchId = nullptr;
+const wchar_t* penId = nullptr;
+#else
 constexpr wchar_t touchId[] = MOONLIGHT_TOUCH_ID;
 constexpr wchar_t penId[] = MOONLIGHT_PEN_ID;
+#endif
 constexpr UINT hotkeyId = 0x6B10;
 bool keepRunning = false;
 HWND banner = nullptr;
@@ -160,6 +171,10 @@ State transition(const std::wstring& operation) {
 }
 int WINAPI wWinMain(HINSTANCE,HINSTANCE,PWSTR,int) {
     try {
+#ifdef MOONLIGHT_PUBLIC_TOUCH
+        require(SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_SYSTEM32) != FALSE,"Cannot restrict DLL loading.");
+        deviceProfile = VerifiedTouch::discover(); touchId = deviceProfile.touch.c_str(); penId = deviceProfile.pen.c_str();
+#endif
         int argc=0;auto argv=CommandLineToArgvW(GetCommandLineW(),&argc);require(argv && argc==2,"Specify exactly one supported mode.");std::wstring mode=argv[1];LocalFree(argv);
         verify_backend();
         if(mode==L"--inspect"){const auto state=inspect();output(describe(state)+"\n");return state.coherent&&state.penHealthy?0:2;}
