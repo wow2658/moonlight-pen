@@ -1147,6 +1147,10 @@
       "sha256": "4f0857c463c393ac06f036c4dd0e8286c3b19fbee38ed28fa95f0f9f06ee7d6e"
     },
     {
+      "path": "host-shortcuts/uninstall-shortcuts.vbs",
+      "sha256": "0059ce2d8cd48d20b43f137d9b7514477e21401e43c8e1dd2057d221980f265e"
+    },
+    {
       "path": "moonlight-common-c/moonlight-common-c.pro",
       "sha256": "9dee19fbe60c219af364e39b5019583bf8c3a18250ed4512e635ed4a1be0d941"
     },
@@ -1599,6 +1603,10 @@
       "sha256": "819649bd92b8a3fcdca6b64b8f7f9480f8db6b0b1d7a928611d759cb7d33f389"
     },
     {
+      "path": "packaging/client/uninstall-client.ps1",
+      "sha256": "05f664cfdde9fc10128bebbac875c0456596adb96017fec2d7a64c1c591993db"
+    },
+    {
       "path": "qmdnsengine/qmdnsengine.pro",
       "sha256": "568c23887279f86677c003699eb3fb5922ac21b994356dbedba7ca4ed8aa22cf"
     },
@@ -1979,6 +1987,10 @@
       "sha256": "0fc76f5874076d9323804b6e98dffe2e700f34e998ff7063555051ec0a1a41d7"
     },
     {
+      "path": "tests/client-uninstall-test.ps1",
+      "sha256": "51ae19bc2afc61c07f6546afcf43f85f8570f2782fac27a2dbd4cb9d1ba1478d"
+    },
+    {
       "path": "tests/clipboard-protocol-test.cpp",
       "sha256": "31b890fe82c2feb5264523d79c3f6ad6eb8edbf1972cb9c1005681e68a4ef903"
     },
@@ -2013,6 +2025,10 @@
     {
       "path": "tests/touch-setup-test.ps1",
       "sha256": "31c99db03b0dc30a60aa0eb30510504466e3ab5bc0eb51fde0f2df516e16a994"
+    },
+    {
+      "path": "tests/touch-uninstall-test.ps1",
+      "sha256": "375adae70efaac21e24ffb9e679cf18ec97412ef267ae6cbb11ca87e7c46a351"
     },
     {
       "path": "touch-toggle/TouchDispatcher.cpp",

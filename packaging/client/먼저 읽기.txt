@@ -1,4 +1,4 @@
-노트북용 Moonlight Pen — 처음 실행
+﻿노트북용 Moonlight Pen — 처음 실행
 
 1. 이 ZIP을 노트북에서 '모두 압축 풀기'로 풉니다.
 2. '문라이트 실행.cmd'를 더블클릭합니다.
@@ -32,3 +32,7 @@ https://github.com/wow2658/moonlight-pen/blob/main/docs/TROUBLESHOOTING.md
 
 비공개 저장소이므로 접근 권한이 있는 GitHub 계정으로 로그인해야 합니다.
 Moonlight 공식 배포판이 아닌 개인 수정판입니다.
+
+그만 사용할 때
+이 폴더의 삭제.cmd를 실행하세요.
+이 문라이트와 저장한 설정/페어링, 해당 실행 파일의 방화벽 규칙과 바로가기를 제거합니다. 다른 문라이트와 파일은 지우지 않습니다.

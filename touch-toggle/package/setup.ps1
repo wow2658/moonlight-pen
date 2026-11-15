@@ -104,17 +104,32 @@ try {
     $task=Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
     if ($Mode -eq 'Uninstall') {
         if (-not (Test-Path -LiteralPath $folder)) { Write-Output 'Already absent.';exit 0 }
-        Verify-Protected $folder;Verify-Payload $folder
+        Verify-Protected $folder
         foreach ($path in @($backend,$dispatcher)) { Verify-Protected $path }
+        $log=Join-Path $folder 'dispatcher-events.log'
+        if(Test-Path -LiteralPath $log) { Verify-Protected $log }
+        $installedBackend=File-Hash $backend;$installedReceiver=File-Hash $dispatcher
+        $sameRelease=($installedBackend -eq $expected['TouchToggle.exe'] -and $installedReceiver -eq $expected['TouchDispatcher.exe'])
+        $knownWorking=($installedBackend -eq $knownOriginal -and $installedReceiver -eq $knownReceiver)
+        if(-not $sameRelease -and -not $knownWorking) { throw 'Unknown touch installation; nothing was removed.' }
+        $old=Get-ScheduledTask -TaskName 'MoonlightPen-LocalFingerTouchHotkey' -ErrorAction SilentlyContinue
+        if($old -and ($old.State -ne 'Disabled' -or $old.Actions.Count -ne 1 -or $old.Actions[0].Execute -ne $backend -or $old.Actions[0].Arguments -ne '--listen' -or -not (Same-Principal $old.Principal.UserId $identity.User.Value))) { throw 'A different legacy task needs inspection. Nothing was removed.' }
         if ($task) {
             if ($task.Actions.Count -ne 1 -or $task.Actions[0].Execute -ne $dispatcher -or $task.Actions[0].Arguments -ne '--listen' -or -not (Same-Principal $task.Principal.UserId $identity.User.Value)) { throw 'Different scheduled task; uninstall refused.' }
+        }
+        # Restore touch before removing the working receiver or any task.
+        $process=Start-Process -FilePath $backend -ArgumentList '--on','--quiet' -WorkingDirectory $folder -WindowStyle Hidden -Wait -PassThru
+        if ($process.ExitCode -ne 0) { throw 'Touch could not be enabled. Installation retained. Restart Windows before manual recovery.' }
+        if ($task) {
             Stop-ScheduledTask -TaskName $taskName
             Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
         }
-        # The user explicitly invokes uninstall. Restore touch before removing
-        # the program; never remove it while restoration reports failure.
-        $process=Start-Process -FilePath $backend -ArgumentList '--on','--quiet' -WorkingDirectory $folder -WindowStyle Hidden -Wait -PassThru
-        if ($process.ExitCode -ne 0) { throw 'Touch could not be enabled. Files were retained. Restart Windows before manual recovery.' }
+        $until=[DateTime]::UtcNow.AddSeconds(5)
+        while(@(Get-Process -Name TouchDispatcher -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $dispatcher }).Count) {
+            if([DateTime]::UtcNow -ge $until) { throw 'The receiver is still stopping. Files were retained; run 삭제.cmd again.' }
+            Start-Sleep -Milliseconds 100
+        }
+        if($old) { Unregister-ScheduledTask -TaskName 'MoonlightPen-LocalFingerTouchHotkey' -Confirm:$false }
         $shell=New-Object -ComObject WScript.Shell
         foreach ($entry in (Get-Links)) {
             if (Test-Path -LiteralPath $entry.Path) {
@@ -122,9 +137,14 @@ try {
                 if ($link.TargetPath -eq $backend -and $link.Arguments -eq $entry.Args) { No-Redirect $entry.Path;Remove-Item -LiteralPath $entry.Path }
             }
         }
+        $programs=Join-Path ([Environment]::GetFolderPath('Programs')) '손가락 터치'
+        if((Test-Path -LiteralPath $programs) -and -not @(Get-ChildItem -LiteralPath $programs -Force).Count) { No-Redirect $programs;Remove-Item -LiteralPath $programs }
         # No recursive removal and no data from other installs is deleted.
         foreach ($name in @('TouchToggle.exe','TouchDispatcher.exe')) { Remove-Item -LiteralPath (Join-Path $folder $name) }
-        Write-Output 'Removed this release and its own task/shortcuts. Logs remain in Program Files. Confirm physical finger touch; restart Windows if necessary.'
+        $log=Join-Path $folder 'dispatcher-events.log'
+        if(Test-Path -LiteralPath $log) { Verify-Protected $log;Remove-Item -LiteralPath $log }
+        if(-not @(Get-ChildItem -LiteralPath $folder -Force).Count) { Remove-Item -LiteralPath $folder }
+        Write-Output 'Removed finger-touch tool, tasks, shortcuts and its status log. Confirm physical finger touch; restart Windows if necessary.'
         exit 0
     }
     if (Test-Path -LiteralPath $folder) {

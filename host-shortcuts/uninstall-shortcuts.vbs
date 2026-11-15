@@ -3,11 +3,15 @@ Dim shell, fso, installDir, displayExe, explorerExe
 Set shell = CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
 installDir = fso.BuildPath(shell.SpecialFolders("Programs"), "Moonlight Display Shortcuts")
+If WScript.Arguments.Named.Exists("test") Then installDir = fso.BuildPath(fso.GetParentFolderName(WScript.ScriptFullName), "shortcut-test")
 displayExe = shell.ExpandEnvironmentStrings("%SystemRoot%\System32\DisplaySwitch.exe")
 explorerExe = shell.ExpandEnvironmentStrings("%SystemRoot%\explorer.exe")
 DeleteLink "Clone.lnk", displayExe, "/clone"
 DeleteLink "Extend.lnk", displayExe, "/extend"
 DeleteLink "Check.lnk", explorerExe, "ms-settings:display"
+If fso.FolderExists(installDir) Then
+    If fso.GetFolder(installDir).Files.Count = 0 And fso.GetFolder(installDir).SubFolders.Count = 0 Then fso.DeleteFolder installDir, False
+End If
 WScript.Echo "Removed only the three registered Moonlight shortcuts. Display mode was not changed."
 
 Sub DeleteLink(name, target, args)

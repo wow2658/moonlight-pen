@@ -36,7 +36,7 @@ read-only hardware check, device-selection tests, setup simulations, hash/privac
 scans. Actual new-release OFF/ON and fresh Windows end-to-end remain untested.
 '''
 (root/'SOURCE.txt').write_bytes(source.replace('\n','\r\n').encode('utf-8'))
-for name,mode in [('INSTALL.cmd','Install'),('CHECK.cmd','Check'),('UNINSTALL.cmd','Uninstall')]:
+for name,mode in [('INSTALL.cmd','Install'),('CHECK.cmd','Check'),('UNINSTALL.cmd','Uninstall'),('삭제.cmd','Uninstall')]:
     text='@echo off\r\nsetlocal\r\n"%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "%~dp0setup.ps1" -Mode '+mode+'\r\nset "setupExit=%errorlevel%"\r\npause\r\nexit /b %setupExit%\r\n'
     (root/name).write_bytes(text.encode('ascii'))
 files=[{'path':p.relative_to(root).as_posix(),'sha256':sha(p),'bytes':p.stat().st_size} for p in sorted(root.rglob('*')) if p.is_file()]
