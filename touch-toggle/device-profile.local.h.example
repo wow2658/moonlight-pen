@@ -1,0 +1,9 @@
+#pragma once
+// Copy OUTSIDE this repository, fill in VERIFIED local device identities, then
+// pass that directory to scripts/build-touch-tools.cmd. Never commit real IDs.
+#error Fill in the verified local device profile and remove this error first.
+#define MOONLIGHT_TOUCH_ID L"REPLACE_WITH_VERIFIED_FINGER_TOUCH_INSTANCE_ID"
+#define MOONLIGHT_TOUCH_PARENT L"REPLACE_WITH_VERIFIED_TOUCH_PARENT"
+#define MOONLIGHT_PEN_ID L"REPLACE_WITH_SEPARATE_VERIFIED_PEN_INSTANCE_ID"
+#define MOONLIGHT_PEN_PARENT L"REPLACE_WITH_VERIFIED_PEN_PARENT"
+#define MOONLIGHT_BACKEND_SHA256 "REPLACE_WITH_64_LOWERCASE_HEX_BACKEND_SHA256"

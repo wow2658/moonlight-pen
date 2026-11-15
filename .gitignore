@@ -43,3 +43,17 @@ id_rsa*
 id_ed25519*
 config.tests/*/.qmake.stash
 config.tests/*/Makefile
+
+# Private format-restore inputs and runtime payloads are never source releases.
+**/device-profile.local.h
+**/device-profile.local.json
+**/settings-backup*.json
+restore-kit/01-Laptop/client/
+restore-kit/02-Host/official/
+restore-kit/02-Host/clipboard/
+restore-kit/02-Host/display-shortcuts/
+restore-kit/03-Touch/app/
+restore-kit/**/install-result.txt
+restore-kit/**/*-result.txt
+restore-kit/**/*-output.txt
+restore-kit/**/*-error.txt

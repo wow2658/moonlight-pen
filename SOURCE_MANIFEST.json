@@ -4,7 +4,7 @@
   "files": [
     {
       "path": ".gitignore",
-      "sha256": "61aedf799acff139ce8b23e955c371fc9d615f0ca7448261a74c72acaa70c861"
+      "sha256": "543d73bd739c92af686d655cd72aa961be5a7e49b320c6df037b5aca4d1281e8"
     },
     {
       "path": "AntiHooking/AntiHooking.pro",
