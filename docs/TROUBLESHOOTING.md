@@ -31,17 +31,17 @@
 
 PTH-451: 노트북의 **와콤 타블렛 등록정보 → 펜 → 매핑 → Windows Ink 사용**을 켭니다. 앱별 설정이 있다면 Moonlight에 적용되는 항목도 확인하세요. 드라이버 설치 후 재부팅을 요구했다면 재부팅합니다. [공식 설명서](https://101.wacom.com/UserHelpPDF_Legacy/PTH-451_en.pdf)
 
-Sunshine에는 **`native_pen_touch`** 설정이 있습니다. 호스트의 Sunshine 설정에서 네이티브 펜/터치 전달이 켜져 있는지 확인하고, 값을 바꾼 뒤 Sunshine의 적용·재시작 안내를 따릅니다. UI에 보이지 않으면 사용 중인 버전의 공식 설정 문서를 확인하세요. [Sunshine 공식 설정 문서](https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html)
+Sunshine에는 `native_pen_touch` 설정이 있습니다. 호스트의 Sunshine 설정에서 네이티브 펜/터치 전달이 켜져 있는지 확인하고, 값을 바꾼 뒤 Sunshine의 적용·재시작 안내를 따릅니다. UI에 보이지 않으면 사용 중인 버전의 공식 설정 문서를 확인하세요. [Sunshine 공식 설정 문서](https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html)
 
 ## 복제 / 확장 / ? 버튼이 반응하지 않아요
 
 이 기능은 **02 ZIP을 호스트 PC에 설치**해야 합니다. 노트북에 설치하는 것이 아닙니다.
 
 1. 호스트에서 `호스트 설치.cmd`를 실행해 **PASS**를 확인합니다.
-2. **`설치된 바로가기 열기.cmd`**를 실행합니다. 시작 메뉴에서 폴더를 찾지 않아도 됩니다.
+2. `설치된 바로가기 열기.cmd`를 실행합니다. 시작 메뉴에서 폴더를 찾지 않아도 됩니다.
 3. 열린 폴더에서 **Check**를 직접 실행합니다. **호스트의 Windows 디스플레이 설정**이 열려야 합니다.
 4. 호스트 키보드로 **Ctrl+Alt+Shift+H**를 누릅니다. 같은 설정 창이 열려야 합니다.
-5. 노트북의 문라이트를 다시 연결하고 패널의 **?**를 누릅니다. 같은 설정 창이 열려야 합니다.
+5. 노트북의 문라이트를 다시 연결하고 패널의 `?`를 누릅니다. 같은 설정 창이 열려야 합니다.
 6. 마지막으로 **복제 / 확장**을 확인합니다. 모니터가 한 개뿐이거나 해당 배치가 지원되지 않으면 눈에 띄는 변화가 없을 수 있습니다.
 
 | 어디까지 됐나요? | 다음 조치 |
@@ -88,4 +88,4 @@ Sunshine에는 **`native_pen_touch`** 설정이 있습니다. 호스트의 Sunsh
 
 ## 호스트 바로가기 삭제
 
-02 패키지의 **`호스트 바로가기 삭제.cmd`**를 실행합니다. 이 작업은 설치한 Clone / Extend / Check 바로가기를 제거합니다. Sunshine 자체나 Windows 디스플레이 설정을 제거하는 작업은 아닙니다.
+02 패키지의 `호스트 바로가기 삭제.cmd`를 실행합니다. 이 작업은 설치한 Clone / Extend / Check 바로가기를 제거합니다. Sunshine 자체나 Windows 디스플레이 설정을 제거하는 작업은 아닙니다.
