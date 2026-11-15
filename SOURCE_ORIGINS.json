@@ -37,6 +37,13 @@
       "source_url": "https://github.com/cgutman/qmdnsengine.git",
       "revision": "920c097ffa742e2968290f15d4dde6693aec02e5",
       "git_metadata_included": false
+    },
+    {
+      "path": "host-clipboard",
+      "source_url": "https://github.com/LizardByte/Sunshine.git",
+      "revision": "63d35f702ee9e362e43263742981836ec0710384",
+      "git_metadata_included": false,
+      "layout": "Version-pinned clipboard patch, installer source and tests; not a full Sunshine checkout."
     }
   ],
   "excluded_upstream_metadata": [
