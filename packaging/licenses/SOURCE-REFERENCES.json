@@ -1,0 +1,90 @@
+{
+  "moonlight": "https://github.com/wow2658/moonlight-pen",
+  "binary_dependencies": {
+    "build_scripts": "https://github.com/moonlight-stream/moonlight-qt-deps/tree/v20",
+    "release": "https://github.com/moonlight-stream/moonlight-qt-deps/releases/tag/v20",
+    "components": [
+      {
+        "name": "Detours",
+        "source": "https://github.com/microsoft/Detours/tree/9764cebcb1a75940e68fa83d6730ffaf0f669401"
+      },
+      {
+        "name": "FFmpeg",
+        "source": "https://github.com/FFmpeg/FFmpeg/tree/946fcce07b6dcd0331c8cc609192aeff5e1924f8"
+      },
+      {
+        "name": "SDL3",
+        "source": "https://github.com/libsdl-org/SDL/tree/f00dc919ca35b9756316e86c4777392de442f9b2"
+      },
+      {
+        "name": "SDL2-compat",
+        "source": "https://github.com/libsdl-org/sdl2-compat/tree/bebc6eb01397497130ca58a1cb48c8bd141422f5"
+      },
+      {
+        "name": "SDL_ttf",
+        "source": "https://github.com/libsdl-org/SDL_ttf/tree/a883e490e30fb44a5336ea3dcb990c6982c5216f"
+      },
+      {
+        "name": "dav1d",
+        "source": "https://github.com/videolan/dav1d/tree/54706fc6bc0cdecab7e9593974a4039cc038fca7"
+      },
+      {
+        "name": "discord-rpc",
+        "source": "https://github.com/cgutman/discord-rpc/tree/7bcf3b3fdd02d4d5072971ef1d5b4e6dd3a765dc"
+      },
+      {
+        "name": "libplacebo",
+        "source": "https://github.com/haasn/libplacebo/tree/275f7dea27924cdd34ab2e6c20e448b6bc4fab65"
+      },
+      {
+        "name": "OpenSSL",
+        "source": "https://github.com/openssl/openssl/tree/c8bd5a57108599ac650bbae77fcabe3109dab2e8"
+      },
+      {
+        "name": "Opus",
+        "source": "https://github.com/xiph/opus/tree/22244de5a79bd1d6d623c32e72bf1954b56235be"
+      },
+      {
+        "name": "Vulkan-Headers",
+        "source": "https://github.com/KhronosGroup/Vulkan-Headers/tree/6802bb4733b63ed5efd3adb308a6c885ef180ea1"
+      },
+      {
+        "name": "shaderc",
+        "source": "https://github.com/moonlight-stream/moonlight-qt-deps/blob/v20/.github/workflows/build-win-mac.yml"
+      },
+      {
+        "name": "glslang",
+        "source": "https://github.com/moonlight-stream/moonlight-qt-deps/blob/v20/.github/workflows/build-win-mac.yml"
+      },
+      {
+        "name": "SPIRV-Tools",
+        "source": "https://github.com/moonlight-stream/moonlight-qt-deps/blob/v20/.github/workflows/build-win-mac.yml"
+      },
+      {
+        "name": "FreeType (SDL_ttf)",
+        "source": "https://github.com/libsdl-org/freetype/tree/535d2993d2cab67cc8b270132b1b1bcb62f269aa"
+      },
+      {
+        "name": "HarfBuzz (SDL_ttf)",
+        "source": "https://github.com/libsdl-org/harfbuzz/tree/950d232cdcd29e2e83a2099307e5624a8f1aa937"
+      }
+    ],
+    "Vulkan_SDK": "1.4.363.0 (see v20 build-win-mac.yml)"
+  },
+  "Qt": {
+    "version": "6.12.0",
+    "modules": [
+      "qtbase",
+      "qtdeclarative",
+      "qtsvg",
+      "qttranslations"
+    ],
+    "source_archives": "https://download.qt.io/archive/qt/6.12/6.12.0/submodules/",
+    "license_information": "https://doc.qt.io/qt-6/licenses-used-in-qt.html"
+  },
+  "Microsoft_runtime": {
+    "name": "Visual C++ runtime",
+    "version": "14.51.36247.0",
+    "license": "https://visualstudio.microsoft.com/license-terms/vs2022-cruntime/"
+  }
+}
