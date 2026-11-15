@@ -52,10 +52,16 @@ def copy_text(source, target, encoding='utf-8-sig'):
     target.write_bytes(text.replace('\r\n', '\n').replace('\n', '\r\n').encode(encoding))
 
 copy_text(root / 'packaging/client/START-MOONLIGHT.cmd', client / '문라이트 실행.cmd', 'ascii')
+copy_text(root / 'packaging/client/DELETE.cmd', client / '삭제.cmd', 'ascii')
+uninstaller = (root / 'packaging/client/uninstall-client.ps1').read_text(encoding='utf-8-sig')
+uninstaller = uninstaller.replace('@MOONLIGHT_SHA256@', hashlib.sha256((client / 'app/Moonlight.exe').read_bytes()).hexdigest())
+(client / 'support').mkdir(exist_ok=True)
+(client / 'support/uninstall-client.ps1').write_bytes(uninstaller.replace('\r\n','\n').replace('\n','\r\n').encode('utf-8-sig'))
 copy_text(root / 'packaging/client/먼저 읽기.txt', client / '00-먼저 읽기.txt')
 copy_text(root / 'packaging/host/먼저 읽기.txt', host / '00-먼저 읽기.txt')
 for source, target in [('INSTALL.cmd', '호스트 설치.cmd'), ('OPEN.cmd', '설치된 바로가기 열기.cmd'), ('UNINSTALL.cmd', '호스트 바로가기 삭제.cmd')]:
     copy_text(root / 'packaging/host' / source, host / target, 'ascii')
+copy_text(root / 'packaging/host/UNINSTALL.cmd', host / '삭제.cmd', 'ascii')
 for source in (root / 'host-shortcuts').iterdir():
     if source.is_file():
         copy_text(source, host / 'support' / source.name, 'ascii' if source.suffix in {'.cmd', '.vbs'} else 'utf-8-sig')
@@ -75,6 +81,9 @@ source_note = (
 (client / 'SOURCE.txt').write_text(source_note, encoding='utf-8')
 (host / 'SOURCE.txt').write_text(source_note.replace('Third-party notices: licenses/.', 'See LICENSE; this package contains only text scripts.').replace('Dependency source/build references: licenses/SOURCE-REFERENCES.json.\n', ''), encoding='utf-8')
 for folder in [client, host]:
+    if folder == client:
+        import json
+        (folder / 'UNINSTALL-FILES.json').write_text(json.dumps({'format':1,'product':'Moonlight-Pen-portable','files':[p.relative_to(folder).as_posix() for p in sorted(folder.rglob('*')) if p.is_file()]},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     files = sorted(p for p in folder.rglob('*') if p.is_file())
     manifest = ''.join(hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.relative_to(folder).as_posix() + '\n' for p in files)
     (folder / 'FILES-SHA256.txt').write_text(manifest, encoding='utf-8')

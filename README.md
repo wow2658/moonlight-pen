@@ -15,23 +15,27 @@
 
 **Sunshine과 그리기 앱이 설치된 데스크톱 PC에서 받으세요.** 전체 압축 해제 후 `호스트 설치.cmd`를 한 번 실행합니다. 복제·확장 버튼을 쓸 때 필요합니다.
 
-### [⬇ 선택: 손터치 F10 도구 ZIP 바로 다운로드 · 약 176KB](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.15-touch1/03-Laptop-Finger-Touch.zip)
+### [⬇ 선택: 손터치 F10 도구 ZIP 바로 다운로드 · 약 176KB](https://github.com/wow2658/moonlight-pen/releases/latest/download/03-Laptop-Finger-Touch.zip)
 
 **Samsung 940X3M 노트북 전용입니다.** 손가락 터치스크린만 **Ctrl+Alt+F10**으로 켜고 끄며 S펜은 유지합니다. Moonlight 연결 없이도 작동합니다. 전체 압축 해제 후 **`CHECK.cmd` → `INSTALL.cmd`** 순서로 실행하세요. 이미 잘 쓰고 있다면 재설치할 필요는 없습니다.
 
-개인 장치 ID는 포함하지 않고 현재 PC에서 모델·손터치·별도 S펜을 확인합니다. 다른 모델이나 모호한 장치 구성이면 중단합니다. 관리자 권한이 필요하며 자체 빌드라 코드 서명이 없습니다. [설치·검증 범위](touch-toggle/README.md) · [보안 검토](docs/TOUCH_SECURITY.md) · [ZIP SHA256](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.15-touch1/03-Laptop-Finger-Touch-SHA256.txt)
+개인 장치 ID는 포함하지 않고 현재 PC에서 모델·손터치·별도 S펜을 확인합니다. 다른 모델이나 모호한 장치 구성이면 중단합니다. 관리자 권한이 필요하며 자체 빌드라 코드 서명이 없습니다. [설치·검증 범위](touch-toggle/README.md) · [보안 검토](docs/TOUCH_SECURITY.md) · [ZIP SHA256](https://github.com/wow2658/moonlight-pen/releases/latest/download/SHA256SUMS.txt)
 
 위 링크를 누르면 ZIP을 바로 다운로드합니다. Releases 페이지에서 파일을 따로 찾을 필요는 없습니다.
 
 이 저장소에 접근할 수 있는 GitHub 계정으로 로그인하세요. 비공개 저장소라 로그아웃 상태에서는 404가 보일 수 있습니다.
 
-| 받을 파일 | 어느 컴퓨터에서? | 압축을 푼 뒤 할 일 |
-| --- | --- | --- |
-| `01-Laptop-Moonlight-Pen.zip` | **펜을 사용하는 노트북** | `문라이트 실행.cmd` 더블클릭 |
-| `02-Host-Display-Shortcuts.zip` | **그리기 프로그램이 있는 데스크톱 PC** | `호스트 설치.cmd` 한 번 실행 |
-| `03-Laptop-Finger-Touch.zip` — 선택 | **Samsung 940X3M 노트북** | `CHECK.cmd` 확인 후 `INSTALL.cmd` |
+각 ZIP을 푼 폴더에서 아래 파일을 실행하세요.
+
+| 다운로드 | 사용할 PC | 실행 / 설치 | 삭제 |
+| --- | --- | --- | --- |
+| 01 · 문라이트 | 노트북 | `문라이트 실행.cmd` | `삭제.cmd` |
+| 02 · 호스트 화면 전환 | 호스트 PC | `호스트 설치.cmd` | `삭제.cmd` |
+| 03 · 손터치 도구 — 선택 | 940X3M 노트북 | `CHECK.cmd` → `INSTALL.cmd` | `삭제.cmd` |
 
 **GitHub의 초록색 `Code → Download ZIP`과 Releases의 `Source code`는 개발용 소스입니다. 실행하려면 위의 기능별 ZIP을 받으세요.**
+
+**설치한 ZIP과 삭제 파일이 1:1로 대응합니다.** 01은 문라이트·저장 설정·해당 방화벽 규칙/바로가기, 02는 호스트 화면 전환 바로가기, 03은 손터치를 켠 뒤 F10 프로그램·자동 실행·바로가기·로그를 지웁니다.
 
 이미 지금 구성으로 잘 쓰고 있다면 재설치할 필요는 없습니다. 아래 안내는 새 PC에 설치하거나 나중에 복구할 때 사용하세요.
 
