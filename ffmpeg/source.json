@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "dependency": "FFmpeg",
+  "baseline_revision": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "source_repository": "https://code.ffmpeg.org/FFmpeg/FFmpeg",
+  "baseline_archive_sha256": "8cffa6ccf78df6d39d57bd61baaf19e8bf0a7d590eef0d838de69932e8de3572",
+  "upstream_patch_id": "a4983189482bd8e957c06b45ac49473f8e08cd01",
+  "upstream_patch_reference": "https://www.mail-archive.com/ffmpeg-devel@ffmpeg.org/msg191199.html",
+  "scope": "Windows HEVC bounds checking while preserving Moonlight RangeExt compatibility",
+  "patches_in_order": [
+    {
+      "path": "patches/moonlight-v20-hevc-rext.patch",
+      "sha256": "21717fc3a079a32e2c03c9e6446a8ba3c5134eaaf470d526c577e98e087e2cda"
+    },
+    {
+      "path": "patches/windows-hevc-bounds.patch",
+      "sha256": "6872a9357c5d3e9d68fd517b2998e7999bd87ec97885914007de3a6ec8eb4d1e"
+    }
+  ],
+  "trial_avcodec_sha256": "078b14fd1297e87a086ad7ed9abaa6f0af9a8bad945bbd240e6c8ec8742e8ab1",
+  "recorded_build": {
+    "architecture": "x86_64",
+    "msvc": "14.51.36231",
+    "windows_sdk": "10.0.26100.0",
+    "moonlight_windows_dependencies": "v20 x64",
+    "recipe": "README.md",
+    "rebuilt_during_source_publication": false
+  }
+}

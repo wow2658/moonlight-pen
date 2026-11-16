@@ -26,6 +26,8 @@ Qt·컴파일러·SDK·jom은 별도 설치합니다. 로컬 도구 경로나 �
 
 현재 저장소에는 의존 소스가 포함되어 별도 서브모듈 초기화가 필요하지 않습니다. 다른 플랫폼과 원본 빌드 안내는 README.upstream.md를 참고하세요.
 
+Windows HEVC 보안 시험판에 사용한 FFmpeg 수정 소스와 별도 빌드 조건은 [ffmpeg/README.md](ffmpeg/README.md)에 있습니다. `setup-deps.ps1`의 기본 v20 다운로드에는 이 패치가 자동 적용되지 않습니다.
+
 ## 실행 패키지 만들기
 
 개인 설정이 없는 Qt 배포 런타임을 별도 폴더에 준비한 뒤 `scripts/package-windows-release.py --runtime <런타임> --output <새 출력 폴더> --tag <대응 소스 태그>`를 실행합니다. 사용 중인 `app` 폴더를 그대로 포장하지 마세요.

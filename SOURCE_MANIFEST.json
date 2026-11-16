@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "description": "Current client, vendored clipboard sources and hardware-scoped optional touch tool.",
+  "description": "Current client, vendored clipboard sources, optional touch tool and Windows HEVC dependency patch sources.",
   "files": [
     {
       "path": ".gitignore",
@@ -2097,6 +2097,22 @@
     {
       "path": "wix/MoonlightSetup/license.rtf",
       "sha256": "656ee2547f55772a4da5a44032dae69dd700f22df9b384eca6a56be6424a4d16"
+    },
+    {
+      "path": "ffmpeg/README.md",
+      "sha256": "ae3c98cb9069217ae1a1e377727ebffc57d910fc1321f6346b7df92acfd9d46c"
+    },
+    {
+      "path": "ffmpeg/source.json",
+      "sha256": "231a8be14c811f6f4768a6100876f0f8350117627b887d8039c55c8a224cb985"
+    },
+    {
+      "path": "ffmpeg/patches/moonlight-v20-hevc-rext.patch",
+      "sha256": "21717fc3a079a32e2c03c9e6446a8ba3c5134eaaf470d526c577e98e087e2cda"
+    },
+    {
+      "path": "ffmpeg/patches/windows-hevc-bounds.patch",
+      "sha256": "6872a9357c5d3e9d68fd517b2998e7999bd87ec97885914007de3a6ec8eb4d1e"
     }
   ]
 }

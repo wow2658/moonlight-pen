@@ -44,6 +44,13 @@
       "revision": "63d35f702ee9e362e43263742981836ec0710384",
       "git_metadata_included": false,
       "layout": "Version-pinned clipboard patch, installer source and tests; not a full Sunshine checkout."
+    },
+    {
+      "path": "ffmpeg",
+      "source_url": "https://code.ffmpeg.org/FFmpeg/FFmpeg",
+      "revision": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "git_metadata_included": false,
+      "layout": "Version-pinned patch sources and build conditions; full dependency checkout and binaries are excluded."
     }
   ],
   "excluded_upstream_metadata": [
