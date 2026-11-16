@@ -1570,7 +1570,24 @@ void Session::toggleFullscreen()
 #endif
 
     // Actually enter/leave fullscreen
-    SDL_SetWindowFullscreen(m_Window, fullScreen ? m_FullScreenFlag : 0);
+    if (SDL_SetWindowFullscreen(m_Window, fullScreen ? m_FullScreenFlag : 0) < 0) {
+        SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION,
+                    "Full-screen transition failed: %s", SDL_GetError());
+    }
+
+#ifdef Q_OS_WIN32
+    // We destroyed the decoder above. A same-size fullscreen/windowed switch
+    // (including SDL2-compat on SDL3) may not emit SIZE_CHANGED or SHOWN, so
+    // explicitly request recreation instead of leaving the stream decoderless.
+    // A preceding resize event can consume this request via the reset flush in
+    // the common recreation path, avoiding a second decoder reconstruction.
+    SDL_Event resetEvent = {};
+    resetEvent.type = SDL_RENDER_DEVICE_RESET;
+    if (SDL_PushEvent(&resetEvent) <= 0) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                     "Unable to queue decoder reset after full-screen transition: %s", SDL_GetError());
+    }
+#endif
 
 #ifdef Q_OS_DARWIN
     // SDL on macOS has a bug that causes the window size to be reset to crazy
