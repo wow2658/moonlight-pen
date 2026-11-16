@@ -5,7 +5,7 @@
 
 ## 다운로드와 설치
 
-**노트북에는 01, 호스트 PC에는 02를 설치하세요.** 손터치 단축키가 필요하면 노트북에 03을 추가합니다. 현재 배포판은 **v2026.11.16-clipboard-r4**입니다.
+**노트북에는 01, 호스트 PC에는 02를 사용하세요.** 새 01 클라이언트는 **v2026.11.17-fullscreen-hevc1**이며 전체 화면 전환 수정과 HEVC 보안 보완을 함께 포함합니다. 02 호스트 도구와 03 손터치 도구는 기존 r4 배포본을 유지합니다.
 
 | 기능 | 최신 소스 (`main`) | 아래 실행용 ZIP |
 | --- | --- | --- |
@@ -17,19 +17,19 @@
 
 **기존 클립보드 r3에서 업데이트할 때는 노트북 01과 호스트 02를 모두 업데이트하세요.** 설정을 유지하는 방법은 [기존 설치 업데이트](#기존-설치-업데이트)를 참고하세요. 02는 **Sunshine 2026.914.233613 Windows AMD64**의 검증된 공식 설치본과 이전 클립보드 패치를 지원하며, 다른 버전을 자동으로 덮어쓰지 않습니다.
 
-### [⬇ 01 · 노트북용 문라이트 ZIP 바로 다운로드 · 약 44MB](https://github.com/wow2658/moonlight-pen/releases/latest/download/01-Laptop-Moonlight-Pen.zip)
+### [⬇ 01 · 노트북용 문라이트 ZIP 바로 다운로드](https://github.com/wow2658/moonlight-pen/releases/latest/download/01-Laptop-Moonlight-Pen.zip)
 
-**펜을 사용하는 노트북에서 받으세요.** 전체 압축 해제 후 `문라이트 실행.cmd`를 실행합니다.
+**펜을 사용하는 노트북에서 받으세요.** 기존 정상판과 다른 새 폴더에 전체 압축 해제 후 `문라이트 실행.cmd`를 실행합니다. 기존 정상판은 보존하고 두 앱을 동시에 실행하지 않습니다. [이번 01의 구성과 확인 범위](docs/validation/combined-client-20261117.md) · [이번 01의 ZIP SHA256](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.17-fullscreen-hevc1/SHA256SUMS.txt)
 
-### [⬇ 02 · 호스트용 클립보드·화면 전환 ZIP 바로 다운로드 · 약 34MB](https://github.com/wow2658/moonlight-pen/releases/latest/download/02-Host-Moonlight-Tools.zip)
+### [⬇ 02 · 호스트용 클립보드·화면 전환 ZIP 바로 다운로드 · 약 34MB](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.16-clipboard-r4/02-Host-Moonlight-Tools.zip)
 
 **Sunshine과 그리기 앱이 설치된 데스크톱 PC에서 받으세요.** 스트리밍 연결을 끊고 전체 압축 해제 후 `호스트 설치.cmd`를 실행합니다. 관리자 권한 요청을 승인하면 **클립보드 패치와 복제·확장 바로가기**를 함께 설치합니다. Sunshine 설정과 페어링은 유지합니다.
 
-### [⬇ 선택: 손터치 F10 도구 ZIP 바로 다운로드 · 약 176KB](https://github.com/wow2658/moonlight-pen/releases/latest/download/03-Laptop-Finger-Touch.zip)
+### [⬇ 선택: 손터치 F10 도구 ZIP 바로 다운로드 · 약 176KB](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.16-clipboard-r4/03-Laptop-Finger-Touch.zip)
 
 **Samsung 940X3M 노트북 전용입니다.** 손가락 터치스크린만 **Ctrl+Alt+F10**으로 켜고 끄며 S펜은 유지합니다. Moonlight 연결 없이도 작동합니다. 전체 압축 해제 후 **`CHECK.cmd` → `INSTALL.cmd`** 순서로 실행하세요. 이미 잘 쓰고 있다면 재설치할 필요는 없습니다.
 
-개인 장치 ID는 포함하지 않고 현재 PC에서 모델·손터치·별도 S펜을 확인합니다. 다른 모델이나 모호한 장치 구성이면 중단합니다. 관리자 권한이 필요하며 자체 빌드라 코드 서명이 없습니다. [설치·검증 범위](touch-toggle/README.md) · [보안 검토](docs/TOUCH_SECURITY.md) · [ZIP SHA256](https://github.com/wow2658/moonlight-pen/releases/latest/download/SHA256SUMS.txt)
+개인 장치 ID는 포함하지 않고 현재 PC에서 모델·손터치·별도 S펜을 확인합니다. 다른 모델이나 모호한 장치 구성이면 중단합니다. 관리자 권한이 필요하며 자체 빌드라 코드 서명이 없습니다. [설치·검증 범위](touch-toggle/README.md) · [보안 검토](docs/TOUCH_SECURITY.md) · [ZIP SHA256](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.16-clipboard-r4/SHA256SUMS.txt)
 
 위 링크를 누르면 ZIP을 바로 다운로드합니다. Releases 페이지에서 파일을 따로 찾을 필요는 없습니다.
 
@@ -51,11 +51,11 @@
 
 ## 기존 설치 업데이트
 
-1. **노트북:** 문라이트를 완전히 종료하고 새 01 ZIP을 기존 `01-Laptop-Moonlight-Pen` 폴더에 덮어씁니다. `문라이트 실행.cmd`와 `app`이 기존 파일과 같은 위치에 오도록 하세요. 기존 `app/Moonlight Game Streaming Project` 설정 폴더는 지우지 않습니다. 업데이트 전에 `삭제.cmd`를 실행하면 설정·페어링까지 지워지므로 실행하지 마세요.
-2. **호스트:** 스트리밍 연결을 끊고 새 02 ZIP을 압축 해제한 뒤 `호스트 설치.cmd`를 실행합니다. 이전 클립보드 패치를 인식해 업데이트하며 검증된 공식 원본 백업은 유지합니다.
+1. **노트북:** 문라이트를 완전히 종료하고 새 01 ZIP을 기존 정상판과 다른 새 폴더에 풉니다. 기존 설정을 재사용하려면 새 앱을 처음 실행하기 전에 `support/copy-portable-settings.ps1`에 `-NormalAppDirectory`로 기존 포터블 정상판의 `app` 폴더를 지정합니다. 원본은 읽기만 하며 새 프로필이 이미 있으면 덮어쓰지 않습니다. 기존 정상판이나 설정 폴더를 삭제하지 마세요.
+2. **호스트:** 이미 r4 호스트 도구로 잘 동작한다면 이번 01 업데이트 때문에 02를 재설치할 필요는 없습니다. r3에서 r4로 올리는 경우에만 스트리밍 연결을 끊고 02의 `호스트 설치.cmd`를 실행합니다. 이전 클립보드 패치를 인식해 업데이트하며 검증된 공식 원본 백업은 유지합니다.
 3. **다시 연결:** 노트북에서 호스트 타일 메뉴의 **텍스트 클립보드 공유**를 켜고 연결합니다. 새로운 긴 텍스트를 복사해 양방향으로 붙여넣어 확인하세요. 이번 16MiB 한도는 양쪽 모두 r4일 때 지원합니다.
 
-설정이 없는 새 폴더에 01을 풀었다면 새 설치로 시작하므로 다시 페어링해야 합니다. 예전 `Moonlight-Clipboard-Test` 구성은 `01-Laptop/app`이 실제 실행 폴더입니다. 기존 `app`을 보존하고 새 01의 `app` 내용을 같은 위치에 덮어쓴 뒤 기존 실행기를 사용하면 됩니다.
+설정을 복사하지 않은 새 폴더는 빈 프로필로 시작합니다. 기존 설정을 복사할 수 없다면 새 페어링 여부를 결정하세요. 예전 `Moonlight-Clipboard-Test` 구성은 `01-Laptop/app`이 실제 원본 실행 폴더입니다. 프로필을 복사한 로컬 폴더에는 개인 페어링 정보가 들어갈 수 있으므로 다시 ZIP으로 묶어 공유하지 마세요.
 
 ## 개발 배경
 
@@ -79,7 +79,7 @@
 4. 스트리밍 연결을 끊고 풀린 폴더에서 `호스트 설치.cmd`를 더블클릭합니다. 관리자 권한 요청을 승인합니다.
 5. 검은 창에 `PASS: r4 clipboard and screen shortcuts installed.`가 나오면 설치가 끝났습니다. 기존 Sunshine 설정·페어링은 유지하며 서비스가 잠시 재시작됩니다.
 
-펜 필압만 사용할 때는 호스트 패치가 필요 없습니다. 기존 화면 전환만 필요한 사용자를 위해 [화면 전환 전용 ZIP](https://github.com/wow2658/moonlight-pen/releases/latest/download/02-Host-Display-Shortcuts.zip)도 유지합니다. 이 작은 전용 ZIP에는 클립보드가 없습니다. 위의 기본 02 다운로드는 두 기능을 함께 설치합니다.
+펜 필압만 사용할 때는 호스트 패치가 필요 없습니다. 기존 화면 전환만 필요한 사용자를 위해 [화면 전환 전용 ZIP](https://github.com/wow2658/moonlight-pen/releases/download/v2026.11.16-clipboard-r4/02-Host-Display-Shortcuts.zip)도 유지합니다. 이 작은 전용 ZIP에는 클립보드가 없습니다. 위의 기본 02 다운로드는 두 기능을 함께 설치합니다.
 
 ## 2. 노트북에서 문라이트 실행하기
 

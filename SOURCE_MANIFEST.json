@@ -2113,6 +2113,26 @@
     {
       "path": "ffmpeg/patches/windows-hevc-bounds.patch",
       "sha256": "6872a9357c5d3e9d68fd517b2998e7999bd87ec97885914007de3a6ec8eb4d1e"
+    },
+    {
+      "path": "scripts/package-combined-windows.ps1",
+      "sha256": "8b1adcd7e59a276a45266710ec20ced6aa070f878e76b8278564155fe6717dfb"
+    },
+    {
+      "path": "packaging/combined/START.cmd",
+      "sha256": "6be43f5ecd3fbe51ead18a7d261e3857487fe610c321fce343cf1623c87a5176"
+    },
+    {
+      "path": "packaging/combined/README.txt",
+      "sha256": "b720cf4224e09caa56723ff521f31bbcbae8f415c937f64eb2b451da1d83a279"
+    },
+    {
+      "path": "packaging/combined/launch-combined.ps1",
+      "sha256": "267bfd7afe6dc4ca6cc485fc3e9c7704adb4166d19e62d35ed33cd641b361415"
+    },
+    {
+      "path": "packaging/combined/copy-portable-settings.ps1",
+      "sha256": "3b1cd9ce46823dc4d3f6472a63f66c597cb83a634b03d922c028016cdc4855d3"
     }
   ]
 }

@@ -30,6 +30,14 @@ Windows HEVC 보안 시험판에 사용한 FFmpeg 수정 소스와 별도 빌드
 
 ## 실행 패키지 만들기
 
+### 전체 화면·HEVC 통합판
+
+`scripts/package-combined-windows.ps1`은 해시가 고정된 기존 전체 화면 수정 EXE와 보안 시험판 ZIP을 읽어 새 01 포터블 패키지를 만듭니다. 소스를 다시 컴파일하는 도구는 아닙니다. `-TrialArchive`, `-NormalAppDirectory`, `-OutputDirectory`, `-Tag`를 지정하며 출력 폴더는 새 폴더여야 합니다. 입력 원본에는 쓰지 않고, 정상판에서는 확인된 `Moonlight.exe` 한 파일만 읽어 복사합니다. 개인 프로필은 공개 패키지에 포함하지 않습니다.
+
+공개 ZIP을 만든 후 개인 노트북에서 사용할 별도 복사본에만 설정 복사 도구를 적용합니다. 이 개인 실행 폴더를 배포 ZIP의 입력으로 사용하지 않습니다. [구성과 확인 범위](docs/validation/combined-client-20261117.md)를 참고하세요.
+
+### 기존 전체 도구 패키지
+
 개인 설정이 없는 Qt 배포 런타임을 별도 폴더에 준비한 뒤 `scripts/package-windows-release.py --runtime <런타임> --output <새 출력 폴더> --tag <대응 소스 태그>`를 실행합니다. 사용 중인 `app` 폴더를 그대로 포장하지 마세요.
 
 클립보드를 포함하는 현재 배포판은 같은 명령에 `--clipboard-host <검증한 r4 호스트 패키지 폴더>`를 추가합니다. 호스트 폴더에는 `host-clipboard/package`의 설치기·검증기와 대응 Sunshine 실행 파일·`package.json`·라이선스·패치가 필요합니다. 패키지 도구는 r4 리비전·16MiB 한도·호스트 실행 파일 해시를 확인하고, 새 클라이언트 해시를 호스트 매니페스트에 기록합니다.
