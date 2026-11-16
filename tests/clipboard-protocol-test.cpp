@@ -19,7 +19,7 @@ struct Pair {
     void pump() {
         size_t loops = 0;
         while (!to_host.empty() || !to_client.empty()) {
-            CHECK(++loops < 1000);
+            CHECK(++loops < 10000);
             if (!to_host.empty()) { auto b = std::move(to_host.front()); to_host.pop_front(); host.receive(b); }
             if (!to_client.empty()) { auto b = std::move(to_client.front()); to_client.pop_front(); client.receive(b); }
         }
@@ -56,13 +56,20 @@ int main() {
     p.host.local(u8"호스트 → 노트북\r\n둘째 줄"); p.pump();
     CHECK(p.client_clip == u8"호스트 → 노트북\r\n둘째 줄" && p.client_writes == 1);
     p.client.local(""); p.pump(); CHECK(p.host_clip.empty());
-    for (size_t size : {size_t(8191), size_t(8192), size_t(8193), max_text}) {
+    for (size_t size : {size_t(8191), size_t(8192), size_t(8193), size_t(1024*1024+1), max_text}) {
         std::string large(size, 'x');
         large.replace(size - 4, 4, "LAST");
         p.host.local(large);
         CHECK(p.to_client.size() == 1); // Hard backpressure, not 128 queued chunks.
         p.pump(); CHECK(p.client_clip == large);
+        p.client.local(large); p.pump(); CHECK(p.host_clip == large);
     }
+    // Real long Unicode text crosses both the old 1 MiB cap and chunk/codepoint boundaries.
+    std::string unicode;
+    for (int i=0; i<100000; ++i) unicode += u8"한글😀\r\n";
+    CHECK(unicode.size() > 1024*1024);
+    p.client.local(unicode); p.pump(); CHECK(p.host_clip == unicode);
+    p.host.local(unicode); p.pump(); CHECK(p.client_clip == unicode);
     auto saved = p.host_clip;
     p.client.local(std::string(max_text + 1, 'x')); p.pump(); CHECK(p.host_clip == saved);
     p.client.local(std::string("bad\0text", 8)); p.pump(); CHECK(p.host_clip == saved);
@@ -105,5 +112,5 @@ int main() {
         auto decoded = decode(bytes);
         if (decoded) CHECK(decoded->data.size() <= chunk_size && decoded->total <= max_text);
     }
-    std::cout << "PASS: negotiation, Unicode, both directions, 1 MiB, flow control, invalidation, races, reconnect, limits and malformed frames\n";
+    std::cout << "PASS: negotiation, long Unicode, both directions through 16 MiB, flow control, invalidation, races, reconnect, limits and malformed frames\n";
 }

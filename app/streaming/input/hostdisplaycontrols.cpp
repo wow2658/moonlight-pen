@@ -75,6 +75,7 @@ HostDisplayControls::~HostDisplayControls(){
     if(m_GdiToken)GdiplusShutdown(m_GdiToken);
 }
 void HostDisplayControls::toggle(){m_Hidden=false;m_Expanded=!m_Expanded;m_LastInside=GetTickCount64();layout();}
+void HostDisplayControls::toggleVisibility(){if(m_Expanded&&!m_Hidden)collapse(true);else toggle();}
 void HostDisplayControls::collapse(bool hide){m_Expanded=false;if(hide)m_Hidden=true;layout();}
 void HostDisplayControls::togglePin(){m_Placement.pinned=!m_Placement.pinned;savePlacement();InvalidateRect(m_Buttons[Pin-1],nullptr,FALSE);}
 void HostDisplayControls::setPressureEnabled(bool enabled){m_PressureEnabled=enabled;if(enabled)m_Hidden=false;layout();}
@@ -252,7 +253,7 @@ LRESULT CALLBACK HostDisplayControls::buttonProc(HWND hwnd,UINT msg,WPARAM wp,LP
 }
 LRESULT CALLBACK HostDisplayControls::ownerProc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR id,DWORD_PTR data){
     auto self=reinterpret_cast<HostDisplayControls*>(data);
-    if(msg==WM_SYSCOMMAND&&(wp&0xFFF0)==menuId){self->m_Callback(Toggle);return 0;}
+    if(msg==WM_SYSCOMMAND&&(wp&0xFFF0)==menuId){self->m_Callback(ToggleVisibility);return 0;}
     if(msg==WM_NCDESTROY){self->m_Owner=nullptr;RemoveWindowSubclass(hwnd,ownerProc,id);}
     LRESULT result=DefSubclassProc(hwnd,msg,wp,lp);
     if(msg==WM_WINDOWPOSCHANGED||msg==WM_DPICHANGED)self->layout();

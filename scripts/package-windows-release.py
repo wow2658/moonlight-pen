@@ -5,6 +5,7 @@ Requires Python 3.9+. This builds local ZIPs and does not upload anything.
 from pathlib import Path
 import argparse
 import hashlib
+import json
 import shutil
 import zipfile
 
@@ -12,6 +13,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--runtime', type=Path, required=True, help='Fresh windeployqt output containing Moonlight.exe')
 parser.add_argument('--output', type=Path, required=True, help='New output directory outside the source checkout')
 parser.add_argument('--tag', required=True, help='Release tag providing the corresponding source')
+parser.add_argument('--clipboard-host', type=Path, help='Clean matching r4 host package; adds the combined host tools ZIP')
 args = parser.parse_args()
 root = Path(__file__).resolve().parent.parent
 runtime = args.runtime.resolve()
@@ -24,6 +26,20 @@ if root == output or root in output.parents:
     parser.error('--output must be outside the source checkout')
 if not args.tag or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-' for c in args.tag):
     parser.error('--tag must contain only letters, digits, dot, underscore, or hyphen')
+
+clipboard_host = args.clipboard_host.resolve() if args.clipboard_host else None
+if clipboard_host:
+    metadata = json.loads((clipboard_host / 'package.json').read_text(encoding='utf-8-sig'))
+    if metadata.get('clipboardRevision') != 'text-16mib-r4' or metadata.get('maxTextBytes') != 16*1024*1024:
+        parser.error('--clipboard-host must be the matching 16 MiB r4 package')
+    if hashlib.sha256((clipboard_host / 'sunshine.exe').read_bytes()).hexdigest() != metadata['patchedSha256']:
+        parser.error('Clipboard host executable hash mismatch')
+    for path in clipboard_host.rglob('*'):
+        rel = path.relative_to(clipboard_host)
+        if path.is_symlink() or any(part.casefold() in {'.git','.ssh','cache','boxart','moonlight game streaming project','private-runtime-backup'} for part in rel.parts):
+            parser.error('Clipboard host contains a link or private directory')
+        if path.is_file() and path.suffix.lower() in {'.ini','.log','.key','.pem','.pfx','.p12','.crt','.cer','.pdb','.dmp','.lnk'}:
+            parser.error('Clipboard host contains personal or debug data: ' + rel.as_posix())
 
 blocked = {'.ini', '.log', '.key', '.pem', '.pfx', '.p12', '.crt', '.cer', '.pdb', '.dmp', '.lnk', '.zip', '.7z'}
 blocked_dirs = {'.git', '.ssh', 'cache', 'boxart', 'qmlcache', 'Moonlight Game Streaming Project'}
@@ -80,7 +96,22 @@ source_note = (
 )
 (client / 'SOURCE.txt').write_text(source_note, encoding='utf-8')
 (host / 'SOURCE.txt').write_text(source_note.replace('Third-party notices: licenses/.', 'See LICENSE; this package contains only text scripts.').replace('Dependency source/build references: licenses/SOURCE-REFERENCES.json.\n', ''), encoding='utf-8')
-for folder in [client, host]:
+folders = [client, host]
+if clipboard_host:
+    combined = output / '02-Host-Moonlight-Tools'
+    shutil.copytree(host, combined)
+    shutil.copytree(clipboard_host, combined / 'clipboard')
+    metadata['clientSha256'] = hashlib.sha256((client / 'app/Moonlight.exe').read_bytes()).hexdigest()
+    (combined / 'clipboard/package.json').write_text(json.dumps(metadata,indent=2)+'\n',encoding='utf-8')
+    copy_text(root / 'packaging/host/INSTALL-TOOLS.cmd', combined / '호스트 설치.cmd', 'ascii')
+    copy_text(root / 'packaging/host/DELETE-TOOLS.cmd', combined / '삭제.cmd', 'ascii')
+    copy_text(root / 'packaging/host/host-tools.ps1', combined / 'support/host-tools.ps1')
+    copy_text(root / 'packaging/host/통합 먼저 읽기.txt', combined / '00-먼저 읽기.txt')
+    (combined / 'SOURCE.txt').write_text(source_note + 'Sunshine patch: host-clipboard/sunshine.patch at the corresponding source tag.\n', encoding='utf-8')
+    # Replace the private test note; published users install through the root launcher.
+    copy_text(root / 'packaging/host/통합 먼저 읽기.txt', combined / 'clipboard/설치기 수정 안내.txt')
+    folders.append(combined)
+for folder in folders:
     if folder == client:
         import json
         (folder / 'UNINSTALL-FILES.json').write_text(json.dumps({'format':1,'product':'Moonlight-Pen-portable','files':[p.relative_to(folder).as_posix() for p in sorted(folder.rglob('*')) if p.is_file()]},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

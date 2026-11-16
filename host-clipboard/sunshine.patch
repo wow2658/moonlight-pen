@@ -221,7 +221,7 @@ index 1291c9c..9968cb1 100644
 +  constexpr uint8_t channel = 6;  ///< Separate reliable ENet channel from keyboard and pen input.
 +  constexpr size_t header_size = 24;  ///< Little endian MPCT v1 header size.
 +  constexpr size_t chunk_size = 8192;  ///< Stop-and-wait keeps at most one text chunk in flight.
-+  constexpr size_t max_text = 1024 * 1024;  ///< Maximum UTF-8 text size before allocating receive storage.
++  constexpr size_t max_text = 16 * 1024 * 1024;  ///< Maximum UTF-8 text size; both peers need the same raised limit.
 +  enum class Role : uint8_t {
 +    client = 1,
 +    host = 2
@@ -966,7 +966,7 @@ index 1291c9c..9968cb1 100644
 +}  // namespace pen_clipboard
 --- /dev/null
 +++ b/tests/unit/test_pen_clipboard.cpp
-@@ -0,0 +1,186 @@
+@@ -0,0 +1,187 @@
 +// SPDX-License-Identifier: GPL-3.0-or-later
 +#include "src/pen_clipboard/protocol.h"
 +
@@ -1010,7 +1010,7 @@ index 1291c9c..9968cb1 100644
 +  void pump() {
 +    size_t loops = 0;
 +    while (!to_host.empty() || !to_client.empty()) {
-+      CHECK(++loops < 1000);
++      CHECK(++loops < 10000);
 +      if (!to_host.empty()) {
 +        auto b = std::move(to_host.front());
 +        to_host.pop_front();
@@ -1066,13 +1066,14 @@ index 1291c9c..9968cb1 100644
 +  p.client.local("");
 +  p.pump();
 +  CHECK(p.host_clip.empty());
-+  for (size_t size : {size_t(8191), size_t(8192), size_t(8193), max_text}) {
++  for (size_t size : {size_t(8191), size_t(8192), size_t(8193), size_t(1024 * 1024 + 1), max_text}) {
 +    std::string large(size, 'x');
 +    large.replace(size - 4, 4, "LAST");
 +    p.host.local(large);
 +    CHECK(p.to_client.size() == 1);  // Hard backpressure, not 128 queued chunks.
 +    p.pump();
 +    CHECK(p.client_clip == large);
++    p.client.local(large); p.pump(); CHECK(p.host_clip == large);
 +  }
 +  auto saved = p.host_clip;
 +  p.client.local(std::string(max_text + 1, 'x'));
@@ -1151,5 +1152,5 @@ index 1291c9c..9968cb1 100644
 +      CHECK(decoded->data.size() <= chunk_size && decoded->total <= max_text);
 +    }
 +  }
-+  std::cout << "PASS: negotiation, Unicode, both directions, 1 MiB, flow control, invalidation, races, reconnect, limits and malformed frames\n";
++  std::cout << "PASS: negotiation, Unicode, both directions, 16 MiB, flow control, invalidation, races, reconnect, limits and malformed frames\n";
 +}

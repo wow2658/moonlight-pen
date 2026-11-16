@@ -61,7 +61,19 @@ int main() {
         assert(!GetUpdateRect(button,nullptr,FALSE)); // no repaint storm while hovering
         SendMessageW(button,WM_MOUSELEAVE,0,0);
     }
-    panel->collapse();panel->toggle();panel->setPressureEnabled(false);
+    // The keyboard toggle hides the whole popup, including the launcher and
+    // pressure bars. Timer/focus updates must not make it reappear.
+    panel->toggleVisibility();assert(panel->hidden()&&!panel->expanded());
+    SendMessageW(found.panel,WM_TIMER,1,0);
+    WINDOWPOS position={};position.hwnd=owner;position.flags=SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER;
+    SendMessageW(owner,WM_WINDOWPOSCHANGED,0,reinterpret_cast<LPARAM>(&position));
+    assert(panel->hidden()&&!panel->expanded());
+    assert(!(GetWindowLongPtrW(found.panel,GWL_STYLE)&WS_VISIBLE));
+    panel->toggleVisibility();assert(!panel->hidden()&&panel->expanded());
+    panel->collapse();assert(!panel->hidden()&&!panel->expanded());
+    panel->toggleVisibility();assert(!panel->hidden()&&panel->expanded());
+    panel->toggleVisibility();assert(panel->hidden()&&!panel->expanded());
+    panel->setPressureEnabled(false);assert(panel->hidden());
     panel.reset();DestroyWindow(owner);
-    puts("PASS: dark erase; buffered normal/pressed/focus buttons contain no white; stable hover; expand/collapse.");
+    puts("PASS: buffered dark painting; stable hover; keyboard hides launcher and pressure bars; repeated hide/reopen.");
 }

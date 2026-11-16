@@ -32,7 +32,7 @@ void SdlInputHandler::performSpecialKeyCombo(KeyCombo combo)
     switch (combo) {
 #ifdef Q_OS_WIN32
     case KeyComboHostDisplayControls:
-        handleHostDisplayControl(HostDisplayControls::Toggle);
+        handleHostDisplayControl(HostDisplayControls::ToggleVisibility);
         break;
     case KeyComboHostMonitor1:
         handleHostDisplayControl(HostDisplayControls::Monitor1);
@@ -575,13 +575,14 @@ void SdlInputHandler::handleHostDisplayControl(int action)
         return;
     }
     bool wasExpanded = m_HostDisplayControls->expanded();
-    if (action == HostDisplayControls::Toggle) {
+    if (action == HostDisplayControls::Toggle || action == HostDisplayControls::ToggleVisibility) {
         raiseAllKeys();
         if (!wasExpanded) {
             m_DisplayPanelHadCapture = isCaptureActive();
             setCaptureActive(false);
         }
-        m_HostDisplayControls->toggle();
+        if (action == HostDisplayControls::ToggleVisibility) m_HostDisplayControls->toggleVisibility();
+        else m_HostDisplayControls->toggle();
         if (wasExpanded && m_DisplayPanelHadCapture && (SDL_GetWindowFlags(m_Window) & SDL_WINDOW_INPUT_FOCUS)) setCaptureActive(true);
         return;
     }

@@ -165,7 +165,7 @@ void StreamingPreferences::reload()
     spenPressureMaxPercent = readPressureMaxPercent(settings, "spenPressureMaxPercent", 70);
     wacomPressureMaxPercent = readPressureMaxPercent(settings, "wacomPressureMaxPercent", 100);
     showPenPressure = settings.value("showPenPressure", false).toBool();
-    showHostDisplayButton = settings.value("showHostDisplayButton", true).toBool();
+    showHostDisplayButton = settings.value("showHostDisplayButton", false).toBool();
     packetSize = settings.value(SER_PACKETSIZE, 0).toInt();
     swapMouseButtons = settings.value(SER_SWAPMOUSEBUTTONS, false).toBool();
     muteOnFocusLoss = settings.value(SER_MUTEONFOCUSLOSS, false).toBool();

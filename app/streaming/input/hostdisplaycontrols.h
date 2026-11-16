@@ -6,14 +6,16 @@
 // Modeless panel: never blocks the SDL event/render loop.
 class HostDisplayControls {
 public:
-    enum Action { Toggle = 1, Hide, Monitor1, Monitor2, Clone, Extend, Pressure, HostCheck, Pin };
+    enum Action { Toggle = 1, Hide, Monitor1, Monitor2, Clone, Extend, Pressure, HostCheck, Pin, ToggleVisibility };
     struct Placement { int right = 16; int bottom = 16; bool pinned = false; };
     HostDisplayControls(HWND owner, bool showButton, std::function<void(Action)> callback,
                         Placement placement, std::function<void(Placement)> savePlacement);
     ~HostDisplayControls();
     void toggle();
+    void toggleVisibility();
     void collapse(bool hide = false);
     bool expanded() const { return m_Expanded; }
+    bool hidden() const { return m_Hidden; }
     bool pinned() const { return m_Placement.pinned; }
     void togglePin();
     void setPressureEnabled(bool enabled);

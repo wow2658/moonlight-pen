@@ -708,7 +708,7 @@
     },
     {
       "path": "app/settings/streamingpreferences.cpp",
-      "sha256": "be684491108b4757ab2ba3fb96c656165c95e2d71ee7e75cc9d3dcdced3478c2"
+      "sha256": "25ec4246d7c7fda1f640f6cae9e70fe34abc1cc09876010fd183ce802ca195b2"
     },
     {
       "path": "app/settings/streamingpreferences.h",
@@ -828,11 +828,11 @@
     },
     {
       "path": "app/streaming/input/hostdisplaycontrols.cpp",
-      "sha256": "4a97e0d55e0d2b513c3313c1e874c3843a15fa82d5089af2d2a14cd24e7737b9"
+      "sha256": "455a978bc930096dae08615e30b3d77a5bc8e6657c776dd8f48591417e0abbff"
     },
     {
       "path": "app/streaming/input/hostdisplaycontrols.h",
-      "sha256": "80f65d09695d0d1c1f28c2cfea8454e9e2884e44937250aeffd6c26bbf904a83"
+      "sha256": "43029f1d10340cd829bbe9af70648052d4f7f4bf69a62b552d798f860229efce"
     },
     {
       "path": "app/streaming/input/hostdisplayprotocol.h",
@@ -852,7 +852,7 @@
     },
     {
       "path": "app/streaming/input/keyboard.cpp",
-      "sha256": "78da33a876e8e12b0e81f2c6686696a49d975d110264b14066ba40c8a3a1e92d"
+      "sha256": "147843ae70de2c2bd918a564b5235c0c70470d0445dc6013aac482a98ac5897b"
     },
     {
       "path": "app/streaming/input/mouse.cpp",
@@ -1607,6 +1607,22 @@
       "sha256": "05f664cfdde9fc10128bebbac875c0456596adb96017fec2d7a64c1c591993db"
     },
     {
+      "path": "packaging/host/DELETE-TOOLS.cmd",
+      "sha256": "129a5f4642ed0b06866566a17ddc0d77d37938bd1a66fc355919068bc989299c"
+    },
+    {
+      "path": "packaging/host/INSTALL-TOOLS.cmd",
+      "sha256": "82b11841a3d4860c3fef4540a6ebe365507cf373e4d7ace7afa148c4d240218d"
+    },
+    {
+      "path": "packaging/host/host-tools.ps1",
+      "sha256": "499427d6db25b3345f4f73b63927caf4fa3bccbddee955f86e665db4c529f2d9"
+    },
+    {
+      "path": "packaging/host/통합 먼저 읽기.txt",
+      "sha256": "a2d216a4a45a239db190e606c2823950175ec7e6fa9e8fd3851cf47e6ee9ce34"
+    },
+    {
       "path": "qmdnsengine/qmdnsengine.pro",
       "sha256": "568c23887279f86677c003699eb3fb5922ac21b994356dbedba7ca4ed8aa22cf"
     },
@@ -1980,7 +1996,7 @@
     },
     {
       "path": "shared/clipboard/protocol.h",
-      "sha256": "074e5a8510e22d18b124bd4199160bd2f4acd9e526d0e74d787313006ebee7ed"
+      "sha256": "9e83e0e99541e9e7530c423d672122d76bd14b65868f7e6439ef3163bce56a88"
     },
     {
       "path": "shared/clipboard/windows.h",
@@ -1992,15 +2008,19 @@
     },
     {
       "path": "tests/clipboard-protocol-test.cpp",
-      "sha256": "31b890fe82c2feb5264523d79c3f6ad6eb8edbf1972cb9c1005681e68a4ef903"
+      "sha256": "844f70cac06e9529d1e1eedfe3a9a9ff654ab58cad25b472a823a2d670aa87fc"
     },
     {
       "path": "tests/clipboard-windows-test.cpp",
-      "sha256": "0b859897fea1252628f60362efe4d293f7b5eed813507b02711228e4d25edb92"
+      "sha256": "30fa682d2807a44fbb1de62bd536062b14c12c7331c9e4bb1c234219db5041c8"
+    },
+    {
+      "path": "tests/host-tools-package-test.ps1",
+      "sha256": "31d33546dd7452a8a72991511a9abd4b45df015089ea24b20127f0355b510902"
     },
     {
       "path": "tests/hostdisplay-paint-test.cpp",
-      "sha256": "cd20fe3378959996fe8c7086c5e79d4931e79d1c93fd8a2a3bd418618b0b62a0"
+      "sha256": "40fb8f9c2d4013668344c4a3083c42ca0d426f82a1a7b904060fe3096dc58376"
     },
     {
       "path": "tests/hostdisplay-preview.cpp",

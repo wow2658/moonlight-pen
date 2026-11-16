@@ -59,7 +59,7 @@ namespace pen_clipboard {
   constexpr uint8_t channel = 6;  ///< Separate reliable ENet channel from keyboard and pen input.
   constexpr size_t header_size = 24;  ///< Little endian MPCT v1 header size.
   constexpr size_t chunk_size = 8192;  ///< Stop-and-wait keeps at most one text chunk in flight.
-  constexpr size_t max_text = 1024 * 1024;  ///< Maximum UTF-8 text size before allocating receive storage.
+  constexpr size_t max_text = 16 * 1024 * 1024;  ///< Maximum UTF-8 text size; both peers need the same raised limit.
   enum class Role : uint8_t {
     client = 1,
     host = 2

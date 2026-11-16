@@ -124,8 +124,15 @@ static int run_tests() {
             CHECK(poll([&] { auto s = read_clipboard(owner); return s && s->text == text; }));
         } else { set_text(text); CHECK(poll([&] { return host_text == text; })); }
     }
+    std::string unicode;
+    for (int i=0; i<100000; ++i) unicode += u8"한글😀\r\n";
+    CHECK(unicode.size() > 1024*1024);
+    set_text(unicode); CHECK(poll([&] { return host_text == unicode; }, 15000));
+    host.local(unicode);
+    CHECK(poll([&] { auto s = read_clipboard(owner); return s && s->text == unicode; }, 15000));
+    set_text(large); CHECK(poll([&] { return host_text == large; }, 60000));
     host.local(large);
-    CHECK(poll([&] { auto s = read_clipboard(owner); return s && s->text == large; }, 10000));
+    CHECK(poll([&] { auto s = read_clipboard(owner); return s && s->text == large; }, 60000));
     bridge.stop();
     auto final_text = *read_clipboard(owner)->text;
     CHECK(!bridge.receive(encode({Kind::text, {9999, 2}, 4, 0, "late"})));
@@ -134,7 +141,7 @@ static int run_tests() {
     CHECK(SetThreadDesktop(original_desktop));
     CHECK(SetProcessWindowStation(original_station));
     CloseDesktop(desktop); CloseWindowStation(station);
-    std::cout << "PASS: isolated Windows clipboard, Unicode, locking, stale-write guard, worker bidirectional text, no initial copy, no echo, 1 MiB, stop\n";
+    std::cout << "PASS: isolated Windows clipboard, Unicode, locking, stale-write guard, worker bidirectional text, no initial copy, no echo, long Unicode, 16 MiB both ways, stop\n";
     return 0;
 }
 
